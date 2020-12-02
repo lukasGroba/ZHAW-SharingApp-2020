@@ -1,4 +1,4 @@
-package ch.zhaw.mas.sharingApp.firstTestProjectSetup;
+package ch.zhaw.mas.sharingApp.clientSite.firstTestProjectSetup;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

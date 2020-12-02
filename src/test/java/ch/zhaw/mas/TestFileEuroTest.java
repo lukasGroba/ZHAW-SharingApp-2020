@@ -1,6 +1,6 @@
 package ch.zhaw.mas;
 
-import ch.zhaw.mas.sharingApp.firstTestProjectSetup.TestFileEuro;
+import ch.zhaw.mas.sharingApp.clientSite.firstTestProjectSetup.TestFileEuro;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
