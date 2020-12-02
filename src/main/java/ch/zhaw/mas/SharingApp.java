@@ -1,10 +1,13 @@
 package ch.zhaw.mas;
 
+import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +22,7 @@ public class SharingApp extends Application
 {
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private boolean isLoginValid = false;
 
     /**
      * Constructor of Sharing App
@@ -34,9 +38,14 @@ public class SharingApp extends Application
         this.primaryStage.setTitle("SharingApp");
         //this.primaryStage.getIcons().add(new Image("file:../adressBook2/src/main/resources/images/iconAddressBook.png"));
 
+        /*Check if Login is valid*/
+        while(!isLoginValid) {
+            openLoginDialog();
+        }
+
         initRootLayout();
 
-        //openLoginDialog();
+
     }
 
     /**
@@ -69,17 +78,17 @@ public class SharingApp extends Application
      * Initializes the openLoginDialog
      */
 
-    /*
+
     public void openLoginDialog() {
         try {
             // Load LoginView layout from fxml file.
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("LoginView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/LoginView.fxml"));
             System.out.println(loader.getLocation());
             AnchorPane loginPage = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Person");
+            dialogStage.setTitle("Login SharingApp");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(loginPage);
@@ -87,15 +96,20 @@ public class SharingApp extends Application
 
             // Give the controller access to the main app.
             LoginViewController controller = loader.getController();
-            controller.setSharingApp(this);
+            controller.setDialogStage(dialogStage);
 
-            dialogStage.show();
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            if(controller.isLoginValid()){
+                isLoginValid = true;
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-    }*/
+    }
 
     /**
      * Returns the main stage.
