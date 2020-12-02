@@ -47,7 +47,7 @@ public class SharingApp extends Application
     public void initRootLayout() {
         try {
             // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader(SharingApp.class.getResource("presentation/RootLayout.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/RootLayout.fxml"));
             System.out.println(loader.getLocation());
             rootLayout = (BorderPane) loader.load();
 
