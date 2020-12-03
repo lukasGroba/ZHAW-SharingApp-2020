@@ -7,7 +7,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
+/************************************************************************************************************
+ * LoginViewController class
+ *
+ * This is the LoginViewController and manages all buttons and actions with the LogingView GUI
+ *
+ * @author  Lukas Grossenbacher
+ * @since   2020.12.02
+ * @version 0.1
+ *
+ ************************************************************************************************************/
 public class LoginViewController {
 
     @FXML
@@ -19,38 +28,73 @@ public class LoginViewController {
     private Stage dialogStage;
     private boolean loginValid = false;
 
-    /**
+    /************************************************************************************************************
+     * void initialize() Method
+     *
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
-     */
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param
+     * @return
+     *
+     ************************************************************************************************************/
     @FXML
     private void initialize() {
     }
 
-    /**
+    /************************************************************************************************************
+     * void setDialogStage() Method
+     *
      * Sets the stage of this dialog.
      *
-     * @param dialogStage
-     */
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param   dialogStage
+     * @return
+     *
+     ************************************************************************************************************/
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
+
+    /************************************************************************************************************
+     * void setSharingApp() Method
+     *
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param   sharingApp
+     * @return
+     *
+     ************************************************************************************************************/
     // Reference to the main application
     private SharingApp sharingApp;
 
-    /**
-     * Is called by the main application to give a reference back to itself.
-     *
-     * @param sharingApp
-     */
     public void setSharingApp(SharingApp sharingApp) {
         this.sharingApp = sharingApp;
     }
 
-    /**
-     * Called when the user clicks Login.
-     */
+
+    /************************************************************************************************************
+     * void handleLogin() Method
+     *
+     * This method will be called when the user clicks the login button in GUI. This method will also set
+     * loginValid to true if the login was successful.
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param
+     * @return
+     *
+     ************************************************************************************************************/
     @FXML
     private void handleLogin() {
         if (isInputValid()) {
@@ -63,19 +107,37 @@ public class LoginViewController {
         }
     }
 
-    /**
-     * Called when the user clicks Login.
-     */
+    /************************************************************************************************************
+     * void handleCancel() Method
+     *
+     * This method will be called when the user clicks the cancel button in GUI. This method will close the
+     * program end generate a System.exit(0)
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param
+     * @return
+     *
+     ************************************************************************************************************/
     @FXML
     private void handleCancel() {
         System.exit(0);
     }
 
-    /**
-     * Validates the user input in the text fields.
+    /************************************************************************************************************
+     * boolean isInputValid() Method
      *
-     * @return true if the input is valid
-     */
+     * This method validates the user input in the text fields of the GUI. It will be checked if it is
+     * empty or null.
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param
+     * @return true if the input is valid / false if the input is not valid
+     *
+     ************************************************************************************************************/
     private boolean isInputValid() {
         String errorMessage = "";
 
@@ -101,6 +163,19 @@ public class LoginViewController {
             return false;
         }
     }
+
+    /************************************************************************************************************
+     * boolean isLoginValid() Method
+     *
+     * This method returns the actual state of the loginValid variable.
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param
+     * @return  loginValid
+     *
+     ************************************************************************************************************/
     public boolean isLoginValid(){
         return loginValid;
     }

@@ -12,12 +12,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * Main Program
+/************************************************************************************************************
+ * SharingApp class
  *
- * Developed by: Adrian Fischer, Kaelin Noemi, Lukas Grossenbacher
+ * Main Program of SharingApp
+ * This is the main application of the SharingApp. It contains the main structure of the whole program and GUI
  *
- */
+ * @author  Lukas Grossenbacher
+ * @since   2020.12.02
+ * @version 0.1
+ *
+ ************************************************************************************************************/
 public class SharingApp extends Application
 {
     private Stage primaryStage;
@@ -31,6 +36,19 @@ public class SharingApp extends Application
     public SharingApp(){
 
     }
+
+    /************************************************************************************************************
+     * void start() Method
+     *
+     * This is the start method of the GUI. It start up the login and initialize the rootLayout
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param   primaryStage
+     * @return
+     *
+     ************************************************************************************************************/
 
     @Override
     public void start(Stage primaryStage){
@@ -48,11 +66,19 @@ public class SharingApp extends Application
 
     }
 
-    /**
-     * Initializes the root layout
+    /************************************************************************************************************
+     * void initRootLayout() Method
      *
-     * @author Lukas Grossenbacher
-     */
+     * This method initializes the rootLayout of the GUI
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param
+     * @return
+     *
+     ************************************************************************************************************/
+
     public void initRootLayout() {
         try {
             // Load root layout from fxml file.
@@ -74,9 +100,18 @@ public class SharingApp extends Application
         }
     }
 
-    /**
-     * Initializes the openLoginDialog
-     */
+    /************************************************************************************************************
+     * void openLoginDialog() Method
+     *
+     * This method create and opens the first loginDialog of the SharingApp. This is needed to verify the user.
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param
+     * @return
+     *
+     ************************************************************************************************************/
 
 
     public void openLoginDialog() {
@@ -111,14 +146,18 @@ public class SharingApp extends Application
 
     }
 
-    /**
-     * Returns the main stage.
+    /************************************************************************************************************
+     * void main() Method
+     *
+     * This is the main method to start the complete application
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * @version 0.1
+     * @param   args
      * @return
-     */
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
+     *
+     ************************************************************************************************************/
     public static void main(String[] args) {
         launch(args);
     }
