@@ -2,7 +2,6 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.SharingApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -34,11 +33,11 @@ public class LoginViewController {
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param
-     * @return
+     * version 0.1
+     * param
+     * return
      *
      ************************************************************************************************************/
     @FXML
@@ -52,9 +51,9 @@ public class LoginViewController {
      *
      * @author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
+     * version 0.1
      * @param   dialogStage
-     * @return
+     * return
      *
      ************************************************************************************************************/
     public void setDialogStage(Stage dialogStage) {
@@ -67,11 +66,11 @@ public class LoginViewController {
      *
      * Is called by the main application to give a reference back to itself.
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param   sharingApp
-     * @return
+     * version 0.1
+     * param   sharingApp
+     * return
      *
      ************************************************************************************************************/
     // Reference to the main application
@@ -88,11 +87,11 @@ public class LoginViewController {
      * This method will be called when the user clicks the login button in GUI. This method will also set
      * loginValid to true if the login was successful.
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param
-     * @return
+     * version 0.1
+     * param
+     * return
      *
      ************************************************************************************************************/
     @FXML
@@ -113,11 +112,11 @@ public class LoginViewController {
      * This method will be called when the user clicks the cancel button in GUI. This method will close the
      * program end generate a System.exit(0)
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param
-     * @return
+     * version 0.1
+     * param
+     * return
      *
      ************************************************************************************************************/
     @FXML
@@ -131,11 +130,11 @@ public class LoginViewController {
      * This method validates the user input in the text fields of the GUI. It will be checked if it is
      * empty or null.
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param
-     * @return true if the input is valid / false if the input is not valid
+     * version 0.1
+     * param
+     * return true if the input is valid / false if the input is not valid
      *
      ************************************************************************************************************/
     private boolean isInputValid() {
@@ -169,11 +168,11 @@ public class LoginViewController {
      *
      * This method returns the actual state of the loginValid variable.
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param
-     * @return  loginValid
+     * version 0.1
+     * param
+     * return  loginValid
      *
      ************************************************************************************************************/
     public boolean isLoginValid(){

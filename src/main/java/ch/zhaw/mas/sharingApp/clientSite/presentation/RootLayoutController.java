@@ -21,11 +21,11 @@ public class RootLayoutController {
      *
      * Is called by the main application to give a reference back to itself.
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param   sharingApp
-     * @return
+     * version 0.1
+     * param   sharingApp
+     * return
      *
      ************************************************************************************************************/
     // Reference to the main application
@@ -42,11 +42,11 @@ public class RootLayoutController {
      * This method will be called when the user clicks the exit button in GUI. This method will close the
      * program end generate a System.exit(0)
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param
-     * @return
+     * version 0.1
+     * param
+     * return
      *
      ************************************************************************************************************/
     @FXML

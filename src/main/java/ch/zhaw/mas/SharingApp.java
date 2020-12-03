@@ -42,11 +42,11 @@ public class SharingApp extends Application
      *
      * This is the start method of the GUI. It start up the login and initialize the rootLayout
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
+     * version 0.1
      * @param   primaryStage
-     * @return
+     * return
      *
      ************************************************************************************************************/
 
@@ -71,11 +71,11 @@ public class SharingApp extends Application
      *
      * This method initializes the rootLayout of the GUI
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param
-     * @return
+     * version 0.1
+     * param
+     * return
      *
      ************************************************************************************************************/
 
@@ -105,11 +105,11 @@ public class SharingApp extends Application
      *
      * This method create and opens the first loginDialog of the SharingApp. This is needed to verify the user.
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
-     * @param
-     * @return
+     * version 0.1
+     * param
+     * return
      *
      ************************************************************************************************************/
 
@@ -151,11 +151,11 @@ public class SharingApp extends Application
      *
      * This is the main method to start the complete application
      *
-     * @author  Lukas Grossenbacher
+     * author  Lukas Grossenbacher
      * @since   2020.12.02
-     * @version 0.1
+     * version 0.1
      * @param   args
-     * @return
+     * return
      *
      ************************************************************************************************************/
     public static void main(String[] args) {
