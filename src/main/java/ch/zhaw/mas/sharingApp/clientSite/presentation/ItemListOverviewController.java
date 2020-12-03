@@ -1,7 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.SharingApp;
-import ch.zhaw.mas.sharingApp.clientSite.persistence.Item;
+import ch.zhaw.mas.sharingApp.clientSite.domain.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;

@@ -1,4 +1,4 @@
-package ch.zhaw.mas.sharingApp.clientSite.persistence;
+package ch.zhaw.mas.sharingApp.clientSite.domain;
 
 import javafx.beans.property.*;
 

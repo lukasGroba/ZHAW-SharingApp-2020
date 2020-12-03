@@ -1,6 +1,6 @@
 package ch.zhaw.mas;
 
-import ch.zhaw.mas.sharingApp.clientSite.persistence.Item;
+import ch.zhaw.mas.sharingApp.clientSite.domain.Item;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
