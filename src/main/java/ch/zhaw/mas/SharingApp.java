@@ -1,8 +1,12 @@
 package ch.zhaw.mas;
 
+import ch.zhaw.mas.sharingApp.clientSite.persistence.Item;
+import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -29,11 +33,16 @@ public class SharingApp extends Application
     private BorderPane rootLayout;
     private boolean isLoginValid = false;
 
+    private ObservableList<Item> itemDataList = FXCollections.observableArrayList();
+
     /**
      * Constructor of Sharing App
      */
 
     public SharingApp(){
+
+        /*Create sample Data List*/
+        addSampleItemData();
 
     }
 
@@ -49,7 +58,6 @@ public class SharingApp extends Application
      * return
      *
      ************************************************************************************************************/
-
     @Override
     public void start(Stage primaryStage){
         this.primaryStage = primaryStage;
@@ -60,8 +68,11 @@ public class SharingApp extends Application
         while(!isLoginValid) {
             openLoginDialog();
         }
-
+        //RootLayout will be initialized
         initRootLayout();
+
+        //Shows the item list inside the rootLayout
+        showItemListOverview();
 
 
     }
@@ -78,7 +89,6 @@ public class SharingApp extends Application
      * return
      *
      ************************************************************************************************************/
-
     public void initRootLayout() {
         try {
             // Load root layout from fxml file.
@@ -112,8 +122,6 @@ public class SharingApp extends Application
      * return
      *
      ************************************************************************************************************/
-
-
     public void openLoginDialog() {
         try {
             // Load LoginView layout from fxml file.
@@ -129,7 +137,7 @@ public class SharingApp extends Application
             Scene scene = new Scene(loginPage);
             dialogStage.setScene(scene);
 
-            // Give the controller access to the main app.
+            // Give the controller access to the main SharingApp.
             LoginViewController controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
@@ -144,6 +152,79 @@ public class SharingApp extends Application
             e.printStackTrace();
         }
 
+    }
+    /************************************************************************************************************
+     * void showItemListOverview() Method
+     *
+     * This method create the itemListOverview inside the root Layout to view the list with details.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.03
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    public void showItemListOverview(){
+        try {
+            // Load item list overview
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/ItemListOverview.fxml"));
+            System.out.println(loader.getLocation());
+            AnchorPane itemListOverview = (AnchorPane) loader.load();
+
+            // Set item list overview into the center of root layout.
+            rootLayout.setCenter(itemListOverview);
+
+            // Give the controller access to the main SharingApp.
+            ItemListOverviewController controller = loader.getController();
+            controller.setSharingApp(this);
+
+        }catch(IOException exp){
+            exp.printStackTrace();
+        }
+
+    }
+
+    /************************************************************************************************************
+     * void addSampleItemData() Method
+     *
+     * This method create the itemListOverview inside the root Layout to view the list with details.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.03
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    public void addSampleItemData(){
+        // Add some sample data
+        itemDataList.add(new Item("Hemd", "Max Muster"));
+        itemDataList.add(new Item("Motorrad", "Franz Meier"));
+        itemDataList.add(new Item("Dia Projektor", "Harry Hasler"));
+        itemDataList.add(new Item("Bohrmaschine", "Josef Mueller"));
+        itemDataList.add(new Item("Schraubenzieherset", "Heidi Gisler"));
+        itemDataList.add(new Item("Stabmixer", "Jasmin Staub"));
+    }
+
+    /************************************************************************************************************
+     * ObservableList<Item> getItemData() Method
+     *
+     * This method returns the complete observable itemDataList.
+     *
+     * author  Lukas Grossenbacher
+     * @since  2020.12.03
+     * version 0.1
+     * param
+     * return itemDataList
+     *
+     ************************************************************************************************************/
+    /**
+     * Returns the data as an observable list of Persons.
+     * @return
+     */
+    public ObservableList<Item> getItemData() {
+        return this.itemDataList;
     }
 
     /************************************************************************************************************
