@@ -7,7 +7,7 @@ public class Item {
     private final StringProperty itemName;
     private final IntegerProperty itemID;
     private final StringProperty itemOwner;
-    private final BooleanProperty itemAvailavle;
+    private final BooleanProperty itemAvailable;
 
 
     /**
@@ -24,7 +24,7 @@ public class Item {
         this.itemName = new SimpleStringProperty(itemName);
         this.itemID = new SimpleIntegerProperty(0);
         this.itemOwner = new SimpleStringProperty(itemOwner);
-        this.itemAvailavle = new SimpleBooleanProperty(true);
+        this.itemAvailable = new SimpleBooleanProperty(true);
     }
 
     public String getItemName(){return this.itemName.get();}
@@ -48,9 +48,9 @@ public class Item {
         return this.itemOwner;
     }
 
-    public boolean getItemAvailable(){return this.itemAvailavle.get();}
+    public boolean getItemAvailable(){return this.itemAvailable.get();}
     public void setItemAvailavle(boolean itemAvailavle){
-        this.itemAvailavle.set(itemAvailavle);
+        this.itemAvailable.set(itemAvailavle);
     }
     public String getItemAvailableString(){
         if(getItemAvailable()){
