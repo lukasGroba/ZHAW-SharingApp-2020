@@ -1,8 +1,8 @@
-package ch.zhaw.mas.sharingApp.clientSite.domain;
+package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import javafx.beans.property.*;
 
-public class Item {
+public class ItemFxView {
 
     private final StringProperty itemName;
     private final IntegerProperty itemID;
@@ -13,14 +13,14 @@ public class Item {
     /**
      * Default constructor.
      */
-    public Item() {
+    public ItemFxView() {
         this(null, null);
     }
 
     /**
      * Constructor with initial data.
      */
-    public Item(String itemName, String itemOwner) {
+    public ItemFxView(String itemName, String itemOwner) {
         this.itemName = new SimpleStringProperty(itemName);
         this.itemID = new SimpleIntegerProperty(0);
         this.itemOwner = new SimpleStringProperty(itemOwner);

@@ -1,6 +1,6 @@
 package ch.zhaw.mas;
 
-import ch.zhaw.mas.sharingApp.clientSite.domain.Item;
+import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
@@ -33,7 +33,7 @@ public class SharingApp extends Application
     private BorderPane rootLayout;
     private boolean isLoginValid = false;
 
-    private ObservableList<Item> itemDataList = FXCollections.observableArrayList();
+    private ObservableList<ItemFxView> itemDataList = FXCollections.observableArrayList();
 
     /**
      * Constructor of Sharing App
@@ -199,12 +199,12 @@ public class SharingApp extends Application
      ************************************************************************************************************/
     public void addSampleItemData(){
         // Add some sample data
-        itemDataList.add(new Item("Hemd", "Max Muster"));
-        itemDataList.add(new Item("Motorrad", "Franz Meier"));
-        itemDataList.add(new Item("Dia Projektor", "Harry Hasler"));
-        itemDataList.add(new Item("Bohrmaschine", "Josef Mueller"));
-        itemDataList.add(new Item("Schraubenzieherset", "Heidi Gisler"));
-        itemDataList.add(new Item("Stabmixer", "Jasmin Staub"));
+        itemDataList.add(new ItemFxView("Hemd", "Max Muster"));
+        itemDataList.add(new ItemFxView("Motorrad", "Franz Meier"));
+        itemDataList.add(new ItemFxView("Dia Projektor", "Harry Hasler"));
+        itemDataList.add(new ItemFxView("Bohrmaschine", "Josef Mueller"));
+        itemDataList.add(new ItemFxView("Schraubenzieherset", "Heidi Gisler"));
+        itemDataList.add(new ItemFxView("Stabmixer", "Jasmin Staub"));
     }
 
     /************************************************************************************************************
@@ -223,7 +223,7 @@ public class SharingApp extends Application
      * Returns the data as an observable list of Persons.
      * @return
      */
-    public ObservableList<Item> getItemData() {
+    public ObservableList<ItemFxView> getItemData() {
         return this.itemDataList;
     }
 

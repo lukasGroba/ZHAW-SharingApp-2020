@@ -1,7 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.SharingApp;
-import ch.zhaw.mas.sharingApp.clientSite.domain.Item;
+import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -21,11 +21,11 @@ import javafx.scene.control.TableView;
 public class ItemListOverviewController {
 
     @FXML
-    private TableView<Item> itemTable;
+    private TableView<ItemFxView> itemTable;
     @FXML
-    private TableColumn<Item, String> itemNameColumn;
+    private TableColumn<ItemFxView, String> itemNameColumn;
     @FXML
-    private TableColumn<Item, String> itemOwnerColumn;
+    private TableColumn<ItemFxView, String> itemOwnerColumn;
 
     @FXML
     private Label itemNameLabel;
@@ -89,7 +89,7 @@ public class ItemListOverviewController {
         itemTable.setItems(sharingApp.getItemData());
     }
 
-    private void showItemDetails(Item item) {
+    private void showItemDetails(ItemFxView item) {
         if (item != null) {
             itemNameLabel.setText(item.getItemName());
             itemOwnerLabel.setText(item.getItemOwner());
