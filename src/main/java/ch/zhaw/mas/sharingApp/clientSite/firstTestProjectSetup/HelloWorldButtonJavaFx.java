@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.firstTestProjectSetup;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +18,9 @@ public class HelloWorldButtonJavaFx extends Application {
     }
 
     public void start(Stage primaryStage) {
+        User user = new User();
+        user.setMail("blabla");
+        System.out.println(user.getMail());
         Label label1 = new Label("Hallo");
         Label label2 = new Label("Welt");
         VBox root = new VBox();//Definition der Layout Klasse
