@@ -7,12 +7,15 @@ import java.time.LocalDate;
 
 @Data
 public class ItemToShare {
-    private String Name;
+    private int id;
+    private String name;
     private LocalDate dateCreated;
-    private String beschreibung;
-    private boolean ausgeliehen;
-    private Double bewertung;
-//    private User owner;
+    private String description;
+    private boolean isLent;
+    private Double rating;
+    private User owner;
+    private LocalDate lentFrom;
+    private LocalDate lentTill;
 //    private whatever picture;
 //    private Location location; --> eher in owner?
 
