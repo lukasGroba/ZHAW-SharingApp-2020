@@ -1,4 +1,4 @@
-package ch.zhaw.mas;
+package ch.zhaw.mas.sharingApp.clientSite;
 
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;

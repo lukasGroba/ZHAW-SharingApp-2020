@@ -1,7 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
-import ch.zhaw.mas.SharingApp;
-import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
+import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;

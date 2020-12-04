@@ -1,13 +1,12 @@
 package ch.zhaw.mas.sharingApp.clientSite.firstTestProjectSetup;
 
-import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
-import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
