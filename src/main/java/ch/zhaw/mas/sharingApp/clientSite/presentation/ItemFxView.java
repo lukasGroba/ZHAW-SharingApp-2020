@@ -18,6 +18,10 @@ public class ItemFxView {
     }
 
     /**
+     * Konstruktor machen wo direkt ein Item Uebergeben werden.
+     */
+
+    /**
      * Constructor with initial data.
      */
     public ItemFxView(String itemName, String itemOwner) {
