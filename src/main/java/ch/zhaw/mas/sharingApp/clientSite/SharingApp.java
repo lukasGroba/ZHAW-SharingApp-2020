@@ -1,5 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
+import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
@@ -15,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.*;
 
 /************************************************************************************************************
  * SharingApp class
@@ -198,13 +201,43 @@ public class SharingApp extends Application
      *
      ************************************************************************************************************/
     public void addSampleItemData(){
+
         // Add some sample data
-        itemDataList.add(new ItemFxView("Hemd", "Max Muster"));
-        itemDataList.add(new ItemFxView("Motorrad", "Franz Meier"));
-        itemDataList.add(new ItemFxView("Dia Projektor", "Harry Hasler"));
-        itemDataList.add(new ItemFxView("Bohrmaschine", "Josef Mueller"));
-        itemDataList.add(new ItemFxView("Schraubenzieherset", "Heidi Gisler"));
-        itemDataList.add(new ItemFxView("Stabmixer", "Jasmin Staub"));
+//        itemDataList.add(new ItemFxView("Hemd", "Max Muster"));
+//        itemDataList.add(new ItemFxView("Motorrad", "Franz Meier"));
+//        itemDataList.add(new ItemFxView("Dia Projektor", "Harry Hasler"));
+//        itemDataList.add(new ItemFxView("Bohrmaschine", "Josef Mueller"));
+//        itemDataList.add(new ItemFxView("Schraubenzieherset", "Heidi Gisler"));
+//        itemDataList.add(new ItemFxView("Stabmixer", "Jasmin Staub"));
+
+        /*Create sample User*/
+        User user = new User();
+        user.setUsername("Max Muster");
+        user.setMail("max.muster@gmail.com");
+
+        /*Create sample Item*/
+        ItemToShare itemToShare = new ItemToShare();
+        itemToShare.setId(1);
+        itemToShare.setLent(false);
+        itemToShare.setOwner(user);
+
+        itemToShare.setName("Bohrmaschine");
+        itemDataList.add(new ItemFxView(itemToShare));
+
+        itemToShare.setName("Hut");
+        itemDataList.add(new ItemFxView(itemToShare));
+
+        itemToShare.setName("Motorrad");
+        itemDataList.add(new ItemFxView(itemToShare));
+
+        itemToShare.setName("Dia Projektor");
+        itemDataList.add(new ItemFxView(itemToShare));
+
+        itemToShare.setName("Schraubenzieherset");
+        itemDataList.add(new ItemFxView(itemToShare));
+
+        itemToShare.setName("Stabmixer");
+        itemDataList.add(new ItemFxView(itemToShare));
     }
 
     /************************************************************************************************************

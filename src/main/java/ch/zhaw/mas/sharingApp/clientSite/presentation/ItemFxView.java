@@ -1,6 +1,8 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import javafx.beans.property.*;
+import lombok.Data;
 
 public class ItemFxView {
 
@@ -9,26 +11,24 @@ public class ItemFxView {
     private final StringProperty itemOwner;
     private final BooleanProperty itemAvailable;
 
+    /**
+     * Constructor for testing the item.
+     */
+//    public ItemFxView(String itemName, String itemOwner) {
+//        this.itemName = new SimpleStringProperty(itemName);
+//        this.itemID = new SimpleIntegerProperty(0);
+//        this.itemOwner = new SimpleStringProperty(itemOwner);
+//        this.itemAvailable = new SimpleBooleanProperty(true);
+//    }
 
     /**
-     * Default constructor.
+     * Constructor with Class ItemToShare.
      */
-    public ItemFxView() {
-        this(null, null);
-    }
-
-    /**
-     * Konstruktor machen wo direkt ein Item Uebergeben werden.
-     */
-
-    /**
-     * Constructor with initial data.
-     */
-    public ItemFxView(String itemName, String itemOwner) {
-        this.itemName = new SimpleStringProperty(itemName);
-        this.itemID = new SimpleIntegerProperty(0);
-        this.itemOwner = new SimpleStringProperty(itemOwner);
-        this.itemAvailable = new SimpleBooleanProperty(true);
+    public ItemFxView(ItemToShare itemToShare){
+        this.itemName = new SimpleStringProperty(itemToShare.getName());
+        this.itemID = new SimpleIntegerProperty(itemToShare.getId());
+        this.itemOwner = new SimpleStringProperty(itemToShare.getOwner().getUsername());
+        this.itemAvailable = new SimpleBooleanProperty(itemToShare.isLent());
     }
 
     public String getItemName(){return this.itemName.get();}
