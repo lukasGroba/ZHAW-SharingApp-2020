@@ -2,12 +2,15 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 
 
 /************************************************************************************************************
@@ -47,6 +50,8 @@ public class ItemListOverviewController {
     private Label itemLentFrom;
     @FXML
     private Label itemLentTill;
+
+    private Stage dialogStage;
 
     /**
      * The constructor
@@ -123,6 +128,95 @@ public class ItemListOverviewController {
             itemLentFrom.setText("");
             itemLentTill.setText("");
         }
+    }
+
+    /************************************************************************************************************
+     * void handleNew() Method
+     *
+     * This method will be called when the user clicks the new button in GUI. This method will open a dialog
+     * to create a new item and add it the list on the server.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    @FXML
+    private void handleNew(){
+        System.out.println("handleNew button clicked");
+        //todo GRL: add a method to create a new item
+    }
+
+    /************************************************************************************************************
+     * void handleEdit() Method
+     *
+     * This method will be called when the user clicks the edit button in GUI. This method will open a dialog
+     * to edit an item and store it in the list on the server.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    @FXML
+    private void handleEdit(){
+        System.out.println("handleEdit button clicked");
+        ItemFxView selectedItem = itemTable.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                boolean okClicked = SharingApp.showEditItemDialog(selectedItem);
+                if (okClicked) {
+                    showItemDetails(selectedItem);
+                }
+
+            } else {
+                // Nothing selected.
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(dialogStage);
+                alert.setTitle("No Selection");
+                alert.setHeaderText("No Person Selected");
+                alert.setContentText("Please select a person in the table.");
+
+                alert.showAndWait();
+            }
+    }
+
+    /************************************************************************************************************
+     * void handleDelete() Method
+     *
+     * This method will be called when the user clicks the delete button in GUI. This method will delete an item
+     * and remove it in the list on the server.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    @FXML
+    private void handleDelete(){
+        System.out.println("handleDelete button clicked");
+        //todo GRL: add a method to delete an item
+    }
+
+    /************************************************************************************************************
+     * void setDialogStage() Method
+     *
+     * Sets the stage of this dialog.
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.02
+     * version 0.1
+     * @param   dialogStage
+     * return
+     *
+     ************************************************************************************************************/
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
     }
 
 }

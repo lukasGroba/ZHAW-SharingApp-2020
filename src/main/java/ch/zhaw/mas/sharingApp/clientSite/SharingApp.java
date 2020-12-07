@@ -2,10 +2,7 @@ package ch.zhaw.mas.sharingApp.clientSite;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
-import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
-import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
-import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
-import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
+import ch.zhaw.mas.sharingApp.clientSite.presentation.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,7 +30,7 @@ import java.util.*;
  ************************************************************************************************************/
 public class SharingApp extends Application
 {
-    private Stage primaryStage;
+    private static Stage primaryStage;
     private BorderPane rootLayout;
     private boolean isLoginValid = false;
 
@@ -187,6 +184,50 @@ public class SharingApp extends Application
             exp.printStackTrace();
         }
 
+    }
+
+    /************************************************************************************************************
+     * void showEditItemDialog() Method
+     *
+     * Opens a dialog to edit details for the specified Item. If the user
+     * clicks OK, the changes are saved into the provided Item object and true
+     * is returned.
+     *
+     * author  Lukas Grossenbacher
+     * @since  2020.12.07
+     * version 0.1
+     * param   item todo GRL: Check if the itemToShare or ItemFxView is needed.
+     * @return true if the user clicked OK, false otherwise
+     ************************************************************************************************************/
+    public static boolean showEditItemDialog(ItemFxView itemFxView){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader(SharingApp.class.getClassLoader().getResource("FXML/EditItemDialog.fxml"));
+            System.out.println(loader.getLocation());
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Item");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            EditItemDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            /** todo GRL: define item*/
+            controller.setItem(itemFxView);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /************************************************************************************************************

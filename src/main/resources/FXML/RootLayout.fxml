@@ -15,13 +15,6 @@
               <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Item">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleNew" text="New" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleEdit" text="Edit" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="Help">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
