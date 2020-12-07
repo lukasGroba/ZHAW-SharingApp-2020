@@ -4,6 +4,7 @@ import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -27,7 +28,7 @@ public class EditItemDialogController {
     @FXML
     private TextField dateCreatedField;
     @FXML
-    private TextField itemDescriptionField;
+    private TextArea itemDescriptionField;
     @FXML
     private TextField isItemLentField;
     @FXML
@@ -177,38 +178,52 @@ public class EditItemDialogController {
     private boolean isInputValid(){
         String errorMessage = "";
 
-//        if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {
-//            errorMessage += "No valid first name!\n";
-//        }
-//        if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
-//            errorMessage += "No valid last name!\n";
-//        }
-//        if (streetField.getText() == null || streetField.getText().length() == 0) {
-//            errorMessage += "No valid street!\n";
-//        }
-//
-//        if (postalCodeField.getText() == null || postalCodeField.getText().length() == 0) {
-//            errorMessage += "No valid postal code!\n";
-//        } else {
-//            // try to parse the postal code into an int.
-//            try {
-//                Integer.parseInt(postalCodeField.getText());
-//            } catch (NumberFormatException e) {
-//                errorMessage += "No valid postal code (must be an integer)!\n";
-//            }
-//        }
-//
-//        if (cityField.getText() == null || cityField.getText().length() == 0) {
-//            errorMessage += "No valid city!\n";
-//        }
-//
-//        if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
-//            errorMessage += "No valid birthday!\n";
-//        } else {
-//            if (!DateUtil.validDate(birthdayField.getText())) {
-//                errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
-//            }
-//        }
+        if (itemNameField.getText() == null || itemNameField.getText().length() == 0) {
+            errorMessage += "No valid item name!\n";
+       }
+
+        if (dateCreatedField.getText() == null || dateCreatedField.getText().length() == 0) {
+            errorMessage += "No valid create date!\n";
+        } else {
+            if (!DateUtil.validDate(dateCreatedField.getText())) {
+                errorMessage += "No valid create date. Use the format dd.mm.yyyy!\n";
+            }
+        }
+        if (isItemLentField.getText() == null || isItemLentField.getText().length() == 0) {
+            errorMessage += "No valid availability!\n";
+        }
+        if(isItemLentField.getText().equalsIgnoreCase("true") | isItemLentField.getText().equalsIgnoreCase("false") ){
+            /*Do nothing if statement is correct*/
+        }else{
+            errorMessage += "Availability must be true or false!\n";
+        }
+        if (itemRatingField.getText() == null || itemRatingField.getText().length() == 0) {
+            errorMessage += "No valid rating!\n";
+        }
+        if (Double.parseDouble(itemRatingField.getText()) > 5 || Double.parseDouble(itemRatingField.getText()) < 0) {
+            errorMessage += "Rating must be between 0.0 and 5.0!\n";
+        }
+
+        if (itemDescriptionField.getText() == null || itemDescriptionField.getText().length() == 0) {
+            errorMessage += "Please enter an description!\n";
+        }
+
+        if (itemLentFromField.getText() == null || itemLentFromField.getText().length() == 0) {
+            errorMessage += "No valid lent from date!\n";
+        } else {
+            if (!DateUtil.validDate(itemLentFromField.getText())) {
+                errorMessage += "No valid lent from. Use the format dd.mm.yyyy!\n";
+            }
+        }
+
+        if (itemLentTillField.getText() == null || itemLentTillField.getText().length() == 0) {
+            errorMessage += "No valid lent till date!\n";
+        } else {
+            if (!DateUtil.validDate(itemLentTillField.getText())) {
+                errorMessage += "No valid lent till. Use the format dd.mm.yyyy!\n";
+            }
+        }
+
 
         if (errorMessage.length() == 0) {
             return true;

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -36,9 +37,9 @@
             <TextField fx:id="dateCreatedField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="isItemLentField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="itemRatingField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="itemDescriptionField" prefHeight="145.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="itemLentFromField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="itemLentTillField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextArea fx:id="itemDescriptionField" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Button layoutX="378.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleOk" text="Ok" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="130.0" />

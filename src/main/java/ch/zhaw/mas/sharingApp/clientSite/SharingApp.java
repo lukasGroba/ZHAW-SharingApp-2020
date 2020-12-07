@@ -196,7 +196,7 @@ public class SharingApp extends Application
      * author  Lukas Grossenbacher
      * @since  2020.12.07
      * version 0.1
-     * param   item todo GRL: Check if the itemToShare or ItemFxView is needed.
+     * param   itemFxView
      * @return true if the user clicked OK, false otherwise
      ************************************************************************************************************/
     public static boolean showEditItemDialog(ItemFxView itemFxView){
@@ -217,7 +217,6 @@ public class SharingApp extends Application
             // Set the person into the controller.
             EditItemDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            /** todo GRL: define item*/
             controller.setItem(itemFxView);
 
             // Show the dialog and wait until the user closes it
