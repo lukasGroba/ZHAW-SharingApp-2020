@@ -66,7 +66,7 @@ public class ItemListOverviewController {
      * after the fxml file has been loaded.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since 2020.12.02
      * version 0.1
      * param
      * return
@@ -90,7 +90,7 @@ public class ItemListOverviewController {
      * Is called by the main application to give a reference back to itself.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since 2020.12.02
      * version 0.1
      * param   sharingApp
      * return
@@ -106,6 +106,18 @@ public class ItemListOverviewController {
         itemTable.setItems(sharingApp.getItemData());
     }
 
+    /************************************************************************************************************
+     * void showItemDetails() Method
+     *
+     * Is called by the main application and sets up the Item Details view.
+     *
+     * author  Lukas Grossenbacher
+     * @since 2020.12.02
+     * version 0.1
+     * @param   item
+     * return
+     *
+     ************************************************************************************************************/
     private void showItemDetails(ItemFxView item) {
         if (item != null) {
             itemNameLabel.setText(item.getItemName());
@@ -117,7 +129,7 @@ public class ItemListOverviewController {
             itemDescription.setText(item.getItemDescription());
             itemLentFrom.setText(DateUtil.format(item.getItemLentFrom()));
             itemLentTill.setText(DateUtil.format(item.getItemLentTill()));
-        }else{
+        } else {
             itemNameLabel.setText("");
             itemOwnerLabel.setText("");
             itemIDLabel.setText("");
@@ -137,14 +149,14 @@ public class ItemListOverviewController {
      * to create a new item and add it the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since 2020.12.02
      * version 0.1
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
-    private void handleNew(){
+    private void handleNew() {
         System.out.println("handleNew button clicked");
         //todo GRL: add a method to create a new item
     }
@@ -156,32 +168,32 @@ public class ItemListOverviewController {
      * to edit an item and store it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.07
+     * @since 2020.12.07
      * version 0.1
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
-    private void handleEdit(){
+    private void handleEdit() {
         System.out.println("handleEdit button clicked");
         ItemFxView selectedItem = itemTable.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
-                boolean okClicked = SharingApp.showEditItemDialog(selectedItem);
-                if (okClicked) {
-                    showItemDetails(selectedItem);
-                }
-
-            } else {
-                // Nothing selected.
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(dialogStage);
-                alert.setTitle("No Selection");
-                alert.setHeaderText("No item Selected");
-                alert.setContentText("Please select a item in the table.");
-
-                alert.showAndWait();
+        if (selectedItem != null) {
+            boolean okClicked = SharingApp.showEditItemDialog(selectedItem);
+            if (okClicked) {
+                showItemDetails(selectedItem);
             }
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(dialogStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No item Selected");
+            alert.setContentText("Please select a item in the table.");
+
+            alert.showAndWait();
+        }
     }
 
     /************************************************************************************************************
@@ -191,14 +203,14 @@ public class ItemListOverviewController {
      * and remove it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.07
+     * @since 2020.12.07
      * version 0.1
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
-    private void handleDelete(){
+    private void handleDelete() {
         System.out.println("handleDelete button clicked");
         int selectedIndex = itemTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
@@ -214,21 +226,4 @@ public class ItemListOverviewController {
             alert.showAndWait();
         }
     }
-
-    /************************************************************************************************************
-     * void setDialogStage() Method
-     *
-     * Sets the stage of this dialog.
-     *
-     * @author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
-     * @param   dialogStage
-     * return
-     *
-     ************************************************************************************************************/
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-
 }
