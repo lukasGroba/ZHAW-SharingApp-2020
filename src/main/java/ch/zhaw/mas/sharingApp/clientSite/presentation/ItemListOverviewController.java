@@ -156,7 +156,7 @@ public class ItemListOverviewController {
      * to edit an item and store it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since   2020.12.07
      * version 0.1
      * param
      * return
@@ -177,8 +177,8 @@ public class ItemListOverviewController {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(dialogStage);
                 alert.setTitle("No Selection");
-                alert.setHeaderText("No Person Selected");
-                alert.setContentText("Please select a person in the table.");
+                alert.setHeaderText("No item Selected");
+                alert.setContentText("Please select a item in the table.");
 
                 alert.showAndWait();
             }
@@ -191,7 +191,7 @@ public class ItemListOverviewController {
      * and remove it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since   2020.12.07
      * version 0.1
      * param
      * return
@@ -200,7 +200,19 @@ public class ItemListOverviewController {
     @FXML
     private void handleDelete(){
         System.out.println("handleDelete button clicked");
-        //todo GRL: add a method to delete an item
+        int selectedIndex = itemTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            itemTable.getItems().remove(selectedIndex);
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(dialogStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No item Selected");
+            alert.setContentText("Please select a item in the table.");
+
+            alert.showAndWait();
+        }
     }
 
     /************************************************************************************************************
