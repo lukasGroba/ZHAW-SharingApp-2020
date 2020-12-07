@@ -7,6 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.Date;
+
 /************************************************************************************************************
  * EditItemDialogController class
  *
@@ -31,9 +33,9 @@ public class EditItemDialogController {
     @FXML
     private TextField itemRatingField;
     @FXML
-    private TextField itemLentFrom;
+    private TextField itemLentFromField;
     @FXML
-    private TextField itemLentTill;
+    private TextField itemLentTillField;
 
 
     private Stage dialogStage;
@@ -94,8 +96,8 @@ public class EditItemDialogController {
         isItemLentField.setText(item.getItemAvailableString());
         itemRatingField.setText("" + item.getItemRating());
         itemDescriptionField.setText(item.getItemDescription());
-        itemLentFrom.setText(DateUtil.format(item.getItemLentFrom()));
-        itemLentTill.setText(DateUtil.format(item.getItemLentTill()));
+        itemLentFromField.setText(DateUtil.format(item.getItemLentFrom()));
+        itemLentTillField.setText(DateUtil.format(item.getItemLentTill()));
 
     }
 
@@ -114,8 +116,18 @@ public class EditItemDialogController {
     @FXML
     private void handleOk() {
         System.out.println("Button Ok was clicked");
+
+        if (isInputValid()) {
+            item.setItemName(itemNameField.getText());
+            item.setItemCreateDate(DateUtil.parse(dateCreatedField.getText()));
+            item.setIsItemAvailable(Boolean.parseBoolean(isItemLentField.getText()));
+            item.setItemRating(Double.parseDouble(itemRatingField.getText()));
+            item.setItemDescription(itemDescriptionField.getText());
+            item.setItemLentFrom(DateUtil.parse(itemLentFromField.getText()));
+            item.setItemLentTill(DateUtil.parse(itemLentTillField.getText()));
         okClicked = true;
         dialogStage.close();
+        }
     }
 
 /************************************************************************************************************
@@ -162,7 +174,7 @@ public class EditItemDialogController {
  * @return true if the input is valid
  *
  ************************************************************************************************************/
-    private boolean isInputValid() {
+    private boolean isInputValid(){
         String errorMessage = "";
 
 //        if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {

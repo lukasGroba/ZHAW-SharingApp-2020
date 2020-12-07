@@ -48,6 +48,7 @@ public class ItemFxView {
     }
 
     public String getItemName(){return this.itemName.get();}
+    public void setItemName(String name){this.itemName.set(name);}
     public StringProperty itemNameProperty(){
         return this.itemName;
     }
@@ -61,11 +62,14 @@ public class ItemFxView {
 
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getItemCreateDate(){return this.itemCreateDate.get();}
+    public void setItemCreateDate(LocalDate date){this.itemCreateDate.set(date);}
     public ObjectProperty<LocalDate> itemCreateDateProperty() {
         return itemCreateDate;
     }
 
+
     public boolean getItemAvailable(){return this.itemAvailable.get();}
+    public void setIsItemAvailable(boolean isLent){this.itemAvailable.set(isLent);}
     public String getItemAvailableString(){
         if(getItemAvailable()){
             return "true";
@@ -74,20 +78,24 @@ public class ItemFxView {
     }
 
     public Double getItemRating(){return this.itemRating.get();}
+    public void setItemRating(Double rating){this.itemRating.set(rating);}
     public DoubleProperty getItemRatingProperty(){return this.itemRating;}
 
     public String getItemDescription(){return this.itemDescription.get();}
+    public void setItemDescription(String description){this.itemDescription.set(description);}
     public StringProperty getItemDescriptionProperty(){return this.itemDescription;}
 
 
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getItemLentFrom(){return this.itemLentFrom.get();}
+    public void setItemLentFrom(LocalDate date){this.itemLentFrom.set(date);}
     public ObjectProperty<LocalDate> itemLentFromProperty() {
         return itemLentFrom;
     }
 
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getItemLentTill(){return this.itemLentTill.get();}
+    public void setItemLentTill(LocalDate date){this.itemLentTill.set(date);}
     public ObjectProperty<LocalDate> itemLentTillProperty() {
         return itemLentTill;
     }

@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../CSS/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.mas.sharingApp.clientSite.presentation.EditItemDialogController">
    <children>
       <GridPane layoutY="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
@@ -38,8 +37,8 @@
             <TextField fx:id="isItemLentField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="itemRatingField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="itemDescriptionField" prefHeight="145.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="itemLentFrom" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="itemLentTill" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="itemLentFromField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="itemLentTillField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <Button layoutX="378.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleOk" text="Ok" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="130.0" />
