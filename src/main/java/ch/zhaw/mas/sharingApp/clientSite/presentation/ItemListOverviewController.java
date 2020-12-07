@@ -1,10 +1,13 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
+import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 
 /************************************************************************************************************
@@ -13,8 +16,8 @@ import javafx.scene.control.TableView;
  * This is the ItemListOverviewController and manages all actions with the ItemList.
  *
  * @author  Lukas Grossenbacher
- * @since   2020.12.03
- * @version 0.1
+ * @since   2020.12.07
+ * @version 0.2
  *
  ************************************************************************************************************/
 public class ItemListOverviewController {
@@ -33,7 +36,17 @@ public class ItemListOverviewController {
     @FXML
     private Label itemIDLabel;
     @FXML
+    private Label itemCreateDate;
+    @FXML
     private Label itemAvailableLabel;
+    @FXML
+    private Label itemRating;
+    @FXML
+    private Label itemDescription;
+    @FXML
+    private Label itemLentFrom;
+    @FXML
+    private Label itemLentTill;
 
     /**
      * The constructor
@@ -93,12 +106,22 @@ public class ItemListOverviewController {
             itemNameLabel.setText(item.getItemName());
             itemOwnerLabel.setText(item.getItemOwner());
             itemIDLabel.setText("" + item.getItemID());
+            itemCreateDate.setText(DateUtil.format(item.getItemCreateDate()));
             itemAvailableLabel.setText(item.getItemAvailableString());
+            itemRating.setText("" + item.getItemRating());
+            itemDescription.setText(item.getItemDescription());
+            itemLentFrom.setText(DateUtil.format(item.getItemLentFrom()));
+            itemLentTill.setText(DateUtil.format(item.getItemLentTill()));
         }else{
             itemNameLabel.setText("");
             itemOwnerLabel.setText("");
             itemIDLabel.setText("");
+            itemCreateDate.setText("");
             itemAvailableLabel.setText("");
+            itemRating.setText("");
+            itemDescription.setText("");
+            itemLentFrom.setText("");
+            itemLentTill.setText("");
         }
     }
 

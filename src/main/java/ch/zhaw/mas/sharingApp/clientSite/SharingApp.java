@@ -17,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 /************************************************************************************************************
@@ -219,7 +220,16 @@ public class SharingApp extends Application
         ItemToShare itemToShare = new ItemToShare();
         itemToShare.setId(1);
         itemToShare.setLent(false);
+        itemToShare.setRating(3.8);
+        itemToShare.setDescription("Das ist eine Beispiel-Beschreibung.\n" +
+                                    "35 Zeichen Pro Zeile max. im Moment\n" +
+                                    "35 Zeichen Pro Zeile max. im Moment\n" +
+                                    "35 Zeichen Pro Zeile max. im Moment\n" +
+                                    "35 Zeichen Pro Zeile max. im Moment\n");
         itemToShare.setOwner(user);
+        itemToShare.setDateCreated(LocalDate.of(2020,12,07));
+        itemToShare.setLentFrom(LocalDate.of(1999,01,01));
+        itemToShare.setLentTill(LocalDate.of(1999,01,01));
 
         itemToShare.setName("Bohrmaschine");
         itemDataList.add(new ItemFxView(itemToShare));

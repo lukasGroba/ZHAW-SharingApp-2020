@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="900.0" stylesheets="@../CSS/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController">
+<AnchorPane prefHeight="500.0" prefWidth="900.0" stylesheets="@../CSS/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController">
    <children>
       <SplitPane dividerPositions="0.37639198218262804" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -36,16 +36,31 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Item Name" />
                         <Label text="Item Owner" GridPane.rowIndex="1" />
                         <Label text="Item ID" GridPane.rowIndex="2" />
-                        <Label text="Item Availability" GridPane.rowIndex="3" />
+                        <Label text="Item Availability" GridPane.rowIndex="4" />
                         <Label fx:id="itemNameLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" />
                         <Label fx:id="itemOwnerLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="itemIDLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="itemAvailableLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="itemAvailableLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Item Create Date" GridPane.rowIndex="3" />
+                        <Label text="Item Rating" GridPane.rowIndex="5" />
+                        <Label text="Item Description" GridPane.rowIndex="6" />
+                        <Label text="Item Lent from" GridPane.rowIndex="7" />
+                        <Label text="Item Lent Till" GridPane.rowIndex="8" />
+                        <Label fx:id="itemRating" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="itemLentFrom" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label fx:id="itemLentTill" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label fx:id="itemCreateDate" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="itemDescription" prefHeight="146.0" prefWidth="266.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
                </children>
