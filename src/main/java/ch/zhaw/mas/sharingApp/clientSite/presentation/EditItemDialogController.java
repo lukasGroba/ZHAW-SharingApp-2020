@@ -147,7 +147,7 @@ public class EditItemDialogController {
         dialogStage.close();
     }
 /************************************************************************************************************
-* void isOkClicked() Method
+* boolean isOkClicked() Method
 *
 * Called when the user clicks ok and returns a true.
 *
@@ -155,7 +155,7 @@ public class EditItemDialogController {
 * @since  2020.12.07
 * version 0.1
 * param
-* return
+* @return okClicked
 *
 ************************************************************************************************************/
     public boolean isOkClicked() {

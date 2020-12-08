@@ -158,6 +158,48 @@ public class SharingApp extends Application
 
     }
     /************************************************************************************************************
+     * void showSignUpUserDialog() Method
+     *
+     * This method create and opens the SignUpUserDialog of the SharingApp. This is needed to sign up a new User.
+     * The user will also checked from the server if it already exists in the system.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.08
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    public static void showSignUpUserDialog(){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader(SharingApp.class.getClassLoader().getResource("FXML/SignUpUserDialog.fxml"));
+            System.out.println(loader.getLocation());
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Sign Up new User");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            dialogStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconLogin.png"));
+
+            // Set the person into the controller.
+            SignUpUserDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /************************************************************************************************************
      * void showItemListOverview() Method
      *
      * This method create the itemListOverview inside the root Layout to view the list with details.
