@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -63,7 +64,7 @@ public class SharingApp extends Application
     public void start(Stage primaryStage){
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("SharingApp");
-        //this.primaryStage.getIcons().add(new Image("file:../adressBook2/src/main/resources/images/iconAddressBook.png"));
+        this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
         /*Check if Login is valid*/
         while(!isLoginValid) {
@@ -130,6 +131,7 @@ public class SharingApp extends Application
             System.out.println(loader.getLocation());
             AnchorPane loginPage = (AnchorPane) loader.load();
 
+
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Login SharingApp");
@@ -137,6 +139,8 @@ public class SharingApp extends Application
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(loginPage);
             dialogStage.setScene(scene);
+
+            dialogStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconLogin.png"));
 
             // Give the controller access to the main SharingApp.
             LoginViewController controller = loader.getController();
@@ -213,6 +217,8 @@ public class SharingApp extends Application
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
+
+            dialogStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
             // Set the person into the controller.
             EditItemDialogController controller = loader.getController();
