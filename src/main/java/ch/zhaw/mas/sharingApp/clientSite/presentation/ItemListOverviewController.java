@@ -37,6 +37,8 @@ public class ItemListOverviewController {
     @FXML
     private Label itemOwnerLabel;
     @FXML
+    private Label itemOwnerMailLabel;
+    @FXML
     private Label itemIDLabel;
     @FXML
     private Label itemCreateDate;
@@ -122,6 +124,7 @@ public class ItemListOverviewController {
         if (item != null) {
             itemNameLabel.setText(item.getItemName());
             itemOwnerLabel.setText(item.getItemOwner());
+            itemOwnerMailLabel.setText(item.getItemOwnerMail());
             itemIDLabel.setText("" + item.getItemID());
             itemCreateDate.setText(DateUtil.format(item.getItemCreateDate()));
             itemAvailableLabel.setText(item.getItemAvailableString());
@@ -132,6 +135,7 @@ public class ItemListOverviewController {
         } else {
             itemNameLabel.setText("");
             itemOwnerLabel.setText("");
+            itemOwnerMailLabel.setText("");
             itemIDLabel.setText("");
             itemCreateDate.setText("");
             itemAvailableLabel.setText("");

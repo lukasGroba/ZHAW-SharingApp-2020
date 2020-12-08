@@ -14,6 +14,7 @@ public class ItemFxView {
     private final StringProperty itemName;
     private final IntegerProperty itemID;
     private final StringProperty itemOwner;
+    private final StringProperty itemOwnerMail;
     private final ObjectProperty<LocalDate> itemCreateDate;
     private final BooleanProperty itemAvailable;
     private final DoubleProperty itemRating;
@@ -39,6 +40,7 @@ public class ItemFxView {
         this.itemName = new SimpleStringProperty(itemToShare.getName());
         this.itemID = new SimpleIntegerProperty(itemToShare.getId());
         this.itemOwner = new SimpleStringProperty(itemToShare.getOwner().getUsername());
+        this.itemOwnerMail = new SimpleStringProperty(itemToShare.getOwner().getMail());
         this.itemCreateDate = new SimpleObjectProperty<LocalDate>(itemToShare.getDateCreated());
         this.itemAvailable = new SimpleBooleanProperty(itemToShare.isLent());
         this.itemRating = new SimpleDoubleProperty(itemToShare.getRating());
@@ -58,6 +60,11 @@ public class ItemFxView {
     public String getItemOwner(){return this.itemOwner.get();}
     public StringProperty itemOwnerProperty(){
         return this.itemOwner;
+    }
+
+    public String getItemOwnerMail(){return this.itemOwnerMail.get();}
+    public StringProperty itemOwnerMailProperty(){
+        return this.itemOwnerMail;
     }
 
     @XmlJavaTypeAdapter(LocalDateAdapter.class)

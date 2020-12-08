@@ -28,7 +28,7 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background">
                <children>
                   <Label styleClass="label-header" text="Item Details" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                  <GridPane AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
+                  <GridPane AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="65.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,6 +36,7 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -47,22 +48,24 @@
                      <children>
                         <Label text="Item Name" />
                         <Label text="Item Owner" GridPane.rowIndex="1" />
-                        <Label text="Item ID" GridPane.rowIndex="2" />
-                        <Label text="Item Availability" GridPane.rowIndex="4" />
+                        <Label text="Item ID" GridPane.rowIndex="3" />
+                        <Label text="Item Availability" GridPane.rowIndex="5" />
                         <Label fx:id="itemNameLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" />
                         <Label fx:id="itemOwnerLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="itemIDLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="itemAvailableLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Item Create Date" GridPane.rowIndex="3" />
-                        <Label text="Item Rating" GridPane.rowIndex="5" />
-                        <Label text="Item Description" GridPane.rowIndex="6" />
-                        <Label text="Item Lent from" GridPane.rowIndex="7" />
-                        <Label text="Item Lent Till" GridPane.rowIndex="8" />
-                        <Label fx:id="itemRating" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="itemLentFrom" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label fx:id="itemLentTill" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label fx:id="itemCreateDate" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="itemDescription" prefHeight="146.0" prefWidth="266.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="itemIDLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="itemAvailableLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Item Create Date" GridPane.rowIndex="4" />
+                        <Label text="Item Rating" GridPane.rowIndex="6" />
+                        <Label text="Item Description" GridPane.rowIndex="7" />
+                        <Label text="Item Lent from" GridPane.rowIndex="8" />
+                        <Label text="Item Lent Till" GridPane.rowIndex="9" />
+                        <Label fx:id="itemRating" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="itemLentFrom" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label fx:id="itemLentTill" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label fx:id="itemCreateDate" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="itemDescription" prefHeight="146.0" prefWidth="266.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label text="Owner Mail Address" GridPane.rowIndex="2" />
+                        <Label fx:id="itemOwnerMailLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="318.0" layoutY="495.0" prefHeight="40.0" prefWidth="533.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
