@@ -57,6 +57,7 @@
                               <Button mnemonicParsing="false" onAction="#handleCancel" stylesheets="@../CSS/DarkTheme.css" text="Cancel" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
+                        <Button mnemonicParsing="false" onAction="#handleSignUp" stylesheets="@../CSS/DarkTheme.css" text="Sign Up" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>

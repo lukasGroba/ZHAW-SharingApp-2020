@@ -125,6 +125,24 @@ public class LoginViewController {
     }
 
     /************************************************************************************************************
+     * void handleSignUp() Method
+     *
+     * This method will be called when the user clicks the SignUp button in GUI. This method creates a dialog
+     * Stage that a new user can be created with an new login and stored to the server.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.08
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    @FXML
+    private void handleSignUp(){
+        System.out.println("SignUp button clicked");
+    }
+
+    /************************************************************************************************************
      * boolean isInputValid() Method
      *
      * This method validates the user input in the text fields of the GUI. It will be checked if it is
