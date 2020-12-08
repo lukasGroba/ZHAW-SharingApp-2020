@@ -3,11 +3,21 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.LocalDateAdapter;
 import javafx.beans.property.*;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
+
+/************************************************************************************************************
+ * ItemFxView class
+ *
+ * This is the ItemFxView class. This class is for the JavaFX frontend. With this class everything of the
+ * item can be made visible on the stages.
+ *
+ * @author  Lukas Grossenbacher
+ * @since   2020.12.08
+ * @version 0.1
+ *
+ ************************************************************************************************************/
 
 public class ItemFxView {
 
@@ -22,20 +32,19 @@ public class ItemFxView {
     private final ObjectProperty<LocalDate> itemLentFrom;
     private final ObjectProperty<LocalDate> itemLentTill;
 
+    /************************************************************************************************************
+     * void ItemFxView() constructor
+     *
+     * Constructor of the class ItemFxView with initializing of the object.
+     *
+     * author  Lukas Grossenbacher
+     * @since 2020.12.08
+     * version 0.1
+     * @param itemToShare
+     * return
+     *
+     ************************************************************************************************************/
 
-    /**
-     * Constructor for testing the item.
-     */
-//    public ItemFxView(String itemName, String itemOwner) {
-//        this.itemName = new SimpleStringProperty(itemName);
-//        this.itemID = new SimpleIntegerProperty(0);
-//        this.itemOwner = new SimpleStringProperty(itemOwner);
-//        this.itemAvailable = new SimpleBooleanProperty(true);
-//    }
-
-    /**
-     * Constructor with Class ItemToShare.
-     */
     public ItemFxView(ItemToShare itemToShare){
         this.itemName = new SimpleStringProperty(itemToShare.getName());
         this.itemID = new SimpleIntegerProperty(itemToShare.getId());
@@ -49,6 +58,18 @@ public class ItemFxView {
         this.itemLentTill = new SimpleObjectProperty<LocalDate>(itemToShare.getLentTill());
     }
 
+    /************************************************************************************************************
+     * void getter and setter() Methods
+     *
+     * this methods will be needed to get and set property information
+     *
+     * author  Lukas Grossenbacher
+     * @since 2020.12.08
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
     public String getItemName(){return this.itemName.get();}
     public void setItemName(String name){this.itemName.set(name);}
     public StringProperty itemNameProperty(){

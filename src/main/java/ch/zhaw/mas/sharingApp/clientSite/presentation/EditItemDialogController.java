@@ -1,14 +1,12 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
-import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.Date;
 
 /************************************************************************************************************
  * EditItemDialogController class
