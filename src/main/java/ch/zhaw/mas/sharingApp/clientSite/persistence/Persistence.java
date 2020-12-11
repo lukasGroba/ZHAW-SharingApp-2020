@@ -12,4 +12,5 @@ public abstract class Persistence {
         // TODO: 11.12.2020 from application properties!!
         this.url = "http://localhost:8080/" + specificUrl;
     }
+
 }

@@ -1,9 +1,28 @@
 package ch.zhaw.mas.sharingApp.clientSite.persistence;
 
-public class ItemPersistence {
-    private RestTemplateOwn restTemplate = new RestTemplateOwn();
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
+import org.springframework.stereotype.Service;
 
-    // TODO: 11.12.2020 from application properties!!
-    private String serverUrl = "http://localhost:8080/";
+import java.util.List;
+
+@Service
+public class ItemPersistence extends Persistence{
+    public ItemPersistence() {
+        super("books/test"); // TODO: 11.12.2020 anpassen (items anstatt books)
+    }
+
+    public List<ItemToShare> getAllItems(){
+        return null;
+    }
+
+    public void saveNewItem(ItemToShare item){
+
+    }
+
+    public void deleteItem(int id){
+
+    }
+
+
 
 }

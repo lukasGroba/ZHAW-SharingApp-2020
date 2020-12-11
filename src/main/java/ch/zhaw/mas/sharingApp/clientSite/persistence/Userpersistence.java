@@ -15,6 +15,7 @@ public class Userpersistence extends Persistence{
         super("books/test"); // TODO: 11.12.2020 anpassen (users anstatt books)
     }
 
+    // TODO: 11.12.2020 sollte static sein?
     public User getUser(int id){
         User user = this.getRestTemplate().getForObject(this.getUrl(), User.class);
         return user;

@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.domain;
 
+import ch.zhaw.mas.sharingApp.clientSite.persistence.BackendCommunication;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.Userpersistence;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 
-    Userpersistence userpersistence = new Userpersistence();
+    private Userpersistence userpersistence = new Userpersistence();
 
 //    private String username;
 //    private String mail; // evtl. = username?
@@ -23,7 +24,8 @@ public class User {
 
 //    public void saveNewUser(){}
     public User getUserServer(){
-        return userpersistence.getUser(0);
+        User user = userpersistence.getUser(0);
+        return user;
     }
 //
 

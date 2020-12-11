@@ -1,6 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite.domain;
 
 
+import ch.zhaw.mas.sharingApp.clientSite.persistence.ItemPersistence;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -18,5 +19,15 @@ public class ItemToShare {
     private LocalDate lentTill;
 //    private whatever picture;
 //    private Location location; --> eher in owner?
+
+    private ItemPersistence itemPersistence = new ItemPersistence();
+
+    public void saveNewItem(){
+        itemPersistence.saveNewItem(this);
+    }
+
+    public void deleteItem(int id){
+        itemPersistence.deleteItem(id);
+    }
 
 }
