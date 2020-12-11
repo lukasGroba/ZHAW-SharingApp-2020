@@ -1,5 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.Userpersistence;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
@@ -28,6 +30,8 @@ import java.io.IOException;
  *
  ************************************************************************************************************/
 public class SharingApp extends Application
+
+
 {
     private Stage primaryStage;
     private BorderPane rootLayout;
@@ -64,6 +68,9 @@ public class SharingApp extends Application
         this.primaryStage.setTitle("SharingApp");
         //this.primaryStage.getIcons().add(new Image("file:../adressBook2/src/main/resources/images/iconAddressBook.png"));
 
+        Userpersistence userpersistence = new Userpersistence();
+        User user = userpersistence.getUser(0);
+        System.out.println(user);
         /*Check if Login is valid*/
         while(!isLoginValid) {
             openLoginDialog();
