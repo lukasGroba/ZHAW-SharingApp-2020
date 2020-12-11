@@ -10,27 +10,22 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
-public class Userpersistence {
-
-    private RestTemplateOwn restTemplate = new RestTemplateOwn();
-
-
-    // TODO: 11.12.2020 from application properties!! 
-    private String serverUrl = "http://localhost:8080/";
-
-//    public User getUser(int id){
-//        RestTemplate restTemplate = new RestTemplate();
-//        String fooResourceUrl
-//                = serverUrl + "user" + id;
-//        ResponseEntity<String> response
-//                = restTemplate.getForEntity(fooResourceUrl, String.class);
-//        return new User();
-//    }
+public class Userpersistence extends Persistence{
+    public Userpersistence() {
+        super("books/test"); // TODO: 11.12.2020 anpassen (users anstatt books)
+    }
 
     public User getUser(int id){
-        final String url = serverUrl + "books/test";
-        User user = restTemplate.getForObject(url, User.class);
+        User user = this.getRestTemplate().getForObject(this.getUrl(), User.class);
         return user;
     }
 
+
+    public void saveNewUser(User user){
+
+    }
+
+    public User loginUser(String username, String password) {
+        return new User();
+    }
 }

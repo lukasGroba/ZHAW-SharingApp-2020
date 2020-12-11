@@ -68,18 +68,20 @@ public class SharingApp extends Application
         this.primaryStage.setTitle("SharingApp");
         //this.primaryStage.getIcons().add(new Image("file:../adressBook2/src/main/resources/images/iconAddressBook.png"));
 
-        Userpersistence userpersistence = new Userpersistence();
-        User user = userpersistence.getUser(0);
-        System.out.println(user);
-        /*Check if Login is valid*/
-        while(!isLoginValid) {
-            openLoginDialog();
-        }
-        //RootLayout will be initialized
-        initRootLayout();
 
-        //Shows the item list inside the rootLayout
-        showItemListOverview();
+        User user1 = new User();
+        user1.getUserServer();
+        System.out.println(user1);
+
+//        /*Check if Login is valid*/
+//        while(!isLoginValid) {
+//            openLoginDialog();
+//        }
+//        //RootLayout will be initialized
+//        initRootLayout();
+//
+//        //Shows the item list inside the rootLayout
+//        showItemListOverview();
 
 
     }
