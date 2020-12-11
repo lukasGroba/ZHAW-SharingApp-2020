@@ -1,4 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
+
+
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -7,25 +9,29 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /************************************************************************************************************
- * LoginViewController class
+ * SignUpUserDialogController class
  *
- * This is the LoginViewController and manages all buttons and actions with the LogingView GUI
+ * This is the SignUpUserDialogController and manages all buttons and actions to create a new user to the
+ * SharingApp.
  *
  * @author  Lukas Grossenbacher
- * @since   2020.12.02
+ * @since   2020.12.08
  * @version 0.1
  *
  ************************************************************************************************************/
-public class LoginViewController {
+public class SignUpUserDialogController {
 
     @FXML
-    private TextField userName;
+    private TextField userNameField;
     @FXML
-    private PasswordField userPassword;
+    private TextField userMailField;
+    @FXML
+    private PasswordField userPasswordField;
+    @FXML
+    private PasswordField userPasswordValidationField;
 
 
     private Stage dialogStage;
-    private boolean loginValid = false;
 
     /************************************************************************************************************
      * void initialize() Method
@@ -34,7 +40,7 @@ public class LoginViewController {
      * after the fxml file has been loaded.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since   2020.12.08
      * version 0.1
      * param
      * return
@@ -50,8 +56,8 @@ public class LoginViewController {
      * Sets the stage of this dialog.
      *
      * @author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
+     * @since   2020.12.08
+     * version  0.1
      * @param   dialogStage
      * return
      *
@@ -60,14 +66,13 @@ public class LoginViewController {
         this.dialogStage = dialogStage;
     }
 
-
     /************************************************************************************************************
      * void setSharingApp() Method
      *
      * Is called by the main application to give a reference back to itself.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since  2020.12.08
      * version 0.1
      * param   sharingApp
      * return
@@ -80,30 +85,26 @@ public class LoginViewController {
         this.sharingApp = sharingApp;
     }
 
-
     /************************************************************************************************************
-     * void handleLogin() Method
+     * void handleOk() Method
      *
-     * This method will be called when the user clicks the login button in GUI. This method will also set
-     * loginValid to true if the login was successful.
+     * This method will be called when the user clicks the ok button in GUI. This method creates the new user and
+     * send it to the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since   2020.12.08
      * version 0.1
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
-    private void handleLogin() {
-        if (isInputValid()) {
-            /*todo: Here should be action when button Login is clicked*/
-            /*todo: Load correct user data from server and check if it is valid*/
-            /*todo: check here correct username*/
-            /*todo: check here correct password*/
-            loginValid = true;
-            dialogStage.close();
-        }
+    private void handleOk() {
+        dialogStage.close();
+        //if (isInputValid()) {
+            /*todo GRL: check here user name from server. If user already exists, send error*/
+        //    dialogStage.close();
+        //}
     }
 
     /************************************************************************************************************
@@ -121,38 +122,18 @@ public class LoginViewController {
      ************************************************************************************************************/
     @FXML
     private void handleCancel() {
-        System.exit(0);
+        /*todo GRL: Clear all textFields and passwordFields*/
+        dialogStage.close();
     }
 
-    /************************************************************************************************************
-     * void handleSignUp() Method
-     *
-     * This method will be called when the user clicks the SignUp button in GUI. This method creates a dialog
-     * Stage that a new user can be created with an new login and stored to the server.
-     *
-     * author  Lukas Grossenbacher
-     * @since   2020.12.08
-     * version 0.1
-     * param
-     * return
-     *
-     ************************************************************************************************************/
-    @FXML
-    private void handleSignUp(){
-        System.out.println("SignUp button clicked");
-        SharingApp.showSignUpUserDialog();
-
-        //loginValid = true;
-        //dialogStage.close();
-    }
     /************************************************************************************************************
      * boolean isInputValid() Method
      *
      * This method validates the user input in the text fields of the GUI. It will be checked if it is
-     * empty or null.
+     * empty or null. Also it checks if the two passwords are identical.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since   2020.12.08
      * version 0.1
      * param
      * return true if the input is valid / false if the input is not valid
@@ -161,11 +142,20 @@ public class LoginViewController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (userName.getText() == null || userName.getText().length() == 0) {
+        if (userNameField.getText() == null || userNameField.getText().length() == 0) {
             errorMessage += "No name entered!\n";
         }
-        if (userPassword.getText() == null || userPassword.getText().length() == 0) {
+        if (userMailField.getText() == null || userMailField.getText().length() == 0) {
+            errorMessage += "No name entered!\n";
+        }
+        if (userPasswordField.getText() == null || userPasswordField.getText().length() == 0) {
             errorMessage += "No password entered!\n";
+        }
+        if (userPasswordValidationField.getText() == null || userPasswordValidationField.getText().length() == 0) {
+            errorMessage += "No password entered!\n";
+        }
+        if (userPasswordField.getText().contains(userPasswordValidationField.getText())){
+            errorMessage += "Passwords are not same! Please enter same passwords!\n";
         }
 
         if (errorMessage.length() == 0) {
@@ -182,21 +172,5 @@ public class LoginViewController {
 
             return false;
         }
-    }
-
-    /************************************************************************************************************
-     * boolean isLoginValid() Method
-     *
-     * This method returns the actual state of the loginValid variable.
-     *
-     * author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
-     * param
-     * return  loginValid
-     *
-     ************************************************************************************************************/
-    public boolean isLoginValid(){
-        return loginValid;
     }
 }
