@@ -92,63 +92,6 @@ public class RootLayoutController {
     }
 
     /************************************************************************************************************
-     * void handleNew() Method
-     *
-     * This method will be called when the user clicks the new button in GUI. This method will open a dialog
-     * to create a new item and add it the list on the server.
-     *
-     * author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
-     * param
-     * return
-     *
-     ************************************************************************************************************/
-    @FXML
-    private void handleNew(){
-        System.out.println("handleNew button clicked");
-        //todo GRL: add a method to create a new item
-    }
-
-    /************************************************************************************************************
-     * void handleEdit() Method
-     *
-     * This method will be called when the user clicks the edit button in GUI. This method will open a dialog
-     * to edit an item and store it in the list on the server.
-     *
-     * author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
-     * param
-     * return
-     *
-     ************************************************************************************************************/
-    @FXML
-    private void handleEdit(){
-        System.out.println("handleEdit button clicked");
-        //todo GRL: add a method to edit an item
-    }
-
-    /************************************************************************************************************
-     * void handleDelete() Method
-     *
-     * This method will be called when the user clicks the delete button in GUI. This method will delete an item
-     * and remove it in the list on the server.
-     *
-     * author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
-     * param
-     * return
-     *
-     ************************************************************************************************************/
-    @FXML
-    private void handleDelete(){
-        System.out.println("handleDelete button clicked");
-        //todo GRL: add a method to delete an item
-    }
-
-    /************************************************************************************************************
      * void handleExit() Method
      *
      * This method will be called when the user clicks the exit button in GUI. This method will close the

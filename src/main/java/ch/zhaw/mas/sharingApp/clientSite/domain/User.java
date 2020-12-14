@@ -12,8 +12,8 @@ public class User {
 
     private Userpersistence userpersistence = new Userpersistence();
 
-//    private String username;
-//    private String mail; // evtl. = username?
+    private String username;
+    private String mail; // evtl. = username?
 //    private String password;
 //    private Location location;
 // Items? Picture? Bewertung?

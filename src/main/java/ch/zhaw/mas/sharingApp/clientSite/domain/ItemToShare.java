@@ -3,6 +3,8 @@ package ch.zhaw.mas.sharingApp.clientSite.domain;
 
 import ch.zhaw.mas.sharingApp.clientSite.persistence.ItemPersistence;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -17,6 +19,7 @@ public class ItemToShare {
     private User owner;
     private LocalDate lentFrom;
     private LocalDate lentTill;
+
 //    private whatever picture;
 //    private Location location; --> eher in owner?
 
