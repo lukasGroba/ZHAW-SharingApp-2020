@@ -356,20 +356,4 @@ public class SharingApp extends Application
     public ObservableList<ItemFxView> getItemData() {
         return this.itemDataList;
     }
-
-    /************************************************************************************************************
-     * void main() Method
-     *
-     * This is the main method to start the complete application
-     *
-     * author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
-     * @param   args
-     * return
-     *
-     ************************************************************************************************************/
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
