@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.*;
@@ -14,7 +15,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.sql.RowSet;
 import java.io.IOException;
 import java.time.LocalDate;
 
