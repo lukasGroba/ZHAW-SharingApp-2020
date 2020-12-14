@@ -67,19 +67,19 @@ public class SharingApp extends Application
         this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
         /*Check if Login is valid*/
-        while(!isLoginValid) {
-            openLoginDialog();
+        openLoginDialog();
+
+        /*Start application if login is valid*/
+        if(isLoginValid) {
+            /*Create sample Data List*/
+            addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
+
+            //RootLayout will be initialized
+            initRootLayout();
+
+            //Shows the item list inside the rootLayout
+            showItemListOverview();
         }
-
-        /*Create sample Data List*/
-        addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
-
-        //RootLayout will be initialized
-        initRootLayout();
-
-        //Shows the item list inside the rootLayout
-        showItemListOverview();
-
 
     }
 
