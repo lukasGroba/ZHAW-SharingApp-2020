@@ -153,8 +153,8 @@ public class ItemListOverviewController {
      * to create a new item and add it the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.02
-     * version 0.1
+     * @since 2020.12.14
+     * version 0.2
      * param
      * return
      *
