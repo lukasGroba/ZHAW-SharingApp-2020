@@ -2,12 +2,15 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+
+import java.time.LocalDate;
 
 
 /************************************************************************************************************
@@ -159,7 +162,25 @@ public class ItemListOverviewController {
     @FXML
     private void handleNew() {
         System.out.println("handleNew button clicked");
-        //todo GRL: add a method to create a new item
+        ItemToShare tempItemToShare = new ItemToShare();
+
+        /*Create empty Item with user and create date*/
+        tempItemToShare.setId(0);
+        tempItemToShare.setLent(false);
+        tempItemToShare.setRating(0.0);
+        tempItemToShare.setDescription("");
+        tempItemToShare.setOwner(sharingApp.getUserData());         //Set actual logged-in user from SharingApp
+        tempItemToShare.setDateCreated(LocalDate.now());            //Set actual date
+        tempItemToShare.setLentFrom(LocalDate.of(1999,01,01));
+        tempItemToShare.setLentTill(LocalDate.of(1999,01,01));
+
+        /*Create new ItemFxView and Show edit dialog*/
+        ItemFxView tempItemFxView = new ItemFxView(tempItemToShare);
+        boolean okClicked = SharingApp.showEditItemDialog(tempItemFxView);
+
+        if (okClicked) {
+            sharingApp.getItemData().add(tempItemFxView);
+        }
     }
 
     /************************************************************************************************************

@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
+import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -97,10 +98,12 @@ public class LoginViewController {
     @FXML
     private void handleLogin() {
         if (isInputValid()) {
-            /*todo: Here should be action when button Login is clicked*/
-            /*todo: Load correct user data from server and check if it is valid*/
-            /*todo: check here correct username*/
-            /*todo: check here correct password*/
+            /*todo GRL: Here should be action when button Login is clicked*/
+            /*todo GRL: Load correct user data from server and check if it is valid*/
+            /*todo GRL: check here correct username*/
+            /*todo GRL: check here correct password*/
+            sharingApp.getUserData().setUsername(userName.getText());    /*fixme GRL: Just for Testing to create new Item*/
+            sharingApp.getUserData().setMail("hans.maulwurf@gmx.ch");    /*fixme GRL: Just for Testing to create new Item*/
             loginValid = true;
             dialogStage.close();
         }
