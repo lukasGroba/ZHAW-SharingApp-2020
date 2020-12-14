@@ -73,7 +73,8 @@ public class SharingApp extends Application
         this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
 
-        User user1 = new User();
+        User user1 = new User("Noemi", "mail", (long) 3, "Noemi", "Kaelin");
+        user1.saveNewUser();
         try {
             user1.getUserById(3);
         } catch (JsonProcessingException e) {

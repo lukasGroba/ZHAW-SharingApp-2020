@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.persistence;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,18 +14,36 @@ public class RequestBuilder {
 
 
 
-    public HttpEntity<String> getHttpRequest(Map<String, String> params, String url, HttpMethod httpMethod){
+    public HttpEntity<String> httpGetRequest(Map<String, String> params, String url){
 
+        UriComponentsBuilder builder = getBuilder(params, url);
+
+        HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), HttpMethod.GET, new HttpEntity(getHeaders()), String.class);
+
+        return response;
+    }
+
+    public HttpEntity<String> httpPostRequest(Map<String, String> params, String url, Object body){
+
+        UriComponentsBuilder builder = getBuilder(params, url);
+
+        HttpEntity httpEntity = new HttpEntity(body, getHeaders());
+
+        HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), HttpMethod.POST, httpEntity, String.class);
+
+        return response;
+    }
+
+    private UriComponentsBuilder getBuilder(Map<String, String> params, String url){
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
         for (Map.Entry<String, String> entry : params.entrySet()) {
             builder.queryParam(entry.getKey(), entry.getValue());
         }
-
+        return builder;
+    }
+    private HttpHeaders getHeaders(){
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", "application/json");
-
-        HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), httpMethod, new HttpEntity(headers), String.class);
-
-        return response;
+        return headers;
     }
 }
