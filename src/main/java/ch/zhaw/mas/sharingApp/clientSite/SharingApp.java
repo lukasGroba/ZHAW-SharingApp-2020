@@ -1,14 +1,13 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
-import ch.zhaw.mas.sharingApp.clientSite.persistence.Userpersistence;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
-import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,7 +74,11 @@ public class SharingApp extends Application
 
 
         User user1 = new User();
-        user1.getUserServer();
+        try {
+            user1.getUserById(3);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         System.out.println(user1);
 
 //        /*Check if Login is valid*/

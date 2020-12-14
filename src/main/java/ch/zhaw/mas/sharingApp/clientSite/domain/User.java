@@ -1,7 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite.domain;
 
-import ch.zhaw.mas.sharingApp.clientSite.persistence.BackendCommunication;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.Userpersistence;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,8 +23,8 @@ public class User {
     private String lastName;
 
 //    public void saveNewUser(){}
-    public User getUserServer(){
-        User user = userpersistence.getUser(0);
+    public User getUserById(int id) throws JsonProcessingException {
+        User user = userpersistence.getUser(id);
         return user;
     }
 //
