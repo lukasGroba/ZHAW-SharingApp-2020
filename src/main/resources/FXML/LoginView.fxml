@@ -53,11 +53,11 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleLogin" stylesheets="@../CSS/DarkTheme.css" text="Login" />
-                              <Button mnemonicParsing="false" onAction="#handleCancel" stylesheets="@../CSS/DarkTheme.css" text="Cancel" GridPane.columnIndex="1" />
+                              <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#handleLogin" stylesheets="@../CSS/DarkTheme.css" text="Login" />
+                              <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#handleCancel" stylesheets="@../CSS/DarkTheme.css" text="Cancel" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
-                        <Button mnemonicParsing="false" onAction="#handleSignUp" stylesheets="@../CSS/DarkTheme.css" text="Sign Up" GridPane.rowIndex="3" />
+                        <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#handleSignUp" stylesheets="@../CSS/DarkTheme.css" text="Sign Up" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>
