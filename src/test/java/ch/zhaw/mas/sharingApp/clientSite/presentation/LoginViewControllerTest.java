@@ -111,6 +111,6 @@ class LoginViewControllerTest extends ApplicationTest {
 //        WaitForAsyncUtils.waitForFxEvents();
 //
 //        assertTrue(controller.isLoginValid());
-//    }
+    }
 
 }
