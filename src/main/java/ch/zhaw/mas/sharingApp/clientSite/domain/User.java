@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class User {
 
-    private Userpersistence userpersistence = new Userpersistence();
+//    private Userpersistence userpersistence = new Userpersistence();
 
     private String username;
     private String mail; // evtl. = username?
@@ -26,16 +26,17 @@ public class User {
     private String firstName;
     private String lastName;
 
-    public User(String username, String mail, Long id, String firstName, String lastName) {
-        this.username = username;
-        this.mail = mail;
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+//    public User(String username, String mail, Long id, String firstName, String lastName) {
+//        this.username = username;
+//        this.mail = mail;
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//    }
 
     //    public void saveNewUser(){}
     public User getUserById(int id) throws JsonProcessingException {
+        Userpersistence userpersistence = new Userpersistence();
         User user = userpersistence.getUser(id);
         return user;
     }
@@ -43,10 +44,12 @@ public class User {
 
 
     public void saveNewUser(){
+        Userpersistence userpersistence = new Userpersistence();
         userpersistence.saveNewUser(this);
     }
 
     public User login(String username, String password){
+        Userpersistence userpersistence = new Userpersistence();
         return userpersistence.loginUser(username, password);
     }
 
