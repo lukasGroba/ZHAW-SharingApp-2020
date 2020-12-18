@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ *
+ * @author Noemi Kälin
+ */
 @Service
 public class UserService {
     private Userpersistence userpersistence = new Userpersistence();

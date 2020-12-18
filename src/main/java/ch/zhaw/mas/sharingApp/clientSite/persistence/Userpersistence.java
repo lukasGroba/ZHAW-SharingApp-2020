@@ -14,6 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class is for persisting Users to/from the server.
+ *
+ * @author Noemi Kälin
+ */
 @Service
 public class Userpersistence extends Persistence {
     public Userpersistence() {
