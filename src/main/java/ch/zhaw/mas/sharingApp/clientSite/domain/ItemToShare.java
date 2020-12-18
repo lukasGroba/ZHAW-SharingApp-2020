@@ -1,6 +1,8 @@
 package ch.zhaw.mas.sharingApp.clientSite.domain;
 
 
+import ch.zhaw.mas.sharingApp.clientSite.persistence.ItemPersistence;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +23,20 @@ public class ItemToShare {
 
 //    private whatever picture;
 //    private Location location; --> eher in owner?
+
+    @JsonIgnore
+    private ItemPersistence itemPersistence = new ItemPersistence();
+
+    public void saveNewItem(){
+        itemPersistence.saveNewItem(this);
+    }
+
+    public void deleteItem(int id){
+        itemPersistence.deleteItem(id);
+    }
+
+    public void updateItem(){
+        itemPersistence.updateItem(this);
+    }
 
 }
