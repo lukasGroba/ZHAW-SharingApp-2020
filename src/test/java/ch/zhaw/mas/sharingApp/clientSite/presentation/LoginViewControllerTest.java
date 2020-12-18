@@ -97,10 +97,10 @@ class LoginViewControllerTest extends ApplicationTest {
         assertFalse(controller.isLoginValid());
     }
 
-//    @Test
-//    public void testClickOnButtonLoginValid(){
-//        Boolean loginValidTest = true;
-//
+    @Test
+    public void testClickOnButtonLoginValid(){
+        //Boolean loginValidTest = true;
+
 //        clickOn(nameTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N);
 //        WaitForAsyncUtils.waitForFxEvents();
 //
