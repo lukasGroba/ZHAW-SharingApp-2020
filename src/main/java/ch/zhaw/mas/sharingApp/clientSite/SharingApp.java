@@ -1,7 +1,8 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemFxView;
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
-import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
@@ -40,6 +41,7 @@ public class SharingApp extends Application
     private static Stage primaryStage;
     private BorderPane rootLayout;
     private boolean isLoginValid = false;
+    private static User user = null;
 
     private ObservableList<ItemFxView> itemDataList = FXCollections.observableArrayList();
 
@@ -48,9 +50,8 @@ public class SharingApp extends Application
      */
 
     public SharingApp(){
-
-        /*Create sample Data List*/
-        addSampleItemData();
+        /*Create an empty user, which can be filled after valid login*/
+        this.user = new User();
 
     }
 
@@ -83,15 +84,19 @@ public class SharingApp extends Application
 //        System.out.println(user1);
 
         /*Check if Login is valid*/
-        while(!isLoginValid) {
-            openLoginDialog();
+        openLoginDialog();
+
+        /*Start application if login is valid*/
+        if(isLoginValid) {
+            /*Create sample Data List*/
+            addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
+
+            //RootLayout will be initialized
+            initRootLayout();
+
+            //Shows the item list inside the rootLayout
+            showItemListOverview();
         }
-        //RootLayout will be initialized
-        initRootLayout();
-
-        //Shows the item list inside the rootLayout
-        showItemListOverview();
-
 
     }
 
@@ -160,6 +165,7 @@ public class SharingApp extends Application
 
             // Give the controller access to the main SharingApp.
             LoginViewController controller = loader.getController();
+            controller.setSharingApp(this); //Set reference the main SharingApp
             controller.setDialogStage(dialogStage);
 
             // Show the dialog and wait until the user closes it
@@ -307,18 +313,10 @@ public class SharingApp extends Application
      ************************************************************************************************************/
     public void addSampleItemData(){
 
-        // Add some sample data
-//        itemDataList.add(new ItemFxView("Hemd", "Max Muster"));
-//        itemDataList.add(new ItemFxView("Motorrad", "Franz Meier"));
-//        itemDataList.add(new ItemFxView("Dia Projektor", "Harry Hasler"));
-//        itemDataList.add(new ItemFxView("Bohrmaschine", "Josef Mueller"));
-//        itemDataList.add(new ItemFxView("Schraubenzieherset", "Heidi Gisler"));
-//        itemDataList.add(new ItemFxView("Stabmixer", "Jasmin Staub"));
-
         /*Create sample User*/
-        User user = new User();
-        user.setUsername("Max Muster");
-        user.setMail("max.muster@gmail.com");
+        User sampleUser = new User();
+        sampleUser.setUsername("Max Muster");
+        sampleUser.setMail("max.muster@gmail.com");
 
         /*Create sample Item*/
         ItemToShare itemToShare = new ItemToShare();
@@ -330,8 +328,8 @@ public class SharingApp extends Application
                                     "35 Zeichen Pro Zeile max. im Moment\n" +
                                     "35 Zeichen Pro Zeile max. im Moment\n" +
                                     "35 Zeichen Pro Zeile max. im Moment\n");
-        itemToShare.setOwner(user);
-        itemToShare.setDateCreated(LocalDate.of(2020,12,07));
+        itemToShare.setOwner(sampleUser);
+        itemToShare.setDateCreated(LocalDate.now());
         itemToShare.setLentFrom(LocalDate.of(1999,01,01));
         itemToShare.setLentTill(LocalDate.of(1999,01,01));
 
@@ -372,5 +370,25 @@ public class SharingApp extends Application
      */
     public ObservableList<ItemFxView> getItemData() {
         return this.itemDataList;
+    }
+
+    /************************************************************************************************************
+     * User getUserData() Method
+     *
+     * This method returns the actual logged in user.
+     *
+     * author  Lukas Grossenbacher
+     * @since  2020.12.14
+     * version 0.1
+     * param
+     * return user
+     *
+     ************************************************************************************************************/
+    /**
+     * Returns the data as an observable list of Persons.
+     * @return
+     */
+    public User getUserData() {
+        return this.user;
     }
 }

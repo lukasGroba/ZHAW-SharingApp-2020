@@ -48,6 +48,6 @@ public class User {
 
 
     public List<ItemToShare> getItemsOfUser(){
-        return userpersistence.getItemsOfUser(this.getUsername());
+        return userpersistence.getItemsOfUser(this.getMail());
     }
 }

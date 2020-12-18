@@ -32,8 +32,8 @@
             <Label text="Password validation" GridPane.rowIndex="3" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
               <buttons>
-                <Button mnemonicParsing="false" onAction="#handleOk" text="Ok" />
-                  <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+                <Button fx:id="signUpBtnOk" mnemonicParsing="false" onAction="#handleOk" text="Ok" />
+                  <Button fx:id="signUpBtnCancel" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
               </buttons>
             </ButtonBar>
             <TextField fx:id="userNameField" GridPane.columnIndex="1" />

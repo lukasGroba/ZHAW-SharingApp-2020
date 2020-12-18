@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
+import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 public class LoginViewController {
 
     @FXML
-    private TextField userName;
+    private TextField userMail;
     @FXML
     private PasswordField userPassword;
 
@@ -97,10 +98,12 @@ public class LoginViewController {
     @FXML
     private void handleLogin() {
         if (isInputValid()) {
-            /*todo: Here should be action when button Login is clicked*/
-            /*todo: Load correct user data from server and check if it is valid*/
-            /*todo: check here correct username*/
-            /*todo: check here correct password*/
+            /*todo GRL: Here should be action when button Login is clicked*/
+            /*todo GRL: Load correct user data from server and check if it is valid*/
+            /*todo GRL: check here correct username*/
+            /*todo GRL: check here correct password*/
+            sharingApp.getUserData().setUsername("Brian Muster");    /*fixme GRL: Just for Testing to create new Item*/
+            sharingApp.getUserData().setMail(userMail.getText());    /*fixme GRL: Just for Testing to create new Item*/
             loginValid = true;
             dialogStage.close();
         }
@@ -161,8 +164,11 @@ public class LoginViewController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (userName.getText() == null || userName.getText().length() == 0) {
+        if (userMail.getText() == null || userMail.getText().length() == 0) {
             errorMessage += "No name entered!\n";
+        }
+        if(!userMail.getText().contains("@")){
+            errorMessage += "No valid Mail address! Mail should contains an @!\n";
         }
         if (userPassword.getText() == null || userPassword.getText().length() == 0) {
             errorMessage += "No password entered!\n";

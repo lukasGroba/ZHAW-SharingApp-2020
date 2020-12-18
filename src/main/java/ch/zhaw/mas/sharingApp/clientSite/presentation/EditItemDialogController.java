@@ -1,6 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
+import ch.zhaw.mas.sharingApp.clientSite.domain.ItemFxView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
