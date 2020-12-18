@@ -26,17 +26,8 @@ public class User {
 //    private Location location;
 // Items? Picture? Bewertung?
 
-    private Long id;
-    private String firstName;
-    private String lastName;
 
-    public User(String username, String mail, Long id, String firstName, String lastName) {
-        this.username = username;
-        this.mail = mail;
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+
 
     //    public void saveNewUser(){}
     public User getUserById(int id) throws JsonProcessingException {
@@ -47,7 +38,7 @@ public class User {
 
 
     public void saveNewUser(){
-        this.setId(null);
+//        this.setId(null);
         userpersistence.saveNewUser(this);
     }
 
@@ -57,6 +48,6 @@ public class User {
 
 
     public List<ItemToShare> getItemsOfUser(){
-        return userpersistence.getItemsOfUser(this.getId());
+        return userpersistence.getItemsOfUser(this.getUsername());
     }
 }

@@ -42,7 +42,7 @@ public class Userpersistence extends Persistence{
         return new User();
     }
 
-    public List<ItemToShare> getItemsOfUser(Long id) {
+    public List<ItemToShare> getItemsOfUser(String username) {
         return new ArrayList<>();
     }
 }
