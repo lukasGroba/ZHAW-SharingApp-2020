@@ -1,12 +1,10 @@
-package ch.zhaw.mas.sharingApp.clientSite.persistence;
+package ch.zhaw.mas.sharingApp.clientSite.persistence.generic;
 
-import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class RequestBuilder {

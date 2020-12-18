@@ -17,9 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-    @JsonIgnore
-    private Userpersistence userpersistence = new Userpersistence();
-
     private String username;
     private String mail; // evtl. = username?
 //    private String password;
@@ -27,27 +24,4 @@ public class User {
 // Items? Picture? Bewertung?
 
 
-
-
-    //    public void saveNewUser(){}
-    public User getUserById(int id) throws JsonProcessingException {
-        User user = userpersistence.getUser(id);
-        return user;
-    }
-//
-
-
-    public void saveNewUser(){
-//        this.setId(null);
-        userpersistence.saveNewUser(this);
-    }
-
-    public User login(String username, String password){
-        return userpersistence.loginUser(username, password);
-    }
-
-
-    public List<ItemToShare> getItemsOfUser(){
-        return userpersistence.getItemsOfUser(this.getMail());
-    }
 }

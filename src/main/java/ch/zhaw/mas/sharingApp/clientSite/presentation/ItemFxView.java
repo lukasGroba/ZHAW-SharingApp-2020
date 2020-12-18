@@ -1,4 +1,4 @@
-package ch.zhaw.mas.sharingApp.clientSite.domain;
+package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.LocalDateAdapter;

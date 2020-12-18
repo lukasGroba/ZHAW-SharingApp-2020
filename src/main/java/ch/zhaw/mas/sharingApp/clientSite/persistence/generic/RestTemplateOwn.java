@@ -1,4 +1,4 @@
-package ch.zhaw.mas.sharingApp.clientSite.persistence;
+package ch.zhaw.mas.sharingApp.clientSite.persistence.generic;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
