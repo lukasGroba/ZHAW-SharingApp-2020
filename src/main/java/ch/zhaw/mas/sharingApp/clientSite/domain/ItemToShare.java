@@ -35,4 +35,8 @@ public class ItemToShare {
         itemPersistence.deleteItem(id);
     }
 
+    public void updateItem(){
+        itemPersistence.updateItem(this);
+    }
+
 }

@@ -73,24 +73,24 @@ public class SharingApp extends Application
         this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
 
-        User user1 = new User("Noemi", "mail", (long) 3, "Noemi", "Kaelin");
-        user1.saveNewUser();
-        try {
-            user1.getUserById(3);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        System.out.println(user1);
-
-//        /*Check if Login is valid*/
-//        while(!isLoginValid) {
-//            openLoginDialog();
+//        User user1 = new User("Noemi", "mail", (long) 3, "Noemi", "Kaelin");
+//        user1.saveNewUser();
+//        try {
+//            user1.getUserById(3);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
 //        }
-//        //RootLayout will be initialized
-//        initRootLayout();
-//
-//        //Shows the item list inside the rootLayout
-//        showItemListOverview();
+//        System.out.println(user1);
+
+        /*Check if Login is valid*/
+        while(!isLoginValid) {
+            openLoginDialog();
+        }
+        //RootLayout will be initialized
+        initRootLayout();
+
+        //Shows the item list inside the rootLayout
+        showItemListOverview();
 
 
     }

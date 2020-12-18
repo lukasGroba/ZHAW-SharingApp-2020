@@ -24,5 +24,6 @@ public class ItemPersistence extends Persistence{
     }
 
 
-
+    public void updateItem(ItemToShare item) {
+    }
 }

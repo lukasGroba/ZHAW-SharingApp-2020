@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Data
 @Component
 @AllArgsConstructor
@@ -45,6 +47,7 @@ public class User {
 
 
     public void saveNewUser(){
+        this.setId(null);
         userpersistence.saveNewUser(this);
     }
 
@@ -53,4 +56,7 @@ public class User {
     }
 
 
+    public List<ItemToShare> getItemsOfUser(){
+        return userpersistence.getItemsOfUser(this.getId());
+    }
 }
