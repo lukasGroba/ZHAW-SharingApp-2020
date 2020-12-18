@@ -76,9 +76,9 @@ class LoginViewControllerTest extends ApplicationTest {
 
     @Test
     public void testTypeUserName() {
-        clickOn(nameTest).type(KeyCode.L).type(KeyCode.U).type(KeyCode.K).type(KeyCode.A).type(KeyCode.S);
+        clickOn(nameTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N);
         WaitForAsyncUtils.waitForFxEvents();
-        assertEquals("lukas", nameTest.getText());
+        assertEquals("brian", nameTest.getText());
     }
 
     @Test
@@ -101,7 +101,7 @@ class LoginViewControllerTest extends ApplicationTest {
 //    public void testClickOnButtonLoginValid(){
 //        Boolean loginValidTest = true;
 //
-//        clickOn(nameTest).type(KeyCode.L).type(KeyCode.U).type(KeyCode.K).type(KeyCode.A).type(KeyCode.S);
+//        clickOn(nameTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N);
 //        WaitForAsyncUtils.waitForFxEvents();
 //
 //        clickOn(passwordTest).type(KeyCode.A).type(KeyCode.D).type(KeyCode.M).type(KeyCode.I).type(KeyCode.N);
