@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 public class LoginViewController {
 
     @FXML
-    private TextField userName;
+    private TextField userMail;
     @FXML
     private PasswordField userPassword;
 
@@ -102,8 +102,8 @@ public class LoginViewController {
             /*todo GRL: Load correct user data from server and check if it is valid*/
             /*todo GRL: check here correct username*/
             /*todo GRL: check here correct password*/
-            sharingApp.getUserData().setUsername(userName.getText());    /*fixme GRL: Just for Testing to create new Item*/
-            sharingApp.getUserData().setMail("hans.maulwurf@gmx.ch");    /*fixme GRL: Just for Testing to create new Item*/
+            sharingApp.getUserData().setUsername("Brian Muster");    /*fixme GRL: Just for Testing to create new Item*/
+            sharingApp.getUserData().setMail(userMail.getText());    /*fixme GRL: Just for Testing to create new Item*/
             loginValid = true;
             dialogStage.close();
         }
@@ -164,8 +164,11 @@ public class LoginViewController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (userName.getText() == null || userName.getText().length() == 0) {
+        if (userMail.getText() == null || userMail.getText().length() == 0) {
             errorMessage += "No name entered!\n";
+        }
+        if(!userMail.getText().contains("@")){
+            errorMessage += "No valid Mail address! Mail should contains an @!\n";
         }
         if (userPassword.getText() == null || userPassword.getText().length() == 0) {
             errorMessage += "No password entered!\n";

@@ -1,12 +1,8 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
-<<<<<<< HEAD
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
-=======
->>>>>>> master
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
-import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
