@@ -37,8 +37,8 @@ import java.util.concurrent.TimeoutException;
  * @version 0.1
  *
  ************************************************************************************************************/
-class LoginViewControllerTest extends ApplicationTest {
-    TextField nameTest;
+public class LoginViewControllerTest extends ApplicationTest {
+    TextField userMailTest;
     PasswordField passwordTest;
     Button btnLoginTest;
     Button btnCancelTest;
@@ -58,7 +58,7 @@ class LoginViewControllerTest extends ApplicationTest {
     }
 
     /*Shortcut to retrieve widgets in the GUI*/
-    public <T extends Node> T find(final String query){
+    public <T extends Node> T find(final String query) {
         return lookup(query).query();
     }
 
@@ -66,7 +66,7 @@ class LoginViewControllerTest extends ApplicationTest {
     public void setUp(){
 
         /*Retrieving the tested widgets from the GUI*/
-        nameTest = find("#userName");
+        userMailTest = find("#userMail");
         passwordTest = find("#userPassword");
 
         btnLoginTest = find("#loginBtn");
@@ -86,9 +86,12 @@ class LoginViewControllerTest extends ApplicationTest {
 
     @Test
     public void testTypeUserName() {
-        clickOn(nameTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N);
+        clickOn(userMailTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N)
+                .press(KeyCode.CONTROL,KeyCode.ALT, KeyCode.DIGIT2).release(KeyCode.CONTROL,KeyCode.ALT, KeyCode.DIGIT2)
+                .type(KeyCode.G).type(KeyCode.M).type(KeyCode.X).type(KeyCode.DECIMAL)
+                .type(KeyCode.C).type(KeyCode.H);
         WaitForAsyncUtils.waitForFxEvents();
-        assertEquals("brian", nameTest.getText());
+        assertEquals("brian@gmx.ch", userMailTest.getText());
     }
 
     @Test
@@ -107,8 +110,13 @@ class LoginViewControllerTest extends ApplicationTest {
         assertFalse(controller.isLoginValid());
     }
 
-    @Test
-    public void testClickOnButtonLoginValid(){
+//    @Test
+//    public void testClickOnButtonLoginValid(){
+//        SharingApp sharingApp;
+//        sharingApp = new SharingApp();
+//
+//        sharingApp.getUserData().setUsername("Test");
+
         //Boolean loginValidTest = true;
 
 //        clickOn(nameTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N);
@@ -121,6 +129,6 @@ class LoginViewControllerTest extends ApplicationTest {
 //        WaitForAsyncUtils.waitForFxEvents();
 //
 //        assertTrue(controller.isLoginValid());
-    }
+//    }
 
 }
