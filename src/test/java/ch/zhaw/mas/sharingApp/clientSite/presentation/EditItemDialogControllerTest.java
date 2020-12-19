@@ -25,6 +25,17 @@ import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.concurrent.TimeoutException;
 
+/************************************************************************************************************
+ * EditItemDialogControllerTest class
+ *
+ * This is the Test Class for the EditItemDialogController. In this class some jUnit Tests will be
+ * implemented for automatic testing
+ *
+ * @author  Lukas Grossenbacher
+ * @since   2020.12.19
+ * @version 0.1
+ *
+ ************************************************************************************************************/
 class EditItemDialogControllerTest extends ApplicationTest{
 
     TextField itemNameFieldTest;

@@ -24,6 +24,17 @@ import java.util.concurrent.TimeoutException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/************************************************************************************************************
+ * SignUpUserDialogControllerTest class
+ *
+ * This is the Test Class for the SignUpUserDialogController. In this class some jUnit Tests will be
+ * implemented for automatic testing
+ *
+ * @author  Lukas Grossenbacher
+ * @since   2020.12.19
+ * @version 0.1
+ *
+ ************************************************************************************************************/
 class SignUpUserDialogControllerTest extends ApplicationTest {
 
     TextField userNameFieldTest;

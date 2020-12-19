@@ -26,7 +26,17 @@ import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.concurrent.TimeoutException;
 
-
+/************************************************************************************************************
+ * LoginViewControllerTest class
+ *
+ * This is the Test Class for the LoginViewController. In this class some jUnit Tests will be
+ * implemented for automatic testing
+ *
+ * @author  Lukas Grossenbacher
+ * @since   2020.12.19
+ * @version 0.1
+ *
+ ************************************************************************************************************/
 class LoginViewControllerTest extends ApplicationTest {
     TextField nameTest;
     PasswordField passwordTest;
