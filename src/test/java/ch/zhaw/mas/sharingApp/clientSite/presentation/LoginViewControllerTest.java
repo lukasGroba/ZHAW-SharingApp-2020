@@ -3,6 +3,7 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
@@ -37,6 +38,7 @@ import java.util.concurrent.TimeoutException;
  * @version 0.1
  *
  ************************************************************************************************************/
+
 public class LoginViewControllerTest extends ApplicationTest {
     TextField userMailTest;
     PasswordField passwordTest;
@@ -109,26 +111,4 @@ public class LoginViewControllerTest extends ApplicationTest {
 
         assertFalse(controller.isLoginValid());
     }
-
-//    @Test
-//    public void testClickOnButtonLoginValid(){
-//        SharingApp sharingApp;
-//        sharingApp = new SharingApp();
-//
-//        sharingApp.getUserData().setUsername("Test");
-
-        //Boolean loginValidTest = true;
-
-//        clickOn(nameTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N);
-//        WaitForAsyncUtils.waitForFxEvents();
-//
-//        clickOn(passwordTest).type(KeyCode.A).type(KeyCode.D).type(KeyCode.M).type(KeyCode.I).type(KeyCode.N);
-//        WaitForAsyncUtils.waitForFxEvents();
-//
-//        clickOn(btnLoginTest);
-//        WaitForAsyncUtils.waitForFxEvents();
-//
-//        assertTrue(controller.isLoginValid());
-//    }
-
 }

@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
@@ -40,6 +41,7 @@ public class SharingApp extends Application
     private BorderPane rootLayout;
     private boolean isLoginValid = false;
     private static User user = null;
+    private static UserService userService = null;
 
     private ObservableList<ItemFxView> itemDataList = FXCollections.observableArrayList();
 
@@ -50,6 +52,9 @@ public class SharingApp extends Application
     public SharingApp(){
         /*Create an empty user, which can be filled after valid login*/
         this.user = new User();
+
+        /*Create the UserService of the SharingApplication to communicate with the Server*/
+        this.userService = new UserService();
 
     }
 
@@ -165,6 +170,7 @@ public class SharingApp extends Application
             LoginViewController controller = loader.getController();
             controller.setSharingApp(this); //Set reference the main SharingApp
             controller.setDialogStage(dialogStage);
+            controller.setUserService(this.userService); /*Sets the reference of the UserService to communicate with the server*/
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
@@ -191,10 +197,10 @@ public class SharingApp extends Application
      * return
      *
      ************************************************************************************************************/
-    public static void showSignUpUserDialog(){
+    public void showSignUpUserDialog(){
         try {
             // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader(SharingApp.class.getClassLoader().getResource("FXML/SignUpUserDialog.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/SignUpUserDialog.fxml"));
             System.out.println(loader.getLocation());
             AnchorPane page = (AnchorPane) loader.load();
 
@@ -211,6 +217,7 @@ public class SharingApp extends Application
             // Set the person into the controller.
             SignUpUserDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setUserService(this.userService); /*Sets the reference of the UserService to communicate with the server*/
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
@@ -359,13 +366,9 @@ public class SharingApp extends Application
      * @since  2020.12.03
      * version 0.1
      * param
-     * return itemDataList
+     * @return itemDataList
      *
      ************************************************************************************************************/
-    /**
-     * Returns the data as an observable list of Persons.
-     * @return
-     */
     public ObservableList<ItemFxView> getItemData() {
         return this.itemDataList;
     }
@@ -382,11 +385,23 @@ public class SharingApp extends Application
      * return user
      *
      ************************************************************************************************************/
-    /**
-     * Returns the data as an observable list of Persons.
-     * @return
-     */
     public User getUserData() {
         return this.user;
+    }
+
+    /************************************************************************************************************
+     * setUserData() Method
+     *
+     * This method sets the actual logged in user.
+     *
+     * author  Lukas Grossenbacher
+     * @since  2020.12.19
+     * version 0.1
+     * param
+     * return user
+     *
+     ************************************************************************************************************/
+    public void setUserData(User user) {
+        this.user = user;
     }
 }
