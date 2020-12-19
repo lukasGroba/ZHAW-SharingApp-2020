@@ -1,12 +1,13 @@
 package ch.zhaw.mas.sharingApp.clientSite.persistence;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.Persistence;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ItemPersistence extends Persistence{
+public class ItemPersistence extends Persistence {
     public ItemPersistence() {
         super("books/test"); // TODO: 11.12.2020 anpassen (items anstatt books)
     }

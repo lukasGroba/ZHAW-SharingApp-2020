@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
-import ch.zhaw.mas.sharingApp.clientSite.domain.ItemFxView;
-import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
-import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -26,7 +23,6 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
-import java.time.LocalDate;
 import java.util.concurrent.TimeoutException;
 
 class EditItemDialogControllerTest extends ApplicationTest{

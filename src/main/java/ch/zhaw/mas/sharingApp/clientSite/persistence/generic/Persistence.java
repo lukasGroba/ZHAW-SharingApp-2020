@@ -1,4 +1,4 @@
-package ch.zhaw.mas.sharingApp.clientSite.persistence;
+package ch.zhaw.mas.sharingApp.clientSite.persistence.generic;
 
 import lombok.Data;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,10 +16,5 @@ public abstract class Persistence {
         this.url = "http://localhost:8080/" + specificUrl;
         this.componentsBuilder = UriComponentsBuilder.fromHttpUrl(this.url);
     }
-//
-//    public Class getById(int id){
-//
-//
-//
-//    }
+
 }
