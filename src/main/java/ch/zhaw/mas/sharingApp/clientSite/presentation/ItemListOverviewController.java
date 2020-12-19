@@ -195,7 +195,7 @@ public class ItemListOverviewController {
 
         /*Create new ItemFxView and Show edit dialog*/
         ItemFxView tempItemFxView = new ItemFxView(tempItemToShare);
-        boolean okClicked = SharingApp.showEditItemDialog(tempItemFxView);
+        boolean okClicked = sharingApp.showEditItemDialog(tempItemFxView);
 
         if (okClicked) {
             sharingApp.getItemData().add(tempItemFxView);
@@ -220,7 +220,7 @@ public class ItemListOverviewController {
         System.out.println("handleEdit button clicked");
         ItemFxView selectedItem = itemTable.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            boolean okClicked = SharingApp.showEditItemDialog(selectedItem);
+            boolean okClicked = sharingApp.showEditItemDialog(selectedItem);
             if (okClicked) {
                 showItemDetails(selectedItem);
             }
