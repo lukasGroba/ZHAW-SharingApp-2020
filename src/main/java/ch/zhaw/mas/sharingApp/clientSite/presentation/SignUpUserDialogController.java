@@ -122,7 +122,7 @@ public class SignUpUserDialogController {
     private void handleOk(){
         //dialogStage.close();
         if (isInputValid()) {
-            /*todo GRL: check here user name from server. If user already exists, send error*/
+            /*todo GRL: Uncomment try function for real application*/
 //            try {
                 User userValidation = null;
                 //User userValidation = userService.getUserByMail(userMailField.getText());

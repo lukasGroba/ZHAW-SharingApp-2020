@@ -122,7 +122,7 @@ public class LoginViewController {
             user.setMail(userMail.getText());
             /********************************************************/
 
-            //Todo GRL: Uncommnet userService.login for real application to verify user
+            //Todo GRL: Uncomment userService.login for real application to verify user
             //User user = userService.login(userMail.getText(), userPassword.getText()); /*Request to server*/
             if((user.getUsername() != null) && (user.getMail() != null)) {
                 /*Set valid user into sharingApp*/

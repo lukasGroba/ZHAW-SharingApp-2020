@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.services.ItemService;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
@@ -21,6 +22,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /************************************************************************************************************
  * SharingApp class
@@ -29,8 +32,8 @@ import java.time.LocalDate;
  * This is the main application of the SharingApp. It contains the main structure of the whole program and GUI
  *
  * @author  Lukas Grossenbacher
- * @since   2020.12.02
- * @version 0.1
+ * @since   2020.12.21
+ * @version 0.2
  *
  ************************************************************************************************************/
 public class SharingApp extends Application
@@ -42,6 +45,7 @@ public class SharingApp extends Application
     private boolean isLoginValid = false;
     private static User user = null;
     private static UserService userService = null;
+    private static ItemService itemService = null;
 
     private ObservableList<ItemFxView> itemDataList = FXCollections.observableArrayList();
 
@@ -53,8 +57,11 @@ public class SharingApp extends Application
         /*Create an empty user, which can be filled after valid login*/
         this.user = new User();
 
-        /*Create the UserService of the SharingApplication to communicate with the Server*/
+        /*Create the UserService of the SharingApplication to communicate with the Server about Users*/
         this.userService = new UserService();
+
+        /*Create the ItemService of the SharingApplication to communicate with the Server about Items*/
+        this.itemService = new ItemService();
 
     }
 
@@ -93,6 +100,10 @@ public class SharingApp extends Application
         if(isLoginValid) {
             /*Create sample Data List*/
             addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
+
+            /*Create Initial List from Server after valid login*/
+            /*todo GRL: Uncomment for real application*/
+            //loadCompleteListFromServer();
 
             //RootLayout will be initialized
             initRootLayout();
@@ -355,6 +366,28 @@ public class SharingApp extends Application
 
         itemToShare.setName("Stabmixer");
         itemDataList.add(new ItemFxView(itemToShare));
+    }
+    /************************************************************************************************************
+     * void loadCompleteListFromServer() Method
+     *
+     * This method loads the complete item list from the server and load it into the observable list.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.21
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    public void loadCompleteListFromServer(){
+        List<ItemToShare> itemToShareList = new ArrayList<ItemToShare>();
+        itemToShareList = itemService.getAllItems();    //Load complete item list from the server
+
+        /*Converts complete list of ItemToShare into list of ItemFxView*/
+        for(ItemToShare itemToShare : itemToShareList){
+            itemDataList.add(new ItemFxView(itemToShare));
+        }
+
     }
 
     /************************************************************************************************************
