@@ -1,7 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
-import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
-import ch.zhaw.mas.sharingApp.clientSite.domain.LocalDateAdapter;
+import ch.zhaw.mas.sharingApp.clientSite.domain.*;
 import javafx.beans.property.*;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -128,4 +127,32 @@ public class ItemFxView {
         return itemLentTill;
     }
 
+    /************************************************************************************************************
+     * ItemToShare convertItemFxViewToItemToShare(ItemFxView) Methods
+     *
+     * this methods will convert an ItemFxView to an ItemToShare
+     *
+     * author  Lukas Grossenbacher
+     * @since 2020.12.21
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    public ItemToShare convertItemFxViewToItemToShare(ItemFxView itemFxView, User user){
+        ItemToShare itemToShare = new ItemToShare();
+
+        itemToShare.setId(itemFxView.getItemID());
+        itemToShare.setLent(itemFxView.getItemAvailable());
+        itemToShare.setRating(itemFxView.getItemRating());
+        itemToShare.setOwner(user);
+        itemToShare.setDescription(itemFxView.getItemDescription());
+        itemToShare.setDateCreated(itemFxView.getItemCreateDate());
+        itemToShare.setLentFrom(itemFxView.getItemLentFrom());
+        itemToShare.setLentTill(itemFxView.getItemLentTill());
+
+        return itemToShare;
+    }
+
 }
+

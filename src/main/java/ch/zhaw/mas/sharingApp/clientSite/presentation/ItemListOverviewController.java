@@ -3,6 +3,8 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
+import ch.zhaw.mas.sharingApp.clientSite.domain.services.ItemService;
+import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -55,6 +57,8 @@ public class ItemListOverviewController {
 
     private Stage dialogStage;
 
+    private ItemService itemService;
+
     /**
      * The constructor
      */
@@ -84,6 +88,21 @@ public class ItemListOverviewController {
 
         // Listen for selection changes and show the item details when changed.
         itemTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showItemDetails(newValue));
+    }
+    /************************************************************************************************************
+     * void setItemService() Method
+     *
+     * Sets the ItemService() of this dialog to communicate with the server
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.21
+     * version 0.1
+     * @param   itemService
+     * return
+     *
+     ************************************************************************************************************/
+    public void setItemService(ItemService itemService) {
+        this.itemService = itemService;
     }
 
     /************************************************************************************************************
@@ -198,7 +217,23 @@ public class ItemListOverviewController {
         boolean okClicked = sharingApp.showEditItemDialog(tempItemFxView);
 
         if (okClicked) {
-            sharingApp.getItemData().add(tempItemFxView);
+            try{
+                /*todo GRL: Uncomment for real application*/
+                //itemService.saveNewItem(tempItemFxView.convertItemFxViewToItemToShare(tempItemFxView, sharingApp.getUserData()));
+                //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
+
+                sharingApp.getItemData().add(tempItemFxView); /*todo GRL: Delete or comment for real application*/
+
+            }catch(Exception exp){
+                exp.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(dialogStage);
+                alert.setTitle("Connection Error");
+                alert.setHeaderText("Save item to server failed!");
+                alert.setContentText("Please startup the Server for SharingAppApplication");
+
+                alert.showAndWait();
+            }
         }
     }
 

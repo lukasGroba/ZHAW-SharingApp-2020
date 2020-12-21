@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -101,12 +102,12 @@ public class SharingApp extends Application
             /*Create sample Data List*/
             addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
 
+            //RootLayout will be initialized
+            initRootLayout();
+
             /*Create Initial List from Server after valid login*/
             /*todo GRL: Uncomment for real application*/
             //loadCompleteListFromServer();
-
-            //RootLayout will be initialized
-            initRootLayout();
 
             //Shows the item list inside the rootLayout
             showItemListOverview();
@@ -381,11 +382,23 @@ public class SharingApp extends Application
      ************************************************************************************************************/
     public void loadCompleteListFromServer(){
         List<ItemToShare> itemToShareList = new ArrayList<ItemToShare>();
-        itemToShareList = itemService.getAllItems();    //Load complete item list from the server
 
-        /*Converts complete list of ItemToShare into list of ItemFxView*/
-        for(ItemToShare itemToShare : itemToShareList){
-            itemDataList.add(new ItemFxView(itemToShare));
+        try {
+            itemToShareList = itemService.getAllItems();    //Load complete item list from the server
+
+            /*Converts complete list of ItemToShare into list of ItemFxView*/
+            for (ItemToShare itemToShare : itemToShareList) {
+                itemDataList.add(new ItemFxView(itemToShare));
+            }
+        }catch(Exception exp){
+            exp.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(primaryStage);
+            alert.setTitle("Connection Error");
+            alert.setHeaderText("Load of List Failed");
+            alert.setContentText("Please startup the Server for SharingAppApplication");
+
+            alert.showAndWait();
         }
 
     }
