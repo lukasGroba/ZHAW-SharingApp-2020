@@ -147,6 +147,25 @@ public class ItemListOverviewController {
     }
 
     /************************************************************************************************************
+     * void handleReloadList() Method
+     *
+     * This method will be called when the user clicks the "Reload List" button in GUI. This button will
+     * reload the complete list from the server again.
+     *
+     * author  Lukas Grossenbacher
+     * @since 2020.12.19
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    @FXML
+    private void handleReloadList(){
+        System.out.println("handleReloadList button clicked");
+        /*Todo GRL: Add routine to reload complete item list from the server*/
+    }
+
+    /************************************************************************************************************
      * void handleNew() Method
      *
      * This method will be called when the user clicks the new button in GUI. This method will open a dialog

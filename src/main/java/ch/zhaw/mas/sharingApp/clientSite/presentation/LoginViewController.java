@@ -1,6 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -27,6 +28,7 @@ public class LoginViewController {
 
     private Stage dialogStage;
     private boolean loginValid = false;
+    private UserService userService;
 
     /************************************************************************************************************
      * void initialize() Method
@@ -43,6 +45,7 @@ public class LoginViewController {
      ************************************************************************************************************/
     @FXML
     private void initialize() {
+
     }
 
     /************************************************************************************************************
@@ -61,6 +64,21 @@ public class LoginViewController {
         this.dialogStage = dialogStage;
     }
 
+    /************************************************************************************************************
+     * void setUserService() Method
+     *
+     * Sets the UserService() of this dialog to communicate with the server
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.19
+     * version 0.1
+     * @param   userService
+     * return
+     *
+     ************************************************************************************************************/
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     /************************************************************************************************************
      * void setSharingApp() Method
@@ -89,8 +107,8 @@ public class LoginViewController {
      * loginValid to true if the login was successful.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
+     * @since   2020.12.19
+     * version 0.2
      * param
      * return
      *
@@ -98,14 +116,27 @@ public class LoginViewController {
     @FXML
     private void handleLogin() {
         if (isInputValid()) {
-            /*todo GRL: Here should be action when button Login is clicked*/
-            /*todo GRL: Load correct user data from server and check if it is valid*/
-            /*todo GRL: check here correct username*/
-            /*todo GRL: check here correct password*/
-            sharingApp.getUserData().setUsername("Brian Muster");    /*fixme GRL: Just for Testing to create new Item*/
-            sharingApp.getUserData().setMail(userMail.getText());    /*fixme GRL: Just for Testing to create new Item*/
-            loginValid = true;
-            dialogStage.close();
+            /******************Just for Testing**********************/
+            User user = new User();
+            user.setUsername("Brian Muster");
+            user.setMail(userMail.getText());
+            /********************************************************/
+
+            //Todo GRL: Uncommnet userService.login for real application to verify user
+            //User user = userService.login(userMail.getText(), userPassword.getText()); /*Request to server*/
+            if((user.getUsername() != null) && (user.getMail() != null)) {
+                /*Set valid user into sharingApp*/
+                sharingApp.setUserData(user);
+
+                loginValid = true;
+                dialogStage.close();
+
+            }else{
+                errorAlertMessage("Login was not successful! Try another 'User Mail' or other 'Password'!");
+                /*Empty the textFields*/
+                userMail.clear();
+                userPassword.clear();
+            }
         }
     }
 
@@ -143,10 +174,7 @@ public class LoginViewController {
     @FXML
     private void handleSignUp(){
         System.out.println("SignUp button clicked");
-        SharingApp.showSignUpUserDialog();
-
-        //loginValid = true;
-        //dialogStage.close();
+        sharingApp.showSignUpUserDialog();
     }
     /************************************************************************************************************
      * boolean isInputValid() Method
@@ -178,13 +206,7 @@ public class LoginViewController {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            errorAlertMessage(errorMessage);
 
             return false;
         }
@@ -204,5 +226,26 @@ public class LoginViewController {
      ************************************************************************************************************/
     public boolean isLoginValid(){
         return loginValid;
+    }
+    /************************************************************************************************************
+     * void errorAlertMessage(String errorMessage) Method
+     *
+     * This method creates an alert with given Message when login has failed.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.19
+     * version 0.1
+     * @param errorMessage
+     * return
+     *
+     ************************************************************************************************************/
+    private void errorAlertMessage(String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(dialogStage);
+        alert.setTitle("Invalid Fields");
+        alert.setHeaderText("Please correct invalid fields");
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
     }
 }

@@ -39,7 +39,7 @@ public class Userpersistence extends Persistence {
     }
 
 
-    public void saveNewUser(User user){
+    public void saveNewUser(User user, String password){
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl(), user);
     }

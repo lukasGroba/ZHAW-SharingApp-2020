@@ -3,6 +3,7 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
@@ -26,9 +27,20 @@ import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.concurrent.TimeoutException;
 
+/************************************************************************************************************
+ * LoginViewControllerTest class
+ *
+ * This is the Test Class for the LoginViewController. In this class some jUnit Tests will be
+ * implemented for automatic testing
+ *
+ * @author  Lukas Grossenbacher
+ * @since   2020.12.19
+ * @version 0.1
+ *
+ ************************************************************************************************************/
 
-class LoginViewControllerTest extends ApplicationTest {
-    TextField nameTest;
+public class LoginViewControllerTest extends ApplicationTest {
+    TextField userMailTest;
     PasswordField passwordTest;
     Button btnLoginTest;
     Button btnCancelTest;
@@ -48,7 +60,7 @@ class LoginViewControllerTest extends ApplicationTest {
     }
 
     /*Shortcut to retrieve widgets in the GUI*/
-    public <T extends Node> T find(final String query){
+    public <T extends Node> T find(final String query) {
         return lookup(query).query();
     }
 
@@ -56,7 +68,7 @@ class LoginViewControllerTest extends ApplicationTest {
     public void setUp(){
 
         /*Retrieving the tested widgets from the GUI*/
-        nameTest = find("#userName");
+        userMailTest = find("#userMail");
         passwordTest = find("#userPassword");
 
         btnLoginTest = find("#loginBtn");
@@ -76,9 +88,12 @@ class LoginViewControllerTest extends ApplicationTest {
 
     @Test
     public void testTypeUserName() {
-        clickOn(nameTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N);
+        clickOn(userMailTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N)
+                .press(KeyCode.CONTROL,KeyCode.ALT, KeyCode.DIGIT2).release(KeyCode.CONTROL,KeyCode.ALT, KeyCode.DIGIT2)
+                .type(KeyCode.G).type(KeyCode.M).type(KeyCode.X).type(KeyCode.DECIMAL)
+                .type(KeyCode.C).type(KeyCode.H);
         WaitForAsyncUtils.waitForFxEvents();
-        assertEquals("brian", nameTest.getText());
+        assertEquals("brian@gmx.ch", userMailTest.getText());
     }
 
     @Test
@@ -96,21 +111,4 @@ class LoginViewControllerTest extends ApplicationTest {
 
         assertFalse(controller.isLoginValid());
     }
-
-    @Test
-    public void testClickOnButtonLoginValid(){
-        //Boolean loginValidTest = true;
-
-//        clickOn(nameTest).type(KeyCode.B).type(KeyCode.R).type(KeyCode.I).type(KeyCode.A).type(KeyCode.N);
-//        WaitForAsyncUtils.waitForFxEvents();
-//
-//        clickOn(passwordTest).type(KeyCode.A).type(KeyCode.D).type(KeyCode.M).type(KeyCode.I).type(KeyCode.N);
-//        WaitForAsyncUtils.waitForFxEvents();
-//
-//        clickOn(btnLoginTest);
-//        WaitForAsyncUtils.waitForFxEvents();
-//
-//        assertTrue(controller.isLoginValid());
-    }
-
 }

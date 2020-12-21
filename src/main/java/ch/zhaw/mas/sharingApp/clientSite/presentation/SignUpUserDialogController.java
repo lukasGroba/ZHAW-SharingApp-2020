@@ -2,6 +2,9 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
+import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -32,6 +35,7 @@ public class SignUpUserDialogController {
 
 
     private Stage dialogStage;
+    private UserService userService;
 
     /************************************************************************************************************
      * void initialize() Method
@@ -67,6 +71,22 @@ public class SignUpUserDialogController {
     }
 
     /************************************************************************************************************
+     * void setUserService() Method
+     *
+     * Sets the UserService() of this dialog to communicate with the server
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.19
+     * version 0.1
+     * @param   userService
+     * return
+     *
+     ************************************************************************************************************/
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    /************************************************************************************************************
      * void setSharingApp() Method
      *
      * Is called by the main application to give a reference back to itself.
@@ -99,12 +119,29 @@ public class SignUpUserDialogController {
      *
      ************************************************************************************************************/
     @FXML
-    private void handleOk() {
-        dialogStage.close();
-        //if (isInputValid()) {
+    private void handleOk(){
+        //dialogStage.close();
+        if (isInputValid()) {
             /*todo GRL: check here user name from server. If user already exists, send error*/
-        //    dialogStage.close();
-        //}
+//            try {
+                User userValidation = null;
+                //User userValidation = userService.getUserByMail(userMailField.getText());
+
+                if(userValidation == null) {
+                    User user = new User();
+                    user.setUsername(userNameField.getText());
+                    user.setMail(userMailField.getText());
+                    //userService.saveNewUser(user, userPasswordValidationField.getText());
+                    dialogStage.close();
+                }else{
+                    errorAlertMessage("User Mail already exists! Please enter another mail address!");
+                }
+//            }catch (JsonProcessingException exp) {
+//                errorAlertMessage("Connection to server failed!");
+//                exp.printStackTrace();
+//            }
+
+        }
     }
 
     /************************************************************************************************************
@@ -114,7 +151,7 @@ public class SignUpUserDialogController {
      * program end generate a System.exit(0)
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.02
+     * @since   2020.12.19
      * version 0.1
      * param
      * return
@@ -122,7 +159,12 @@ public class SignUpUserDialogController {
      ************************************************************************************************************/
     @FXML
     private void handleCancel() {
-        /*todo GRL: Clear all textFields and passwordFields*/
+        /*Empty the complete content of all fields*/
+        userNameField.clear();
+        userMailField.clear();
+        userPasswordField.clear();
+        userPasswordValidationField.clear();
+
         dialogStage.close();
     }
 
@@ -142,11 +184,15 @@ public class SignUpUserDialogController {
     private boolean isInputValid() {
         String errorMessage = "";
 
+
         if (userNameField.getText() == null || userNameField.getText().length() == 0) {
             errorMessage += "No name entered!\n";
         }
         if (userMailField.getText() == null || userMailField.getText().length() == 0) {
-            errorMessage += "No name entered!\n";
+            errorMessage += "No Mail entered!\n";
+        }
+        if(!userMailField.getText().contains("@")){
+            errorMessage += "No valid Mail address! Mail should contains an @!\n";
         }
         if (userPasswordField.getText() == null || userPasswordField.getText().length() == 0) {
             errorMessage += "No password entered!\n";
@@ -154,23 +200,38 @@ public class SignUpUserDialogController {
         if (userPasswordValidationField.getText() == null || userPasswordValidationField.getText().length() == 0) {
             errorMessage += "No password entered!\n";
         }
-        if (userPasswordField.getText().contains(userPasswordValidationField.getText())){
+        if (!userPasswordField.getText().contains(userPasswordValidationField.getText())) {
             errorMessage += "Passwords are not same! Please enter same passwords!\n";
-        }
+           }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
-
+            errorAlertMessage(errorMessage);
             return false;
         }
+    }
+
+    /************************************************************************************************************
+     * void errorAlertMessage(String errorMessage) Method
+     *
+     * This method creates an alert with given Message when login has failed.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.19
+     * version 0.1
+     * @param errorMessage
+     * return
+     *
+     ************************************************************************************************************/
+    private void errorAlertMessage(String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(dialogStage);
+        alert.setTitle("Invalid Fields");
+        alert.setHeaderText("Please correct invalid fields");
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
     }
 }

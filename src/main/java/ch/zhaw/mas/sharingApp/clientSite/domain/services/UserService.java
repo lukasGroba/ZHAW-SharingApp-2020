@@ -17,8 +17,8 @@ public class UserService {
     private Userpersistence userpersistence = new Userpersistence();
 
 
-    public User login(String username, String password){
-        return userpersistence.loginUser(username, password);
+    public User login(String userMail, String password){
+        return userpersistence.loginUser(userMail, password);
     }
 
 
@@ -26,8 +26,8 @@ public class UserService {
         return userpersistence.getUser(mail);
     }
 
-    public void saveNewUser(User user){
-        userpersistence.saveNewUser(user);
+    public void saveNewUser(User user, String password){
+        userpersistence.saveNewUser(user, password);
     }
 
     public List<ItemToShare> getItemsOfUser(User user){
