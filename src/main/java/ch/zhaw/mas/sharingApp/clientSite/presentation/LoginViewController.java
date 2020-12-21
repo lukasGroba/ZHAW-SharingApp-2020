@@ -14,8 +14,8 @@ import javafx.stage.Stage;
  * This is the LoginViewController and manages all buttons and actions with the LogingView GUI
  *
  * @author  Lukas Grossenbacher
- * @since   2020.12.02
- * @version 0.1
+ * @since   2020.12.19
+ * @version 0.2
  *
  ************************************************************************************************************/
 public class LoginViewController {

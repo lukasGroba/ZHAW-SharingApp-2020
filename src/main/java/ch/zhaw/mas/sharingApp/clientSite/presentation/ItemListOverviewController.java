@@ -4,7 +4,6 @@ import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.ItemService;
-import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -21,8 +20,8 @@ import java.time.LocalDate;
  * This is the ItemListOverviewController and manages all actions with the ItemList.
  *
  * @author  Lukas Grossenbacher
- * @since   2020.12.07
- * @version 0.2
+ * @since   2020.12.21
+ * @version 0.3
  *
  ************************************************************************************************************/
 public class ItemListOverviewController {
