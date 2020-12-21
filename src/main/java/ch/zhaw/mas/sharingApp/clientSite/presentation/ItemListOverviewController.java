@@ -180,7 +180,20 @@ public class ItemListOverviewController {
     @FXML
     private void handleReloadList(){
         System.out.println("handleReloadList button clicked");
-        /*Todo GRL: Add routine to reload complete item list from the server*/
+        try{
+            /*todo GRL: Uncomment for real application*/
+            //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
+
+        }catch(Exception exp){
+            exp.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Connection Error");
+            alert.setHeaderText("Save item to server failed!");
+            alert.setContentText("Please startup the Server for SharingAppApplication");
+
+            alert.showAndWait();
+        }
     }
 
     /************************************************************************************************************

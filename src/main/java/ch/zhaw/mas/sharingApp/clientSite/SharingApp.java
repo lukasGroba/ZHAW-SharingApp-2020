@@ -382,6 +382,7 @@ public class SharingApp extends Application
      ************************************************************************************************************/
     public void loadCompleteListFromServer(){
         List<ItemToShare> itemToShareList = new ArrayList<ItemToShare>();
+        this.itemDataList.removeAll();      //Clear observable list to refresh it from server
 
         try {
             itemToShareList = itemService.getAllItems();    //Load complete item list from the server
