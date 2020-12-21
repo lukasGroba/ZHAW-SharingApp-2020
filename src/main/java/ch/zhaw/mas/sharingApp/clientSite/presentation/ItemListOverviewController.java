@@ -243,8 +243,8 @@ public class ItemListOverviewController {
      * to edit an item and store it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.07
-     * version 0.1
+     * @since 2020.12.21
+     * version 0.2
      * param
      * return
      *
@@ -256,7 +256,22 @@ public class ItemListOverviewController {
         if (selectedItem != null) {
             boolean okClicked = sharingApp.showEditItemDialog(selectedItem);
             if (okClicked) {
-                showItemDetails(selectedItem);
+
+                try{
+                    /*todo GRL: Uncomment for real application*/
+                    //itemService.updateItem(selectedItem.convertItemFxViewToItemToShare(selectedItem, sharingApp.getUserData()));
+                    showItemDetails(selectedItem); //Needed to display details on GUI
+
+                }catch(Exception exp){
+                    exp.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.initOwner(dialogStage);
+                    alert.setTitle("Connection Error");
+                    alert.setHeaderText("Update item on server failed!");
+                    alert.setContentText("Please startup the Server for SharingAppApplication");
+
+                    alert.showAndWait();
+                }
             }
 
         } else {
@@ -278,8 +293,8 @@ public class ItemListOverviewController {
      * and remove it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.07
-     * version 0.1
+     * @since 2020.12.21
+     * version 0.2
      * param
      * return
      *
@@ -288,15 +303,33 @@ public class ItemListOverviewController {
     private void handleDelete() {
         System.out.println("handleDelete button clicked");
         int selectedIndex = itemTable.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            itemTable.getItems().remove(selectedIndex);
-        } else {
-            // Nothing selected.
+        ItemFxView itemFxView = itemTable.getSelectionModel().getSelectedItem();
+
+        try{
+            if (selectedIndex >= 0) {
+
+                /*todo GRL: Uncomment for real application*/
+                //itemService.deleteItem(itemFxView.getItemID()); //Delete item on server
+                //sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
+
+                itemTable.getItems().remove(selectedIndex); /*todo GRL: remove or uncomment for real application*/
+            } else {
+                // Nothing selected.
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(dialogStage);
+                alert.setTitle("No Selection");
+                alert.setHeaderText("No item Selected");
+                alert.setContentText("Please select a item in the table.");
+
+                alert.showAndWait();
+            }
+        }catch(Exception exp){
+            exp.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialogStage);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No item Selected");
-            alert.setContentText("Please select a item in the table.");
+            alert.setTitle("Connection Error");
+            alert.setHeaderText("Update item on server failed!");
+            alert.setContentText("Please startup the Server for SharingAppApplication");
 
             alert.showAndWait();
         }
