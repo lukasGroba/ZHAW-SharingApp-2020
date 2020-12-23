@@ -48,6 +48,14 @@ public class RequestBuilder {
         return response;
     }
 
+    public HttpEntity<String> httpDeleteRequest(Map<String, String> params, String url){
+        UriComponentsBuilder builder = getBuilder(params, url);
+
+        HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), HttpMethod.DELETE, new HttpEntity(getHeaders()), String.class);
+
+        return response;
+    }
+
     private UriComponentsBuilder getBuilder(Map<String, String> params, String url){
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
         for (Map.Entry<String, String> entry : params.entrySet()) {

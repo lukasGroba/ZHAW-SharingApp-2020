@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import java.time.LocalDate;
 

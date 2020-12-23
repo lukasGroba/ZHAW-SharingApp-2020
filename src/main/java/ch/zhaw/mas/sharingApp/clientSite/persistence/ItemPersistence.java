@@ -5,12 +5,14 @@ import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.Persistence;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.RequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is for persisting Items to/from the server.
@@ -27,16 +29,23 @@ public class ItemPersistence extends Persistence {
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpGetRequest(new HashMap<>(), this.getUrl());
         ObjectMapper objectMapper = new ObjectMapper();
-        List<ItemToShare> items = objectMapper.readValue(response.getBody(), List.class);
+        List<ItemToShare> items = objectMapper.readValue(response.getBody(), new TypeReference<List<ItemToShare>>(){});
+//        for(ItemToShare item : items){
+//            item = objectMapper.convertValue(item, ItemToShare.class);
+//        }
         return items;
     }
 
     public void saveNewItem(ItemToShare item){
-
+        RequestBuilder requestBuilder = new RequestBuilder();
+        HttpEntity<String> response = requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl(), item);
     }
 
-    public void deleteItem(int id){
-
+    public void deleteItem(Integer id){
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id.toString());
+        RequestBuilder requestBuilder = new RequestBuilder();
+        HttpEntity<String> response = requestBuilder.httpDeleteRequest(params, this.getUrl());
     }
 
 
