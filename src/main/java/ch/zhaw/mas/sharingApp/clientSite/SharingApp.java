@@ -1,6 +1,5 @@
 package ch.zhaw.mas.sharingApp.clientSite;
 
-import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.ItemService;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemFxView;
@@ -21,7 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -79,16 +77,6 @@ public class SharingApp extends Application
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("SharingApp");
         this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
-
-
-//        User user1 = new User("Noemi", "mail", (long) 3, "Noemi", "Kaelin");
-//        user1.saveNewUser();
-//        try {
-//            user1.getUserById(3);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(user1);
 
 
         try {
