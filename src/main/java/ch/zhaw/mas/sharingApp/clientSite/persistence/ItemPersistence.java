@@ -2,6 +2,7 @@ package ch.zhaw.mas.sharingApp.clientSite.persistence;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.Persistence;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.RequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,7 +29,7 @@ public class ItemPersistence extends Persistence {
 
 
     // TODO: 31.12.2020 not working (json processing...)
-    public List<ItemToShare> getAllItems() throws JsonProcessingException {
+    public List<ItemToShare> getAllItems() throws JsonProcessingException, BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpGetRequest(new HashMap<>(), this.getUrl());
         ObjectMapper objectMapper = new ObjectMapper();
@@ -42,12 +43,12 @@ public class ItemPersistence extends Persistence {
         return items;
     }
 
-    public void saveNewItem(ItemToShare item){
+    public void saveNewItem(ItemToShare item) throws BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl(), item);
     }
 
-    public void deleteItem(Integer id){
+    public void deleteItem(Integer id) throws BackendError {
         Map<String, String> params = new HashMap<>();
         params.put("id", id.toString());
         RequestBuilder requestBuilder = new RequestBuilder();
@@ -55,7 +56,7 @@ public class ItemPersistence extends Persistence {
     }
 
 
-    public void updateItem(ItemToShare item) {
+    public void updateItem(ItemToShare item) throws BackendError {
         Map<String, String> params = new HashMap<>();
         params.put("id", item.getIdAsString());
         RequestBuilder requestBuilder = new RequestBuilder();
