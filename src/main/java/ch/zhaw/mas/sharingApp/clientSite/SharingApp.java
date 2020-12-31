@@ -79,14 +79,6 @@ public class SharingApp extends Application
         this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
 
-        try {
-            ItemService itemService = new ItemService();
-            itemService.getAllItems();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-
         /*Check if Login is valid*/
         openLoginDialog();
 
