@@ -7,6 +7,7 @@ import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.RequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +23,16 @@ import java.util.Map;
 @Service
 public class ItemPersistence extends Persistence {
     public ItemPersistence() {
-        super("items"); // TODO: 11.12.2020 anpassen (items anstatt books)
+        super("items");
     }
 
     public List<ItemToShare> getAllItems() throws JsonProcessingException {
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpGetRequest(new HashMap<>(), this.getUrl());
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
+
         List<ItemToShare> items = objectMapper.readValue(response.getBody(), new TypeReference<List<ItemToShare>>(){});
 //        for(ItemToShare item : items){
 //            item = objectMapper.convertValue(item, ItemToShare.class);
