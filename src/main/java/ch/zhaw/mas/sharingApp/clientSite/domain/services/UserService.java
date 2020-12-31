@@ -18,21 +18,30 @@ public class UserService {
     private Userpersistence userpersistence = new Userpersistence();
 
 
-    public User login(String userMail, String password){
-        return userpersistence.loginUser(userMail, password);
+    public void login(String userMail, String password){
+        UserWithPassword user = new UserWithPassword(null, userMail, password);
+        userpersistence.loginUser(user);
     }
 
 
     public User getUserByMail(String mail) throws JsonProcessingException {
-        return userpersistence.getUser(mail);
+        return userpersistence.getUserbyMail(mail);
     }
 
     public void saveNewUser(UserWithPassword user){
         userpersistence.saveNewUser(user);
     }
 
-    public List<ItemToShare> getItemsOfUser(User user){
-        return userpersistence.getItemsOfUser(user.getMail());
+    public List<User> getAllUsers() throws JsonProcessingException {
+        return userpersistence.getAllUsers();
     }
+
+    public void deleteUserByMail(String mail){
+        userpersistence.deleteUserByMail(mail);
+    }
+
+//    public List<ItemToShare> getItemsOfUser(User user){
+//        return userpersistence.getItemsOfUser(user.getMail());
+//    }
 
 }
