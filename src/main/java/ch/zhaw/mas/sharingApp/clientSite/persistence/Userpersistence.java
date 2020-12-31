@@ -2,6 +2,7 @@ package ch.zhaw.mas.sharingApp.clientSite.persistence;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.Persistence;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.RequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,7 +23,7 @@ import java.util.Map;
 @Service
 public class Userpersistence extends Persistence {
     public Userpersistence() {
-        super("books/test"); // TODO: 11.12.2020 anpassen (users anstatt books)
+        super("users");
     }
 
 
@@ -32,14 +33,14 @@ public class Userpersistence extends Persistence {
         Map<String, String> params = new HashMap<>();
         params.put("mail", mail);
         RequestBuilder requestBuilder = new RequestBuilder();
-        HttpEntity<String> response = requestBuilder.httpGetRequest(params, this.getUrl());
+        HttpEntity<String> response = requestBuilder.httpGetRequest(params, this.getUrl() + "/user");
         ObjectMapper objectMapper = new ObjectMapper();
         User user = objectMapper.readValue(response.getBody(), User.class);
         return user;
     }
 
 
-    public void saveNewUser(User user, String password){
+    public void saveNewUser(UserWithPassword user){
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl(), user);
     }

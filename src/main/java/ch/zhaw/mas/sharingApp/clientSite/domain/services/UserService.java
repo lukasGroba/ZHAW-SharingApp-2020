@@ -2,6 +2,7 @@ package ch.zhaw.mas.sharingApp.clientSite.domain.services;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.Userpersistence;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class UserService {
         return userpersistence.getUser(mail);
     }
 
-    public void saveNewUser(User user, String password){
-        userpersistence.saveNewUser(user, password);
+    public void saveNewUser(UserWithPassword user){
+        userpersistence.saveNewUser(user);
     }
 
     public List<ItemToShare> getItemsOfUser(User user){
