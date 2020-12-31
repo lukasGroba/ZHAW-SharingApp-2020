@@ -22,6 +22,9 @@ public class ItemToShare {
     private LocalDate lentTill;
 
 
-
+    public String getIdAsString(){
+        Integer id = this.getId();
+        return id.toString();
+    }
 
 }

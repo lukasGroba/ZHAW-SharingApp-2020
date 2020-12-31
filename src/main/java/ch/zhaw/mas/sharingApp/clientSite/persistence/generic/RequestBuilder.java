@@ -56,6 +56,15 @@ public class RequestBuilder {
         return response;
     }
 
+    public HttpEntity<String> httpPutRequest(Map<String, String> params, String url, Object body){
+        UriComponentsBuilder builder = getBuilder(params, url);
+
+        HttpEntity httpEntity = new HttpEntity(body, getHeaders());
+
+        HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), HttpMethod.PUT, httpEntity, String.class);
+        return response;
+    }
+
     private UriComponentsBuilder getBuilder(Map<String, String> params, String url){
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
         for (Map.Entry<String, String> entry : params.entrySet()) {

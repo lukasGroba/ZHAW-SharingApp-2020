@@ -26,6 +26,8 @@ public class ItemPersistence extends Persistence {
         super("items");
     }
 
+
+    // TODO: 31.12.2020 not working (json processing...)
     public List<ItemToShare> getAllItems() throws JsonProcessingException {
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpGetRequest(new HashMap<>(), this.getUrl());
@@ -54,5 +56,9 @@ public class ItemPersistence extends Persistence {
 
 
     public void updateItem(ItemToShare item) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", item.getIdAsString());
+        RequestBuilder requestBuilder = new RequestBuilder();
+        HttpEntity<String> response = requestBuilder.httpPutRequest(params, this.getUrl(), item);
     }
 }

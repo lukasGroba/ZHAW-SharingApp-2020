@@ -92,13 +92,30 @@ public class SharingApp extends Application
 //        System.out.println(user1);
 
 
+//        UserService userService = new UserService();
+//        userService.saveNewUser(new UserWithPassword("Noemi", "bla@bla.ch", "password123"));
+
+
             ItemService itemService = new ItemService();
-            User user = new User("Noemi", "mail");
+        try {
+            itemService.getAllItems();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        User user = new User("Noemi", "bla@bla.ch");
             ItemToShare item = new ItemToShare();
             item.setName("20201228");
             item.setOwner(user);
             itemService.saveNewItem(item);
 
+            item.setId(7);
+
+            itemService.updateItem(item);
+        try {
+            itemService.getAllItems();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
 //
 //        /*Check if Login is valid*/
