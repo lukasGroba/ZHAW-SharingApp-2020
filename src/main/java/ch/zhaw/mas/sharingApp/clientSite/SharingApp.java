@@ -81,57 +81,38 @@ public class SharingApp extends Application
         this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
 
-//        UserWithPassword user1 = new UserWithPassword("Noemi", "mail", "pw");
-//        UserService userService  = new UserService();
-//        userService.saveNewUser(user1);
+//        User user1 = new User("Noemi", "mail", (long) 3, "Noemi", "Kaelin");
+//        user1.saveNewUser();
 //        try {
-//            userService.getUserByMail("mail");
+//            user1.getUserById(3);
 //        } catch (JsonProcessingException e) {
 //            e.printStackTrace();
 //        }
 //        System.out.println(user1);
 
 
-//        UserService userService = new UserService();
-//        userService.saveNewUser(new UserWithPassword("Noemi", "bla@bla.ch", "password123"));
-
-
+        try {
             ItemService itemService = new ItemService();
-        try {
-            itemService.getAllItems();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        User user = new User("Noemi", "bla@bla.ch");
-            ItemToShare item = new ItemToShare();
-            item.setName("20201228");
-            item.setOwner(user);
-            itemService.saveNewItem(item);
-
-            item.setId(7);
-
-            itemService.updateItem(item);
-        try {
             itemService.getAllItems();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-//
-//        /*Check if Login is valid*/
-//        openLoginDialog();
-//
-//        /*Start application if login is valid*/
-//        if(isLoginValid) {
-//            /*Create sample Data List*/
-//            addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
-//
-//            //RootLayout will be initialized
-//            initRootLayout();
-//
-//            //Shows the item list inside the rootLayout
-//            showItemListOverview();
-//        }
+
+        /*Check if Login is valid*/
+        openLoginDialog();
+
+        /*Start application if login is valid*/
+        if(isLoginValid) {
+            /*Create sample Data List*/
+            addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
+
+            //RootLayout will be initialized
+            initRootLayout();
+
+            //Shows the item list inside the rootLayout
+            showItemListOverview();
+        }
 
     }
 

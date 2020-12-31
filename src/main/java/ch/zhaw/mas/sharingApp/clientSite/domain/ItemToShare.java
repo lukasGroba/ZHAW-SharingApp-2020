@@ -14,7 +14,6 @@ public class ItemToShare {
     private String name;
     private LocalDate dateCreated;
     private String description;
-    @JsonIgnore
     private boolean isLent;
     private Double rating;
     private User owner;
