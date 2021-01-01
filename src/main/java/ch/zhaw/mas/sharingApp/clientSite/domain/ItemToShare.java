@@ -1,8 +1,13 @@
 package ch.zhaw.mas.sharingApp.clientSite.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import java.time.LocalDate;
 
+/**
+ *
+ * @author Noemi Kälin
+ */
 @Data
 public class ItemToShare {
     private int id;
@@ -14,6 +19,7 @@ public class ItemToShare {
     private User owner;
     private LocalDate lentFrom;
     private LocalDate lentTill;
+
 
 
 

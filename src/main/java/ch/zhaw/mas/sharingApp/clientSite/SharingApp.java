@@ -9,6 +9,7 @@ import ch.zhaw.mas.sharingApp.clientSite.presentation.ItemListOverviewController
 import ch.zhaw.mas.sharingApp.clientSite.presentation.LoginViewController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.RootLayoutController;
 import ch.zhaw.mas.sharingApp.clientSite.presentation.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -93,6 +95,15 @@ public class SharingApp extends Application
 //            e.printStackTrace();
 //        }
 //        System.out.println(user1);
+
+
+        try {
+            ItemService itemService = new ItemService();
+            itemService.getAllItems();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
 
         /*Check if Login is valid*/
         openLoginDialog();

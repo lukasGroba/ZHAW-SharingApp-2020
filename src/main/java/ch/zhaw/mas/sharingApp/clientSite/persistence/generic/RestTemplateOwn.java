@@ -6,19 +6,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-
+/**
+ * Class used to build a rest template.
+ * @author Noemi Kälin
+ */
 public class RestTemplateOwn extends RestTemplate{
 
     @Autowired
     CloseableHttpClient httpClient;
 
-    public RestTemplate restTemplate() {
+    private RestTemplate restTemplate() {
 
         RestTemplate restTemplate = new RestTemplate(this.clientHttpRequestFactory());
         return restTemplate;
     }
 
-    public HttpComponentsClientHttpRequestFactory clientHttpRequestFactory() {
+    private HttpComponentsClientHttpRequestFactory clientHttpRequestFactory() {
 
         HttpComponentsClientHttpRequestFactory clientHttpRequestFactory
                 = new HttpComponentsClientHttpRequestFactory();
