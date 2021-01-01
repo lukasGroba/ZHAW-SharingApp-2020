@@ -3,6 +3,7 @@ import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
@@ -137,12 +138,15 @@ public class LoginViewController {
 
                 loginValid = true;
                 dialogStage.close();
-            }catch(Exception exp){ /*todo GRL: add here BackendError Exception*/
-                    errorAlertMessage("Login was not successful! Try another 'User Mail' or other 'Password'!");
-                    /*Empty the textFields*/
-                    userMail.clear();
-                    userPassword.clear();
-                }
+            }catch(BackendError exp){
+                System.out.println(exp.getMessage());
+                exp.printStackTrace();
+
+                errorAlertMessage("Login was not successful! Try another 'User Mail' or other 'Password'!");
+                /*Empty the textFields*/
+                userMail.clear();
+                userPassword.clear();
+            }
         }
     }
 

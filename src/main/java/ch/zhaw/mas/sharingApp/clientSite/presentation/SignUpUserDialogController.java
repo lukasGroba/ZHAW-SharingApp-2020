@@ -5,6 +5,7 @@ import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -124,7 +125,7 @@ public class SignUpUserDialogController {
         //dialogStage.close();
         if (isInputValid()) {
             /*todo GRL: Uncomment try function for real application*/
-//            try {
+            try {
                 User userValidation = null;
                 //User userValidation = userService.getUserByMail(userMailField.getText());
 
@@ -137,10 +138,10 @@ public class SignUpUserDialogController {
                 }else{
                     errorAlertMessage("User Mail already exists! Please enter another mail address!");
                 }
-//            }catch (JsonProcessingException exp) {/*todo GRL: Add BackendError exception*/
-//                errorAlertMessage("Connection to server failed!");
-//                exp.printStackTrace();
-//            }
+            }catch (BackendError exp) {
+                errorAlertMessage(exp.getMessage());
+                exp.printStackTrace();
+            }
 
         }
     }

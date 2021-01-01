@@ -1,6 +1,7 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
@@ -128,11 +129,11 @@ public class RootLayoutController {
             userService.deleteUserByMail(sharingApp.getUserData().getMail());
             deleted = true;
 
-        }catch(Exception exp){ /*todo GRL: Add BackendError expection*/
+        }catch(BackendError exp){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Connection Error");
             alert.setHeaderText("Please check server connection!");
-            alert.setContentText("Not able to delete the current user. Please check server connection!");
+            alert.setContentText(exp.getMessage());
             alert.showAndWait();
         }
 
