@@ -11,6 +11,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ *
+ * @author Noemi Kälin
+ */
 @Data
 @Component
 @AllArgsConstructor
