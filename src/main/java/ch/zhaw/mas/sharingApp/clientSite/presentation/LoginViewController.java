@@ -132,7 +132,7 @@ public class LoginViewController {
 
                 /*Set valid user into sharingApp*/
                 /*todo GRL: getUserByMail is not working at the moment. Noemi will fix it!*/
-                //sharingApp.setUserData(userService.getUserByMail(userMail.getText()));
+               //sharingApp.setUserData(userService.getUserByMail(userMail.getText()));
 
                 loginValid = true;
                 dialogStage.close();

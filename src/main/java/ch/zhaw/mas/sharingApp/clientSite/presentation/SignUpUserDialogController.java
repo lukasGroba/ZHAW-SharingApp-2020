@@ -3,6 +3,7 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
@@ -128,15 +129,15 @@ public class SignUpUserDialogController {
                 //User userValidation = userService.getUserByMail(userMailField.getText());
 
                 if(userValidation == null) {
-                    User user = new User();
-                    user.setUsername(userNameField.getText());
-                    user.setMail(userMailField.getText());
-                    //userService.saveNewUser(user, userPasswordValidationField.getText());
+                    UserWithPassword userWithPassword = new UserWithPassword(userNameField.getText(), userMailField.getText(), userPasswordValidationField.getText());
+//                    user.setUsername(userNameField.getText());
+//                    user.setMail(userMailField.getText());
+                    userService.saveNewUser(userWithPassword);
                     dialogStage.close();
                 }else{
                     errorAlertMessage("User Mail already exists! Please enter another mail address!");
                 }
-//            }catch (JsonProcessingException exp) {
+//            }catch (JsonProcessingException exp) {/*todo GRL: Add BackendError exception*/
 //                errorAlertMessage("Connection to server failed!");
 //                exp.printStackTrace();
 //            }
