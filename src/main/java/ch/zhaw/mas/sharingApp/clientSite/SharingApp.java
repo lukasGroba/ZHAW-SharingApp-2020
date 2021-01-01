@@ -152,6 +152,7 @@ public class SharingApp extends Application
             // Give the controller access to the main app.
             RootLayoutController controller = loader.getController();
             controller.setSharingApp(this);
+            controller.setUserService(this.userService); /*Sets the reference of the UserService to communicate with the server*/
 
             primaryStage.show();
         } catch (IOException e) {

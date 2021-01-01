@@ -40,7 +40,7 @@ public class Userpersistence extends Persistence {
     // TODO: 11.12.2020 sollte static sein?
     public User getUserbyMail(String mail) throws JsonProcessingException {
         Map<String, String> params = new HashMap<>();
-        params.put("mail", mail);
+        params.put("user", mail);
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpGetRequest(params, this.getUrl() + "/user");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -61,7 +61,7 @@ public class Userpersistence extends Persistence {
 
     public void deleteUserByMail(String mail) {
         Map<String, String> params = new HashMap<>();
-        params.put("mail", mail);
+        params.put("user", mail);
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpDeleteRequest(params, this.getUrl());
     }

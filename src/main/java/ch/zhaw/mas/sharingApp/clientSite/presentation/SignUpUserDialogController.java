@@ -113,8 +113,8 @@ public class SignUpUserDialogController {
      * send it to the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.08
-     * version 0.1
+     * @since   2021.01.01
+     * version 0.2
      * param
      * return
      *

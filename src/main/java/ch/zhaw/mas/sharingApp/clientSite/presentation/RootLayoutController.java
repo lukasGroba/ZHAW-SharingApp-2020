@@ -1,5 +1,6 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
+import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
@@ -15,7 +16,7 @@ import javafx.scene.control.Alert;
  ************************************************************************************************************/
 public class RootLayoutController {
 
-
+    UserService userService; //Needed for server connection
 
     /************************************************************************************************************
      * void setSharingApp() Method
@@ -34,6 +35,22 @@ public class RootLayoutController {
 
     public void setSharingApp(SharingApp sharingApp) {
         this.sharingApp = sharingApp;
+    }
+
+    /************************************************************************************************************
+     * void setUserService() Method
+     *
+     * Sets the UserService() of this dialog to communicate with the server
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2021.01.01
+     * version 0.1
+     * @param   userService
+     * return
+     *
+     ************************************************************************************************************/
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 
@@ -91,6 +108,39 @@ public class RootLayoutController {
         alert.showAndWait();
     }
 
+    /************************************************************************************************************
+     * void handleDeleteUser() Method
+     *
+     * This method will be called when the user clicks the DeleteUser button in GUI. This method will delete the
+     * current logged in User on the server and close and generate a System.exit(0) to close the application.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2021.01.01
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    @FXML
+    private void handleDeleteUser() {
+        boolean deleted = false;
+        try{
+            userService.deleteUserByMail(sharingApp.getUserData().getMail());
+            deleted = true;
+
+        }catch(Exception exp){ /*todo GRL: Add BackendError expection*/
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Connection Error");
+            alert.setHeaderText("Please check server connection!");
+            alert.setContentText("Not able to delete the current user. Please check server connection!");
+            alert.showAndWait();
+        }
+
+        if(deleted){
+            System.exit(0);
+        }
+
+    }
     /************************************************************************************************************
      * void handleExit() Method
      *

@@ -110,8 +110,8 @@ public class LoginViewController {
      * loginValid to true if the login was successful.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.19
-     * version 0.2
+     * @since   2021.01.01
+     * version 0.3
      * param
      * return
      *
@@ -121,9 +121,10 @@ public class LoginViewController {
         if (isInputValid()) {
             /*todo GRL: delete user for testing below for real application*/
             /******************Just for Testing**********************/
-            User user = new User();
-            user.setUsername("Brian Muster");
-            user.setMail(userMail.getText());
+            User user1 = new User();
+            user1.setUsername("Brian Muster");
+            user1.setMail(userMail.getText());
+            sharingApp.setUserData(user1);
             /********************************************************/
 
             //Todo GRL: Uncomment userService.login for real application to verify user
