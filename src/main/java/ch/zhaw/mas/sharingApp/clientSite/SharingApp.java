@@ -97,12 +97,12 @@ public class SharingApp extends Application
 //        System.out.println(user1);
 
 
-        try {
-            ItemService itemService = new ItemService();
-            itemService.getAllItems();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ItemService itemService = new ItemService();
+//            itemService.getAllItems();
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
 
 
         /*Check if Login is valid*/
