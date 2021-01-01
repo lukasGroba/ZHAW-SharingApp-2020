@@ -3,6 +3,7 @@ package ch.zhaw.mas.sharingApp.clientSite.persistence;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.Persistence;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.RequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,7 +29,7 @@ public class Userpersistence extends Persistence {
     }
 
     // TODO: 31.12.2020 not working (json processing)
-    public List<User> getAllUsers() throws JsonProcessingException {
+    public List<User> getAllUsers() throws JsonProcessingException, BackendError {
         Map<String, String> params = new HashMap<>();
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpGetRequest(params, this.getUrl());
@@ -38,7 +39,7 @@ public class Userpersistence extends Persistence {
     }
 
     // TODO: 11.12.2020 sollte static sein?
-    public User getUserbyMail(String mail) throws JsonProcessingException {
+    public User getUserbyMail(String mail) throws JsonProcessingException, BackendError {
         Map<String, String> params = new HashMap<>();
         params.put("user", mail);
         RequestBuilder requestBuilder = new RequestBuilder();
@@ -49,17 +50,17 @@ public class Userpersistence extends Persistence {
     }
 
 
-    public void saveNewUser(UserWithPassword user){
+    public void saveNewUser(UserWithPassword user) throws BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl(), user);
     }
 
-    public void loginUser(UserWithPassword user) {
+    public void loginUser(UserWithPassword user) throws BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl() + "/login", user);
     }
 
-    public void deleteUserByMail(String mail) {
+    public void deleteUserByMail(String mail) throws BackendError {
         Map<String, String> params = new HashMap<>();
         params.put("user", mail);
         RequestBuilder requestBuilder = new RequestBuilder();

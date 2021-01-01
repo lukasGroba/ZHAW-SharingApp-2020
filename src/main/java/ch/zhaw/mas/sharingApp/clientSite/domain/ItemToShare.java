@@ -1,6 +1,5 @@
 package ch.zhaw.mas.sharingApp.clientSite.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import java.time.LocalDate;
 
@@ -21,6 +20,9 @@ public class ItemToShare {
     private LocalDate lentTill;
 
 
-
+    public String getIdAsString(){
+        Integer id = this.getId();
+        return id.toString();
+    }
 
 }
