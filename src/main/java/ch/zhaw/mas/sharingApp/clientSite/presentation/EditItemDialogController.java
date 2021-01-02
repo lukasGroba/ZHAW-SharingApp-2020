@@ -86,7 +86,6 @@ public class EditItemDialogController {
  * return
  *
  ************************************************************************************************************/
-
     public void setItem(ItemFxView item) {
         this.item = item;
 

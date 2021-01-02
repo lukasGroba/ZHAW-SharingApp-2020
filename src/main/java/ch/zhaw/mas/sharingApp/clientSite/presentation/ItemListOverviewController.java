@@ -3,6 +3,7 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
+import ch.zhaw.mas.sharingApp.clientSite.domain.services.ItemService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -19,8 +20,8 @@ import java.time.LocalDate;
  * This is the ItemListOverviewController and manages all actions with the ItemList.
  *
  * @author  Lukas Grossenbacher
- * @since   2020.12.07
- * @version 0.2
+ * @since   2020.12.21
+ * @version 0.3
  *
  ************************************************************************************************************/
 public class ItemListOverviewController {
@@ -55,6 +56,8 @@ public class ItemListOverviewController {
 
     private Stage dialogStage;
 
+    private ItemService itemService;
+
     /**
      * The constructor
      */
@@ -84,6 +87,21 @@ public class ItemListOverviewController {
 
         // Listen for selection changes and show the item details when changed.
         itemTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showItemDetails(newValue));
+    }
+    /************************************************************************************************************
+     * void setItemService() Method
+     *
+     * Sets the ItemService() of this dialog to communicate with the server
+     *
+     * @author  Lukas Grossenbacher
+     * @since   2020.12.21
+     * version 0.1
+     * @param   itemService
+     * return
+     *
+     ************************************************************************************************************/
+    public void setItemService(ItemService itemService) {
+        this.itemService = itemService;
     }
 
     /************************************************************************************************************
@@ -162,7 +180,20 @@ public class ItemListOverviewController {
     @FXML
     private void handleReloadList(){
         System.out.println("handleReloadList button clicked");
-        /*Todo GRL: Add routine to reload complete item list from the server*/
+        try{
+            /*todo GRL: Uncomment for real application*/
+            //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
+
+        }catch(Exception exp){
+            exp.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Connection Error");
+            alert.setHeaderText("Save item to server failed!");
+            alert.setContentText("Please startup the Server for SharingAppApplication");
+
+            alert.showAndWait();
+        }
     }
 
     /************************************************************************************************************
@@ -195,10 +226,26 @@ public class ItemListOverviewController {
 
         /*Create new ItemFxView and Show edit dialog*/
         ItemFxView tempItemFxView = new ItemFxView(tempItemToShare);
-        boolean okClicked = SharingApp.showEditItemDialog(tempItemFxView);
+        boolean okClicked = sharingApp.showEditItemDialog(tempItemFxView);
 
         if (okClicked) {
-            sharingApp.getItemData().add(tempItemFxView);
+            try{
+                /*todo GRL: Uncomment for real application*/
+                //itemService.saveNewItem(tempItemFxView.convertItemFxViewToItemToShare(tempItemFxView, sharingApp.getUserData()));
+                //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
+
+                sharingApp.getItemData().add(tempItemFxView); /*todo GRL: Delete or comment for real application*/
+
+            }catch(Exception exp){
+                exp.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(dialogStage);
+                alert.setTitle("Connection Error");
+                alert.setHeaderText("Save item to server failed!");
+                alert.setContentText("Please startup the Server for SharingAppApplication");
+
+                alert.showAndWait();
+            }
         }
     }
 
@@ -209,8 +256,8 @@ public class ItemListOverviewController {
      * to edit an item and store it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.07
-     * version 0.1
+     * @since 2020.12.21
+     * version 0.2
      * param
      * return
      *
@@ -220,9 +267,24 @@ public class ItemListOverviewController {
         System.out.println("handleEdit button clicked");
         ItemFxView selectedItem = itemTable.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            boolean okClicked = SharingApp.showEditItemDialog(selectedItem);
+            boolean okClicked = sharingApp.showEditItemDialog(selectedItem);
             if (okClicked) {
-                showItemDetails(selectedItem);
+
+                try{
+                    /*todo GRL: Uncomment for real application*/
+                    //itemService.updateItem(selectedItem.convertItemFxViewToItemToShare(selectedItem, sharingApp.getUserData()));
+                    showItemDetails(selectedItem); //Needed to display details on GUI
+
+                }catch(Exception exp){
+                    exp.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.initOwner(dialogStage);
+                    alert.setTitle("Connection Error");
+                    alert.setHeaderText("Update item on server failed!");
+                    alert.setContentText("Please startup the Server for SharingAppApplication");
+
+                    alert.showAndWait();
+                }
             }
 
         } else {
@@ -244,8 +306,8 @@ public class ItemListOverviewController {
      * and remove it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.07
-     * version 0.1
+     * @since 2020.12.21
+     * version 0.2
      * param
      * return
      *
@@ -254,15 +316,33 @@ public class ItemListOverviewController {
     private void handleDelete() {
         System.out.println("handleDelete button clicked");
         int selectedIndex = itemTable.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            itemTable.getItems().remove(selectedIndex);
-        } else {
-            // Nothing selected.
+        ItemFxView itemFxView = itemTable.getSelectionModel().getSelectedItem();
+
+        try{
+            if (selectedIndex >= 0) {
+
+                /*todo GRL: Uncomment for real application*/
+                //itemService.deleteItem(itemFxView.getItemID()); //Delete item on server
+                //sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
+
+                itemTable.getItems().remove(selectedIndex); /*todo GRL: remove or uncomment for real application*/
+            } else {
+                // Nothing selected.
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(dialogStage);
+                alert.setTitle("No Selection");
+                alert.setHeaderText("No item Selected");
+                alert.setContentText("Please select a item in the table.");
+
+                alert.showAndWait();
+            }
+        }catch(Exception exp){
+            exp.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialogStage);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No item Selected");
-            alert.setContentText("Please select a item in the table.");
+            alert.setTitle("Connection Error");
+            alert.setHeaderText("Update item on server failed!");
+            alert.setContentText("Please startup the Server for SharingAppApplication");
 
             alert.showAndWait();
         }

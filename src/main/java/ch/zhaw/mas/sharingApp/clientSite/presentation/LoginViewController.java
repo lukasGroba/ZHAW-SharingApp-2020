@@ -1,7 +1,11 @@
 package ch.zhaw.mas.sharingApp.clientSite.presentation;
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -14,8 +18,8 @@ import javafx.stage.Stage;
  * This is the LoginViewController and manages all buttons and actions with the LogingView GUI
  *
  * @author  Lukas Grossenbacher
- * @since   2020.12.02
- * @version 0.1
+ * @since   2020.12.19
+ * @version 0.2
  *
  ************************************************************************************************************/
 public class LoginViewController {
@@ -107,8 +111,8 @@ public class LoginViewController {
      * loginValid to true if the login was successful.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.19
-     * version 0.2
+     * @since   2021.01.01
+     * version 0.3
      * param
      * return
      *
@@ -116,22 +120,28 @@ public class LoginViewController {
     @FXML
     private void handleLogin() {
         if (isInputValid()) {
+            /*todo GRL: delete user for testing below for real application*/
             /******************Just for Testing**********************/
-            User user = new User();
-            user.setUsername("Brian Muster");
-            user.setMail(userMail.getText());
+            User user1 = new User();
+            user1.setUsername("Brian Muster");
+            user1.setMail(userMail.getText());
+            sharingApp.setUserData(user1);
             /********************************************************/
 
-            //Todo GRL: Uncommnet userService.login for real application to verify user
-            //User user = userService.login(userMail.getText(), userPassword.getText()); /*Request to server*/
-            if((user.getUsername() != null) && (user.getMail() != null)) {
+            //Todo GRL: Uncomment userService.login for real application to verify user
+            try{
+                userService.login(userMail.getText(), userPassword.getText()); /*Request to server*/
+
                 /*Set valid user into sharingApp*/
-                sharingApp.setUserData(user);
+                /*todo GRL: getUserByMail is not working at the moment. Noemi will fix it!*/
+               //sharingApp.setUserData(userService.getUserByMail(userMail.getText()));
 
                 loginValid = true;
                 dialogStage.close();
+            }catch(BackendError exp){
+                System.out.println(exp.getMessage());
+                exp.printStackTrace();
 
-            }else{
                 errorAlertMessage("Login was not successful! Try another 'User Mail' or other 'Password'!");
                 /*Empty the textFields*/
                 userMail.clear();

@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +24,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /************************************************************************************************************
  * SharingApp class
@@ -31,8 +34,8 @@ import java.time.LocalDate;
  * This is the main application of the SharingApp. It contains the main structure of the whole program and GUI
  *
  * @author  Lukas Grossenbacher
- * @since   2020.12.02
- * @version 0.1
+ * @since   2020.12.21
+ * @version 0.2
  *
  ************************************************************************************************************/
 public class SharingApp extends Application
@@ -44,6 +47,7 @@ public class SharingApp extends Application
     private boolean isLoginValid = false;
     private static User user = null;
     private static UserService userService = null;
+    private static ItemService itemService = null;
 
     private ObservableList<ItemFxView> itemDataList = FXCollections.observableArrayList();
 
@@ -55,8 +59,11 @@ public class SharingApp extends Application
         /*Create an empty user, which can be filled after valid login*/
         this.user = new User();
 
-        /*Create the UserService of the SharingApplication to communicate with the Server*/
+        /*Create the UserService of the SharingApplication to communicate with the Server about Users*/
         this.userService = new UserService();
+
+        /*Create the ItemService of the SharingApplication to communicate with the Server about Items*/
+        this.itemService = new ItemService();
 
     }
 
@@ -79,6 +86,24 @@ public class SharingApp extends Application
         this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
 
+//        User user1 = new User("Noemi", "mail", (long) 3, "Noemi", "Kaelin");
+//        user1.saveNewUser();
+//        try {
+//            user1.getUserById(3);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(user1);
+
+
+//        try {
+//            ItemService itemService = new ItemService();
+//            itemService.getAllItems();
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+
+
         /*Check if Login is valid*/
         openLoginDialog();
 
@@ -89,6 +114,10 @@ public class SharingApp extends Application
 
             //RootLayout will be initialized
             initRootLayout();
+
+            /*Create Initial List from Server after valid login*/
+            /*todo GRL: Uncomment for real application*/
+            //loadCompleteListFromServer();
 
             //Shows the item list inside the rootLayout
             showItemListOverview();
@@ -122,6 +151,7 @@ public class SharingApp extends Application
             // Give the controller access to the main app.
             RootLayoutController controller = loader.getController();
             controller.setSharingApp(this);
+            controller.setUserService(this.userService); /*Sets the reference of the UserService to communicate with the server*/
 
             primaryStage.show();
         } catch (IOException e) {
@@ -348,6 +378,41 @@ public class SharingApp extends Application
 
         itemToShare.setName("Stabmixer");
         itemDataList.add(new ItemFxView(itemToShare));
+    }
+    /************************************************************************************************************
+     * void loadCompleteListFromServer() Method
+     *
+     * This method loads the complete item list from the server and load it into the observable list.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2020.12.21
+     * version 0.1
+     * param
+     * return
+     *
+     ************************************************************************************************************/
+    public void loadCompleteListFromServer(){
+        List<ItemToShare> itemToShareList = new ArrayList<ItemToShare>();
+        this.itemDataList.removeAll();      //Clear observable list to refresh it from server
+
+        try {
+            itemToShareList = itemService.getAllItems();    //Load complete item list from the server
+
+            /*Converts complete list of ItemToShare into list of ItemFxView*/
+            for (ItemToShare itemToShare : itemToShareList) {
+                itemDataList.add(new ItemFxView(itemToShare));
+            }
+        }catch(Exception exp){
+            exp.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(primaryStage);
+            alert.setTitle("Connection Error");
+            alert.setHeaderText("Load of List Failed");
+            alert.setContentText("Please startup the Server for SharingAppApplication");
+
+            alert.showAndWait();
+        }
+
     }
 
     /************************************************************************************************************

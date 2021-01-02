@@ -3,7 +3,9 @@ package ch.zhaw.mas.sharingApp.clientSite.presentation;
 
 import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.User;
+import ch.zhaw.mas.sharingApp.clientSite.domain.UserWithPassword;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.UserService;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -112,8 +114,8 @@ public class SignUpUserDialogController {
      * send it to the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.08
-     * version 0.1
+     * @since   2021.01.01
+     * version 0.2
      * param
      * return
      *
@@ -122,24 +124,24 @@ public class SignUpUserDialogController {
     private void handleOk(){
         //dialogStage.close();
         if (isInputValid()) {
-            /*todo GRL: check here user name from server. If user already exists, send error*/
-//            try {
+            /*todo GRL: Uncomment try function for real application*/
+            try {
                 User userValidation = null;
                 //User userValidation = userService.getUserByMail(userMailField.getText());
 
                 if(userValidation == null) {
-                    User user = new User();
-                    user.setUsername(userNameField.getText());
-                    user.setMail(userMailField.getText());
-                    //userService.saveNewUser(user, userPasswordValidationField.getText());
+                    UserWithPassword userWithPassword = new UserWithPassword(userNameField.getText(), userMailField.getText(), userPasswordValidationField.getText());
+//                    user.setUsername(userNameField.getText());
+//                    user.setMail(userMailField.getText());
+                    userService.saveNewUser(userWithPassword);
                     dialogStage.close();
                 }else{
                     errorAlertMessage("User Mail already exists! Please enter another mail address!");
                 }
-//            }catch (JsonProcessingException exp) {
-//                errorAlertMessage("Connection to server failed!");
-//                exp.printStackTrace();
-//            }
+            }catch (BackendError exp) {
+                errorAlertMessage(exp.getMessage());
+                exp.printStackTrace();
+            }
 
         }
     }
