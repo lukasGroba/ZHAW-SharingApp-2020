@@ -4,6 +4,7 @@ import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.ItemService;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -171,8 +172,8 @@ public class ItemListOverviewController {
      * reload the complete list from the server again.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.19
-     * version 0.1
+     * @since 2021.01.05
+     * version 0.2
      * param
      * return
      *
@@ -181,16 +182,15 @@ public class ItemListOverviewController {
     private void handleReloadList(){
         System.out.println("handleReloadList button clicked");
         try{
-            /*todo GRL: Uncomment for real application*/
-            //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
+            sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
 
         }catch(Exception exp){
             exp.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialogStage);
             alert.setTitle("Connection Error");
-            alert.setHeaderText("Save item to server failed!");
-            alert.setContentText("Please startup the Server for SharingAppApplication");
+            alert.setHeaderText("Reload list from Server failed.");
+            alert.setContentText("Please try again or startup server!");
 
             alert.showAndWait();
         }
@@ -234,17 +234,17 @@ public class ItemListOverviewController {
                 //itemService.saveNewItem(tempItemFxView.convertItemFxViewToItemToShare(tempItemFxView, sharingApp.getUserData()));
                 //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
 
-                sharingApp.getItemData().add(tempItemFxView); /*todo GRL: Delete or comment for real application*/
+                //sharingApp.getItemData().add(tempItemFxView); /*todo GRL: Delete or comment for real application*/
 
             }catch(Exception exp){
-                exp.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Connection Error");
-                alert.setHeaderText("Save item to server failed!");
-                alert.setContentText("Please startup the Server for SharingAppApplication");
+//                exp.printStackTrace();
+//                Alert alert = new Alert(Alert.AlertType.WARNING);
+//                alert.initOwner(dialogStage);
+//                alert.setTitle("Connection Error");
+//                alert.setHeaderText("Save item to server failed!");
+//                alert.setContentText("Please startup the Server for SharingAppApplication");
 
-                alert.showAndWait();
+//                alert.showAndWait();
             }
         }
     }
@@ -264,6 +264,7 @@ public class ItemListOverviewController {
      ************************************************************************************************************/
     @FXML
     private void handleEdit() {
+        /*todo GRL: Check if User own this item*/
         System.out.println("handleEdit button clicked");
         ItemFxView selectedItem = itemTable.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
@@ -314,6 +315,7 @@ public class ItemListOverviewController {
      ************************************************************************************************************/
     @FXML
     private void handleDelete() {
+        /*todo GRL: Check if User own this item*/
         System.out.println("handleDelete button clicked");
         int selectedIndex = itemTable.getSelectionModel().getSelectedIndex();
         ItemFxView itemFxView = itemTable.getSelectionModel().getSelectedItem();

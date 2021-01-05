@@ -114,8 +114,8 @@ public class SignUpUserDialogController {
      * send it to the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2021.01.01
-     * version 0.2
+     * @since   2021.01.05
+     * version 0.3
      * param
      * return
      *
@@ -126,18 +126,9 @@ public class SignUpUserDialogController {
         if (isInputValid()) {
             /*todo GRL: Uncomment try function for real application*/
             try {
-                User userValidation = null;
-                //User userValidation = userService.getUserByMail(userMailField.getText());
-
-                if(userValidation == null) {
                     UserWithPassword userWithPassword = new UserWithPassword(userNameField.getText(), userMailField.getText(), userPasswordValidationField.getText());
-//                    user.setUsername(userNameField.getText());
-//                    user.setMail(userMailField.getText());
                     userService.saveNewUser(userWithPassword);
                     dialogStage.close();
-                }else{
-                    errorAlertMessage("User Mail already exists! Please enter another mail address!");
-                }
             }catch (BackendError exp) {
                 errorAlertMessage(exp.getMessage());
                 exp.printStackTrace();

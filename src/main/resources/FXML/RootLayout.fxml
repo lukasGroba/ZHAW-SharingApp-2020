@@ -22,7 +22,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="User">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleDeleteUser" text="Delete User" />
+                <MenuItem mnemonicParsing="false" onAction="#handleDeleteUser" text="Delete myUser, myItems and Logout" />
               </items>
             </Menu>
         </menus>
