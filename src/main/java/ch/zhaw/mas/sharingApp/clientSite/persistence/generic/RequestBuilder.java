@@ -28,26 +28,23 @@ public class RequestBuilder {
      * @param url    Url where the request should be sent.
      * @author Noemi Kälin
      */
-    public HttpEntity<String> httpGetRequest(Map<String, String> params, String url) throws BackendError {
-
-        UriComponentsBuilder builder = getBuilder(params, url);
-
-        try {
-            HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), HttpMethod.GET, new HttpEntity(getHeaders()), String.class);
-            return response;
-        } catch (Exception ex) {
-            throw new BackendError(ex.getMessage());
-        }
-    }
-
-    public Object httpGetRequest2(Map<String, String> params, String url, Class classExpected) throws BackendError {
-
-        UriComponentsBuilder builder = getBuilder(params, url);
-
-        try {
+//    public HttpEntity<String> httpGetRequest(Map<String, String> params, String url) throws BackendError {
+//
+//        UriComponentsBuilder builder = getBuilder(params, url);
+//
+//        try {
 //            HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), HttpMethod.GET, new HttpEntity(getHeaders()), String.class);
-            ResponseEntity bla = restTemplateOwn.getForEntity(builder.toUriString(), classExpected);
-            return bla.getBody();
+//            return response;
+//        } catch (Exception ex) {
+//            throw new BackendError(ex.getMessage());
+//        }
+//    }
+
+    public Object httpGetRequest(Map<String, String> params, String url, Class expectedClass) throws BackendError {
+        UriComponentsBuilder builder = getBuilder(params, url);
+        try {
+            ResponseEntity responseEntity = restTemplateOwn.getForEntity(builder.toUriString(), expectedClass);
+            return responseEntity.getBody();
         } catch (Exception ex) {
             throw new BackendError(ex.getMessage());
         }

@@ -1,17 +1,14 @@
 package ch.zhaw.mas.sharingApp.clientSite.persistence;
 
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
-import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.Persistence;
 import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.RequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,16 +28,16 @@ public class ItemPersistence extends Persistence {
     // TODO: 31.12.2020 not working (json processing...)
     public List<ItemToShare> getAllItems() throws JsonProcessingException, BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
-        HttpEntity<String> response = requestBuilder.httpGetRequest(new HashMap<>(), this.getUrl());
-        ObjectMapper objectMapper = new ObjectMapper();
+        ItemToShare[] items = (ItemToShare[]) requestBuilder.httpGetRequest(new HashMap<>(), this.getUrl(), ItemToShare[].class);
+//        ObjectMapper objectMapper = new ObjectMapper();
 //        objectMapper.registerModule(new JavaTimeModule());
 
 
-        List<ItemToShare> items = objectMapper.readValue(response.getBody(), new TypeReference<List<ItemToShare>>(){});
+//        List<ItemToShare> items = objectMapper.readValue(response.getBody(), new TypeReference<List<ItemToShare>>(){});
 //        for(ItemToShare item : items){
 //            item = objectMapper.convertValue(item, ItemToShare.class);
 //        }
-        return items;
+        return Arrays.asList(items);
     }
 
     public void saveNewItem(ItemToShare item) throws BackendError {
