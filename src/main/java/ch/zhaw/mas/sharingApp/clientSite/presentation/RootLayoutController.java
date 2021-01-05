@@ -126,7 +126,6 @@ public class RootLayoutController {
     private void handleDeleteUser() {
         boolean deleted = false;
         try{
-            /*todo GRL: implement also delete all items of the deleted user*/
             userService.deleteUserByMail(sharingApp.getUserData().getMail());
             deleted = true;
 

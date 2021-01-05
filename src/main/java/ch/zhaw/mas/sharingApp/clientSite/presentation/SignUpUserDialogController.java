@@ -124,7 +124,6 @@ public class SignUpUserDialogController {
     private void handleOk(){
         //dialogStage.close();
         if (isInputValid()) {
-            /*todo GRL: Uncomment try function for real application*/
             try {
                     UserWithPassword userWithPassword = new UserWithPassword(userNameField.getText(), userMailField.getText(), userPasswordValidationField.getText());
                     userService.saveNewUser(userWithPassword);

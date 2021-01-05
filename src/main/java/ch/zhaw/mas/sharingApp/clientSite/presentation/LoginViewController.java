@@ -120,14 +120,6 @@ public class LoginViewController {
     @FXML
     private void handleLogin() {
         if (isInputValid()) {
-            /*todo GRL: delete or comment user for testing below for real application*/
-            /******************Just for Testing**********************/
-//            User user1 = new User();
-//            user1.setUsername("Brian Muster");
-//            user1.setMail(userMail.getText());
-//            sharingApp.setUserData(user1);
-            /********************************************************/
-
             try{
                 userService.login(userMail.getText(), userPassword.getText()); /*Request to server*/
 
@@ -139,7 +131,7 @@ public class LoginViewController {
             }catch(BackendError | JsonProcessingException exp){
                 System.out.println(exp.getMessage());
                 exp.printStackTrace();
-                errorAlertMessage("Login was not successful! Try another 'User Mail' or other 'Password'!");
+                errorAlertMessage(exp.getMessage()+ "\n\"Login was not successful! Try another 'User Mail' or other 'Password'!\"");
 
                 /*Empty the textFields*/
                 userMail.clear();
