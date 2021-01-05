@@ -257,6 +257,7 @@ public class SharingApp extends Application
             // Give the controller access to the main SharingApp.
             ItemListOverviewController controller = loader.getController();
             controller.setSharingApp(this);
+            controller.setItemService(this.itemService);
 
         }catch(IOException exp){
             exp.printStackTrace();

@@ -230,21 +230,14 @@ public class ItemListOverviewController {
 
         if (okClicked) {
             try{
-                /*todo GRL: Uncomment for real application*/
-                //itemService.saveNewItem(tempItemFxView.convertItemFxViewToItemToShare(tempItemFxView, sharingApp.getUserData()));
-                //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
+                itemService.saveNewItem(tempItemFxView.convertItemFxViewToItemToShare(tempItemFxView, sharingApp.getUserData()));
+                sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
 
                 //sharingApp.getItemData().add(tempItemFxView); /*todo GRL: Delete or comment for real application*/
 
-            }catch(Exception exp){
-//                exp.printStackTrace();
-//                Alert alert = new Alert(Alert.AlertType.WARNING);
-//                alert.initOwner(dialogStage);
-//                alert.setTitle("Connection Error");
-//                alert.setHeaderText("Save item to server failed!");
-//                alert.setContentText("Please startup the Server for SharingAppApplication");
-
-//                alert.showAndWait();
+            }catch(BackendError exp){
+                exp.printStackTrace();
+                errorAlertMessage(exp.getMessage());
             }
         }
     }
@@ -340,13 +333,27 @@ public class ItemListOverviewController {
             }
         }catch(Exception exp){
             exp.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Connection Error");
-            alert.setHeaderText("Update item on server failed!");
-            alert.setContentText("Please startup the Server for SharingAppApplication");
-
-            alert.showAndWait();
         }
+    }
+    /************************************************************************************************************
+     * void errorAlertMessage(String errorMessage) Method
+     *
+     * This method creates an alert with given Message when login has failed.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2021.05.01
+     * version 0.1
+     * @param errorMessage
+     * return
+     *
+     ************************************************************************************************************/
+    private void errorAlertMessage(String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(dialogStage);
+        alert.setTitle("Error");
+        alert.setHeaderText("Please see error message below!");
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
     }
 }
