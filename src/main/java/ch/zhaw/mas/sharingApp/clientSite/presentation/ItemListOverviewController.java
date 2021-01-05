@@ -180,7 +180,6 @@ public class ItemListOverviewController {
      ************************************************************************************************************/
     @FXML
     private void handleReloadList(){
-        System.out.println("handleReloadList button clicked");
         try{
             sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
 
@@ -203,15 +202,14 @@ public class ItemListOverviewController {
      * to create a new item and add it the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.14
-     * version 0.2
+     * @since 2021.01.05
+     * version 0.3
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleNew() {
-        System.out.println("handleNew button clicked");
         ItemToShare tempItemToShare = new ItemToShare();
 
         /*Create empty Item with user and create date*/
@@ -233,8 +231,6 @@ public class ItemListOverviewController {
                 itemService.saveNewItem(tempItemFxView.convertItemFxViewToItemToShare(tempItemFxView, sharingApp.getUserData()));
                 sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
 
-                //sharingApp.getItemData().add(tempItemFxView); /*todo GRL: Delete or comment for real application*/
-
             }catch(BackendError exp){
                 exp.printStackTrace();
                 errorAlertMessage(exp.getMessage());
@@ -249,36 +245,38 @@ public class ItemListOverviewController {
      * to edit an item and store it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.21
-     * version 0.2
+     * @since 2021.01.05
+     * version 0.3
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleEdit() {
-        /*todo GRL: Check if User own this item*/
-        System.out.println("handleEdit button clicked");
         ItemFxView selectedItem = itemTable.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            boolean okClicked = sharingApp.showEditItemDialog(selectedItem);
-            if (okClicked) {
+            if (sharingApp.getUserData().getMail().contentEquals(selectedItem.getItemOwnerMail())) {
+                boolean okClicked = sharingApp.showEditItemDialog(selectedItem);
+                if (okClicked) {
 
-                try{
-                    /*todo GRL: Uncomment for real application*/
-                    //itemService.updateItem(selectedItem.convertItemFxViewToItemToShare(selectedItem, sharingApp.getUserData()));
-                    showItemDetails(selectedItem); //Needed to display details on GUI
+                    try {
+                        /*todo fix GRL: Item will not be updated correctly on server*/
+                        itemService.updateItem(selectedItem.convertItemFxViewToItemToShare(selectedItem, sharingApp.getUserData()));
+                        sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
 
-                }catch(Exception exp){
-                    exp.printStackTrace();
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.initOwner(dialogStage);
-                    alert.setTitle("Connection Error");
-                    alert.setHeaderText("Update item on server failed!");
-                    alert.setContentText("Please startup the Server for SharingAppApplication");
+                    } catch (Exception exp) {
+                        exp.printStackTrace();
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.initOwner(dialogStage);
+                        alert.setTitle("Connection Error");
+                        alert.setHeaderText("Update item on server failed!");
+                        alert.setContentText("Please startup the Server for SharingAppApplication");
 
-                    alert.showAndWait();
+                        alert.showAndWait();
+                    }
                 }
+            }else{
+                errorAlertMessage("User is not owner of this Item. You can only edit your own items!");
             }
 
         } else {
@@ -291,6 +289,7 @@ public class ItemListOverviewController {
 
             alert.showAndWait();
         }
+
     }
 
     /************************************************************************************************************
@@ -300,39 +299,37 @@ public class ItemListOverviewController {
      * and remove it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.21
-     * version 0.2
+     * @since 2021.01.05
+     * version 0.3
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleDelete() {
-        /*todo GRL: Check if User own this item*/
-        System.out.println("handleDelete button clicked");
         int selectedIndex = itemTable.getSelectionModel().getSelectedIndex();
         ItemFxView itemFxView = itemTable.getSelectionModel().getSelectedItem();
+        if (selectedIndex >= 0) {
+            if (sharingApp.getUserData().getMail().contentEquals(itemFxView.getItemOwnerMail())) {
+                try{
+                    itemService.deleteItem(itemFxView.getItemID()); //Delete item on server
+                    sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
 
-        try{
-            if (selectedIndex >= 0) {
-
-                /*todo GRL: Uncomment for real application*/
-                //itemService.deleteItem(itemFxView.getItemID()); //Delete item on server
-                //sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
-
-                itemTable.getItems().remove(selectedIndex); /*todo GRL: remove or uncomment for real application*/
-            } else {
-                // Nothing selected.
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(dialogStage);
-                alert.setTitle("No Selection");
-                alert.setHeaderText("No item Selected");
-                alert.setContentText("Please select a item in the table.");
-
-                alert.showAndWait();
+                }catch(Exception exp){
+                    exp.printStackTrace();
+                }
+            }else{
+                errorAlertMessage("User is not owner of this Item. You can only delete your own items!");
             }
-        }catch(Exception exp){
-            exp.printStackTrace();
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(dialogStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No item Selected");
+            alert.setContentText("Please select a item in the table.");
+
+            alert.showAndWait();
         }
     }
     /************************************************************************************************************
