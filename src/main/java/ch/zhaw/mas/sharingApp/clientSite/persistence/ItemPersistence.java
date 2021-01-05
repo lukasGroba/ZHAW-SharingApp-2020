@@ -25,18 +25,9 @@ public class ItemPersistence extends Persistence {
     }
 
 
-    // TODO: 31.12.2020 not working (json processing...)
     public List<ItemToShare> getAllItems() throws JsonProcessingException, BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
         ItemToShare[] items = (ItemToShare[]) requestBuilder.httpGetRequest(new HashMap<>(), this.getUrl(), ItemToShare[].class);
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.registerModule(new JavaTimeModule());
-
-
-//        List<ItemToShare> items = objectMapper.readValue(response.getBody(), new TypeReference<List<ItemToShare>>(){});
-//        for(ItemToShare item : items){
-//            item = objectMapper.convertValue(item, ItemToShare.class);
-//        }
         return Arrays.asList(items);
     }
 
