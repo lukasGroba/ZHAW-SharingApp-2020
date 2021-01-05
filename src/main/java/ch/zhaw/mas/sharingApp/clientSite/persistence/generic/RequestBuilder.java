@@ -1,11 +1,15 @@
 package ch.zhaw.mas.sharingApp.clientSite.persistence.generic;
 
+import ch.zhaw.mas.sharingApp.clientSite.domain.User;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,13 +28,23 @@ public class RequestBuilder {
      * @param url    Url where the request should be sent.
      * @author Noemi Kälin
      */
-    public HttpEntity<String> httpGetRequest(Map<String, String> params, String url) throws BackendError {
+//    public HttpEntity<String> httpGetRequest(Map<String, String> params, String url) throws BackendError {
+//
+//        UriComponentsBuilder builder = getBuilder(params, url);
+//
+//        try {
+//            HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), HttpMethod.GET, new HttpEntity(getHeaders()), String.class);
+//            return response;
+//        } catch (Exception ex) {
+//            throw new BackendError(ex.getMessage());
+//        }
+//    }
 
+    public Object httpGetRequest(Map<String, String> params, String url, Class expectedClass) throws BackendError {
         UriComponentsBuilder builder = getBuilder(params, url);
-
         try {
-            HttpEntity<String> response = restTemplateOwn.exchange(builder.toUriString(), HttpMethod.GET, new HttpEntity(getHeaders()), String.class);
-            return response;
+            ResponseEntity responseEntity = restTemplateOwn.getForEntity(builder.toUriString(), expectedClass);
+            return responseEntity.getBody();
         } catch (Exception ex) {
             throw new BackendError(ex.getMessage());
         }
