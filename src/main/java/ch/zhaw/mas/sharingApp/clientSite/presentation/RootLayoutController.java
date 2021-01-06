@@ -53,7 +53,7 @@ public class RootLayoutController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-    
+
     /************************************************************************************************************
      * void handleAbout() Method
      *

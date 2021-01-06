@@ -165,15 +165,14 @@ public class LoginViewController {
      * Stage that a new user can be created with an new login and stored to the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.08
-     * version 0.1
+     * @since   2021.01.06
+     * version 0.2
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleSignUp(){
-        System.out.println("SignUp button clicked");
         sharingApp.showSignUpUserDialog();
     }
     /************************************************************************************************************

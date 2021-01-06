@@ -172,8 +172,8 @@ public class ItemListOverviewController {
      * reload the complete list from the server again.
      *
      * author  Lukas Grossenbacher
-     * @since 2021.01.05
-     * version 0.2
+     * @since 2021.01.06
+     * version 0.3
      * param
      * return
      *
@@ -185,13 +185,8 @@ public class ItemListOverviewController {
 
         }catch(Exception exp){
             exp.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Connection Error");
-            alert.setHeaderText("Reload list from Server failed.");
-            alert.setContentText("Please try again or startup server!");
+            warningAlertMessage("Reload list from Server failed.", exp.getMessage() + "Please try again or startup server!");
 
-            alert.showAndWait();
         }
     }
 
@@ -233,7 +228,7 @@ public class ItemListOverviewController {
 
             }catch(BackendError exp){
                 exp.printStackTrace();
-                errorAlertMessage(exp.getMessage());
+                errorAlertMessage("Save new Item failed", exp.getMessage());
             }
         }
     }
@@ -266,28 +261,16 @@ public class ItemListOverviewController {
 
                     } catch (Exception exp) {
                         exp.printStackTrace();
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.initOwner(dialogStage);
-                        alert.setTitle("Connection Error");
-                        alert.setHeaderText("Update item on server failed!");
-                        alert.setContentText("Please startup the Server for SharingAppApplication");
-
-                        alert.showAndWait();
+                        errorAlertMessage("Update item on server failed!",exp.getMessage() + "Please startup the Server for SharingAppApplication");
                     }
                 }
             }else{
-                errorAlertMessage("User is not owner of this Item. You can only edit your own items!");
+                errorAlertMessage("No modification allowed!","User is not owner of this Item. You can only edit your own items!");
             }
 
         } else {
             // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(dialogStage);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No item Selected");
-            alert.setContentText("Please select a item in the table.");
-
-            alert.showAndWait();
+            warningAlertMessage("No item Selected", "Please select an item in the table.");
         }
 
     }
@@ -319,36 +302,54 @@ public class ItemListOverviewController {
                     exp.printStackTrace();
                 }
             }else{
-                errorAlertMessage("User is not owner of this Item. You can only delete your own items!");
+                errorAlertMessage("No modification allowed!","User is not owner of this Item. You can only edit your own items!");
             }
         } else {
             // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(dialogStage);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No item Selected");
-            alert.setContentText("Please select a item in the table.");
-
-            alert.showAndWait();
+            warningAlertMessage("No item Selected", "Please select an item in the table.");
         }
     }
     /************************************************************************************************************
-     * void errorAlertMessage(String errorMessage) Method
+     * void errorAlertMessage(String setHeader, String errorMessage) Method
      *
      * This method creates an alert with given Message when login has failed.
      *
      * author  Lukas Grossenbacher
-     * @since   2021.05.01
-     * version 0.1
+     * @since   2021.01.06
+     * version 0.2
+     * @param setHeader
      * @param errorMessage
      * return
      *
      ************************************************************************************************************/
-    private void errorAlertMessage(String errorMessage){
+    private void errorAlertMessage(String setHeader, String errorMessage){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(dialogStage);
         alert.setTitle("Error");
-        alert.setHeaderText("Please see error message below!");
+        alert.setHeaderText(setHeader);
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
+    }
+
+    /************************************************************************************************************
+     * void warningAlertMessage(String errorMessage) Method
+     *
+     * This method creates an alert with given Message when login has failed.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2021.01.06
+     * version 0.1
+     * @param setHeader
+     * @param errorMessage
+     * return
+     *
+     ************************************************************************************************************/
+    private void warningAlertMessage(String setHeader, String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(dialogStage);
+        alert.setTitle("Warning");
+        alert.setHeaderText(setHeader);
         alert.setContentText(errorMessage);
 
         alert.showAndWait();
