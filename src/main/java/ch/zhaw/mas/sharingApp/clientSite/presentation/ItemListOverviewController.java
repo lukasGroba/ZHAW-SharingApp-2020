@@ -240,8 +240,8 @@ public class ItemListOverviewController {
      * to edit an item and store it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2021.01.05
-     * version 0.3
+     * @since 2021.01.07
+     * version 0.4
      * param
      * return
      *
@@ -255,7 +255,6 @@ public class ItemListOverviewController {
                 if (okClicked) {
 
                     try {
-                        /*todo fix GRL: Item will not be updated correctly on server*/
                         itemService.updateItem(selectedItem.convertItemFxViewToItemToShare(selectedItem, sharingApp.getUserData()));
                         sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
 

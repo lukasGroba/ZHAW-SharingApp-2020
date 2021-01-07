@@ -91,14 +91,11 @@ public class SharingApp extends Application
 
         /*Start application if login is valid*/
         if(isLoginValid) {
-            /*Create sample Data List*/
-            //addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
 
             //RootLayout will be initialized
             initRootLayout();
 
             /*Create Initial List from Server after valid login*/
-            /*todo GRL: Uncomment for real application*/
             loadCompleteListFromServer();
 
             //Shows the item list inside the rootLayout
