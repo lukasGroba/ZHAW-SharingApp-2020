@@ -42,6 +42,7 @@ public class RequestBuilder {
 
     public Object httpGetRequest(Map<String, String> params, String url, Class expectedClass) throws BackendError {
         UriComponentsBuilder builder = getBuilder(params, url);
+        System.out.println(builder.toUriString());
         try {
             ResponseEntity responseEntity = restTemplateOwn.getForEntity(builder.toUriString(), expectedClass);
             return responseEntity.getBody();

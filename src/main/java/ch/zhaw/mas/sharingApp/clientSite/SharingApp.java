@@ -51,6 +51,10 @@ public class SharingApp extends Application
 
     private ObservableList<ItemFxView> itemDataList = FXCollections.observableArrayList();
 
+    public static User getUser() {
+        return user;
+    }
+
     /**
      * Constructor of Sharing App
      */
@@ -60,7 +64,7 @@ public class SharingApp extends Application
         this.user = new User();
 
         /*Create the UserService of the SharingApplication to communicate with the Server about Users*/
-        this.userService = new UserService();
+        this.userService = new UserService(getUser());
 
         /*Create the ItemService of the SharingApplication to communicate with the Server about Items*/
         this.itemService = new ItemService();

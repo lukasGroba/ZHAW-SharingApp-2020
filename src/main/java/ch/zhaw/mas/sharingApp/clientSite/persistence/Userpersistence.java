@@ -21,14 +21,14 @@ public class Userpersistence extends Persistence {
         super("users");
     }
 
-    public List<User> getAllUsers() throws JsonProcessingException, BackendError {
+    public List<User> getAllUsers(String userLoggedInMail) throws JsonProcessingException, BackendError {
         Map<String, String> params = new HashMap<>();
         RequestBuilder requestBuilder = new RequestBuilder();
         User[] user = (User[]) requestBuilder.httpGetRequest(params, this.getUrl(), User[].class);
         return Arrays.asList(user);
     }
 
-    public User getUserbyMail(String mail) throws JsonProcessingException, BackendError {
+    public User getUserbyMail(String mail, String userLoggedInMail) throws JsonProcessingException, BackendError {
         Map<String, String> params = new HashMap<>();
         params.put("mail", mail);
         RequestBuilder requestBuilder = new RequestBuilder();
@@ -36,7 +36,7 @@ public class Userpersistence extends Persistence {
         return user;
     }
 
-    public void saveNewUser(UserWithPassword user) throws BackendError {
+    public void saveNewUser(UserWithPassword user, String userLoggedInMail) throws BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
         requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl(), user);
     }
