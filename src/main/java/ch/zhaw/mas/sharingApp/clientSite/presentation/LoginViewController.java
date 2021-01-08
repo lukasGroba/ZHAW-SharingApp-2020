@@ -111,8 +111,8 @@ public class LoginViewController {
      * loginValid to true if the login was successful.
      *
      * author  Lukas Grossenbacher
-     * @since   2021.01.01
-     * version 0.3
+     * @since   2021.01.05
+     * version 0.4
      * param
      * return
      *
@@ -120,29 +120,19 @@ public class LoginViewController {
     @FXML
     private void handleLogin() {
         if (isInputValid()) {
-            /*todo GRL: delete user for testing below for real application*/
-            /******************Just for Testing**********************/
-            User user1 = new User();
-            user1.setUsername("Brian Muster");
-            user1.setMail(userMail.getText());
-            sharingApp.setUserData(user1);
-            /********************************************************/
-
-            //Todo GRL: Uncomment userService.login for real application to verify user
             try{
                 userService.login(userMail.getText(), userPassword.getText()); /*Request to server*/
 
                 /*Set valid user into sharingApp*/
-                /*todo GRL: getUserByMail is not working at the moment. Noemi will fix it!*/
-               //sharingApp.setUserData(userService.getUserByMail(userMail.getText()));
+               sharingApp.setUserData(userService.getUserByMail(userMail.getText()));
 
                 loginValid = true;
                 dialogStage.close();
-            }catch(BackendError exp){
+            }catch(BackendError | JsonProcessingException exp){
                 System.out.println(exp.getMessage());
                 exp.printStackTrace();
+                errorAlertMessage(exp.getMessage()+ "\n\"Login was not successful! Try another 'User Mail' or other 'Password'!\"");
 
-                errorAlertMessage("Login was not successful! Try another 'User Mail' or other 'Password'!");
                 /*Empty the textFields*/
                 userMail.clear();
                 userPassword.clear();
@@ -175,15 +165,14 @@ public class LoginViewController {
      * Stage that a new user can be created with an new login and stored to the server.
      *
      * author  Lukas Grossenbacher
-     * @since   2020.12.08
-     * version 0.1
+     * @since   2021.01.06
+     * version 0.2
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleSignUp(){
-        System.out.println("SignUp button clicked");
         sharingApp.showSignUpUserDialog();
     }
     /************************************************************************************************************

@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /************************************************************************************************************
@@ -89,39 +90,17 @@ public class SharingApp extends Application
         this.primaryStage.setTitle("SharingApp");
         this.primaryStage.getIcons().add(new Image("file:../ZHAW-SharingApp-2020/src/main/resources/images/iconNetwork.png"));
 
-
-//        User user1 = new User("Noemi", "mail", (long) 3, "Noemi", "Kaelin");
-//        user1.saveNewUser();
-//        try {
-//            user1.getUserById(3);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(user1);
-
-
-//        try {
-//            ItemService itemService = new ItemService();
-//            itemService.getAllItems();
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-
-
         /*Check if Login is valid*/
         openLoginDialog();
 
         /*Start application if login is valid*/
         if(isLoginValid) {
-            /*Create sample Data List*/
-            addSampleItemData();            /*todo GRL: Just for testing. Remove when finished*/
 
             //RootLayout will be initialized
             initRootLayout();
 
             /*Create Initial List from Server after valid login*/
-            /*todo GRL: Uncomment for real application*/
-            //loadCompleteListFromServer();
+            loadCompleteListFromServer();
 
             //Shows the item list inside the rootLayout
             showItemListOverview();
@@ -279,6 +258,7 @@ public class SharingApp extends Application
             // Give the controller access to the main SharingApp.
             ItemListOverviewController controller = loader.getController();
             controller.setSharingApp(this);
+            controller.setItemService(this.itemService);
 
         }catch(IOException exp){
             exp.printStackTrace();
@@ -397,7 +377,9 @@ public class SharingApp extends Application
      ************************************************************************************************************/
     public void loadCompleteListFromServer(){
         List<ItemToShare> itemToShareList = new ArrayList<ItemToShare>();
-        this.itemDataList.removeAll();      //Clear observable list to refresh it from server
+
+        //Clear observable list to refresh it from server
+        itemDataList.clear();
 
         try {
             itemToShareList = itemService.getAllItems();    //Load complete item list from the server

@@ -4,6 +4,7 @@ import ch.zhaw.mas.sharingApp.clientSite.SharingApp;
 import ch.zhaw.mas.sharingApp.clientSite.domain.DateUtil;
 import ch.zhaw.mas.sharingApp.clientSite.domain.ItemToShare;
 import ch.zhaw.mas.sharingApp.clientSite.domain.services.ItemService;
+import ch.zhaw.mas.sharingApp.clientSite.persistence.generic.BackendError;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -171,28 +172,21 @@ public class ItemListOverviewController {
      * reload the complete list from the server again.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.19
-     * version 0.1
+     * @since 2021.01.06
+     * version 0.3
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleReloadList(){
-        System.out.println("handleReloadList button clicked");
         try{
-            /*todo GRL: Uncomment for real application*/
-            //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
+            sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
 
         }catch(Exception exp){
             exp.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Connection Error");
-            alert.setHeaderText("Save item to server failed!");
-            alert.setContentText("Please startup the Server for SharingAppApplication");
+            warningAlertMessage("Reload list from Server failed.", exp.getMessage() + "Please try again or startup server!");
 
-            alert.showAndWait();
         }
     }
 
@@ -203,15 +197,14 @@ public class ItemListOverviewController {
      * to create a new item and add it the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.14
-     * version 0.2
+     * @since 2021.01.05
+     * version 0.3
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleNew() {
-        System.out.println("handleNew button clicked");
         ItemToShare tempItemToShare = new ItemToShare();
 
         /*Create empty Item with user and create date*/
@@ -230,21 +223,12 @@ public class ItemListOverviewController {
 
         if (okClicked) {
             try{
-                /*todo GRL: Uncomment for real application*/
-                //itemService.saveNewItem(tempItemFxView.convertItemFxViewToItemToShare(tempItemFxView, sharingApp.getUserData()));
-                //sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
+                itemService.saveNewItem(tempItemFxView.convertItemFxViewToItemToShare(tempItemFxView, sharingApp.getUserData()));
+                sharingApp.loadCompleteListFromServer();    //Refresh the complete list in SharingAppApplication from server
 
-                sharingApp.getItemData().add(tempItemFxView); /*todo GRL: Delete or comment for real application*/
-
-            }catch(Exception exp){
+            }catch(BackendError exp){
                 exp.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Connection Error");
-                alert.setHeaderText("Save item to server failed!");
-                alert.setContentText("Please startup the Server for SharingAppApplication");
-
-                alert.showAndWait();
+                errorAlertMessage("Save new Item failed", exp.getMessage());
             }
         }
     }
@@ -256,47 +240,38 @@ public class ItemListOverviewController {
      * to edit an item and store it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.21
-     * version 0.2
+     * @since 2021.01.07
+     * version 0.4
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleEdit() {
-        System.out.println("handleEdit button clicked");
         ItemFxView selectedItem = itemTable.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            boolean okClicked = sharingApp.showEditItemDialog(selectedItem);
-            if (okClicked) {
+            if (sharingApp.getUserData().getMail().contentEquals(selectedItem.getItemOwnerMail())) {
+                boolean okClicked = sharingApp.showEditItemDialog(selectedItem);
+                if (okClicked) {
 
-                try{
-                    /*todo GRL: Uncomment for real application*/
-                    //itemService.updateItem(selectedItem.convertItemFxViewToItemToShare(selectedItem, sharingApp.getUserData()));
-                    showItemDetails(selectedItem); //Needed to display details on GUI
+                    try {
+                        itemService.updateItem(selectedItem.convertItemFxViewToItemToShare(selectedItem, sharingApp.getUserData()));
+                        sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
 
-                }catch(Exception exp){
-                    exp.printStackTrace();
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.initOwner(dialogStage);
-                    alert.setTitle("Connection Error");
-                    alert.setHeaderText("Update item on server failed!");
-                    alert.setContentText("Please startup the Server for SharingAppApplication");
-
-                    alert.showAndWait();
+                    } catch (Exception exp) {
+                        exp.printStackTrace();
+                        errorAlertMessage("Update item on server failed!",exp.getMessage() + "Please startup the Server for SharingAppApplication");
+                    }
                 }
+            }else{
+                errorAlertMessage("No modification allowed!","User is not owner of this Item. You can only edit your own items!");
             }
 
         } else {
             // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(dialogStage);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No item Selected");
-            alert.setContentText("Please select a item in the table.");
-
-            alert.showAndWait();
+            warningAlertMessage("No item Selected", "Please select an item in the table.");
         }
+
     }
 
     /************************************************************************************************************
@@ -306,45 +281,76 @@ public class ItemListOverviewController {
      * and remove it in the list on the server.
      *
      * author  Lukas Grossenbacher
-     * @since 2020.12.21
-     * version 0.2
+     * @since 2021.01.05
+     * version 0.3
      * param
      * return
      *
      ************************************************************************************************************/
     @FXML
     private void handleDelete() {
-        System.out.println("handleDelete button clicked");
         int selectedIndex = itemTable.getSelectionModel().getSelectedIndex();
         ItemFxView itemFxView = itemTable.getSelectionModel().getSelectedItem();
+        if (selectedIndex >= 0) {
+            if (sharingApp.getUserData().getMail().contentEquals(itemFxView.getItemOwnerMail())) {
+                try{
+                    itemService.deleteItem(itemFxView.getItemID()); //Delete item on server
+                    sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
 
-        try{
-            if (selectedIndex >= 0) {
-
-                /*todo GRL: Uncomment for real application*/
-                //itemService.deleteItem(itemFxView.getItemID()); //Delete item on server
-                //sharingApp.loadCompleteListFromServer(); //Refresh the complete list in SharingAppApplication from server
-
-                itemTable.getItems().remove(selectedIndex); /*todo GRL: remove or uncomment for real application*/
-            } else {
-                // Nothing selected.
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(dialogStage);
-                alert.setTitle("No Selection");
-                alert.setHeaderText("No item Selected");
-                alert.setContentText("Please select a item in the table.");
-
-                alert.showAndWait();
+                }catch(Exception exp){
+                    exp.printStackTrace();
+                }
+            }else{
+                errorAlertMessage("No modification allowed!","User is not owner of this Item. You can only edit your own items!");
             }
-        }catch(Exception exp){
-            exp.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Connection Error");
-            alert.setHeaderText("Update item on server failed!");
-            alert.setContentText("Please startup the Server for SharingAppApplication");
-
-            alert.showAndWait();
+        } else {
+            // Nothing selected.
+            warningAlertMessage("No item Selected", "Please select an item in the table.");
         }
+    }
+    /************************************************************************************************************
+     * void errorAlertMessage(String setHeader, String errorMessage) Method
+     *
+     * This method creates an alert with given Message when login has failed.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2021.01.06
+     * version 0.2
+     * @param setHeader
+     * @param errorMessage
+     * return
+     *
+     ************************************************************************************************************/
+    private void errorAlertMessage(String setHeader, String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(dialogStage);
+        alert.setTitle("Error");
+        alert.setHeaderText(setHeader);
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
+    }
+
+    /************************************************************************************************************
+     * void warningAlertMessage(String errorMessage) Method
+     *
+     * This method creates an alert with given Message when login has failed.
+     *
+     * author  Lukas Grossenbacher
+     * @since   2021.01.06
+     * version 0.1
+     * @param setHeader
+     * @param errorMessage
+     * return
+     *
+     ************************************************************************************************************/
+    private void warningAlertMessage(String setHeader, String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(dialogStage);
+        alert.setTitle("Warning");
+        alert.setHeaderText(setHeader);
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
     }
 }

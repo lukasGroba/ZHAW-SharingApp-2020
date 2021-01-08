@@ -142,6 +142,7 @@ public class ItemFxView {
     public ItemToShare convertItemFxViewToItemToShare(ItemFxView itemFxView, User user){
         ItemToShare itemToShare = new ItemToShare();
 
+        itemToShare.setName(itemFxView.getItemName());
         itemToShare.setId(itemFxView.getItemID());
         itemToShare.setLent(itemFxView.getItemAvailable());
         itemToShare.setRating(itemFxView.getItemRating());
