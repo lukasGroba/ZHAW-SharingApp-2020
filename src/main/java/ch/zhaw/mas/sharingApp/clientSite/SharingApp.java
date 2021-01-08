@@ -64,11 +64,8 @@ public class SharingApp extends Application
         /*Create an empty user, which can be filled after valid login*/
         this.user = new User();
 
-        /*Create the UserService of the SharingApplication to communicate with the Server about Users*/
-        this.userService = new UserService(getUser());
-
-        /*Create the ItemService of the SharingApplication to communicate with the Server about Items*/
-        this.itemService = new ItemService(getUser());
+        /*Create the UserService of the SharingApplication to communicate with the Server for login with an empty User*/
+        this.userService = new UserService(this.user);
 
     }
 
@@ -95,6 +92,11 @@ public class SharingApp extends Application
 
         /*Start application if login is valid*/
         if(isLoginValid) {
+            /*Create the UserService of the SharingApplication to communicate with the Server about Users*/
+            this.userService = new UserService(this.user);
+
+            /*Create the ItemService of the SharingApplication to communicate with the Server about Items*/
+            this.itemService = new ItemService(this.user);
 
             //RootLayout will be initialized
             initRootLayout();
