@@ -68,7 +68,7 @@ public class SharingApp extends Application
         this.userService = new UserService(getUser());
 
         /*Create the ItemService of the SharingApplication to communicate with the Server about Items*/
-        this.itemService = new ItemService();
+        this.itemService = new ItemService(getUser());
 
     }
 

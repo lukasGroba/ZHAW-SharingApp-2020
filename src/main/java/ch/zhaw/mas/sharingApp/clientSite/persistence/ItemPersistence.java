@@ -25,27 +25,29 @@ public class ItemPersistence extends Persistence {
     }
 
 
-    public List<ItemToShare> getAllItems() throws JsonProcessingException, BackendError {
+    public List<ItemToShare> getAllItems(String userLoggedInMail) throws JsonProcessingException, BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
-        ItemToShare[] items = (ItemToShare[]) requestBuilder.httpGetRequest(new HashMap<>(), this.getUrl(), ItemToShare[].class);
+        Map<String, String> params = getParamsWithUserLoggedIn(userLoggedInMail);
+        ItemToShare[] items = (ItemToShare[]) requestBuilder.httpGetRequest(params, this.getUrl(), ItemToShare[].class);
         return Arrays.asList(items);
     }
 
-    public void saveNewItem(ItemToShare item) throws BackendError {
+    public void saveNewItem(ItemToShare item, String userLoggedInMail) throws BackendError {
         RequestBuilder requestBuilder = new RequestBuilder();
-        HttpEntity<String> response = requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl(), item);
+        Map<String, String> params = getParamsWithUserLoggedIn(userLoggedInMail);
+        HttpEntity<String> response = requestBuilder.httpPostRequest(params, this.getUrl(), item);
     }
 
-    public void deleteItem(Integer id) throws BackendError {
-        Map<String, String> params = new HashMap<>();
+    public void deleteItem(Integer id, String userLoggedInMail) throws BackendError {
+        Map<String, String> params = getParamsWithUserLoggedIn(userLoggedInMail);
         params.put("id", id.toString());
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpDeleteRequest(params, this.getUrl());
     }
 
 
-    public void updateItem(ItemToShare item) throws BackendError {
-        Map<String, String> params = new HashMap<>();
+    public void updateItem(ItemToShare item, String userLoggedInMail) throws BackendError {
+        Map<String, String> params = getParamsWithUserLoggedIn(userLoggedInMail);
         params.put("id", item.getIdAsString());
         RequestBuilder requestBuilder = new RequestBuilder();
         HttpEntity<String> response = requestBuilder.httpPutRequest(params, this.getUrl(), item);

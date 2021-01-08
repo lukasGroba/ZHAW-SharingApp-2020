@@ -22,14 +22,15 @@ public class Userpersistence extends Persistence {
     }
 
     public List<User> getAllUsers(String userLoggedInMail) throws JsonProcessingException, BackendError {
-        Map<String, String> params = new HashMap<>();
+//        System.out.println(userLoggedInMail);
+        Map<String, String> params = getParamsWithUserLoggedIn(userLoggedInMail);
         RequestBuilder requestBuilder = new RequestBuilder();
         User[] user = (User[]) requestBuilder.httpGetRequest(params, this.getUrl(), User[].class);
         return Arrays.asList(user);
     }
 
     public User getUserbyMail(String mail, String userLoggedInMail) throws JsonProcessingException, BackendError {
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = getParamsWithUserLoggedIn(userLoggedInMail);
         params.put("mail", mail);
         RequestBuilder requestBuilder = new RequestBuilder();
         User user = (User) requestBuilder.httpGetRequest(params, this.getUrl() + "/user", User.class);
@@ -37,8 +38,9 @@ public class Userpersistence extends Persistence {
     }
 
     public void saveNewUser(UserWithPassword user, String userLoggedInMail) throws BackendError {
+        Map<String, String> params = getParamsWithUserLoggedIn(userLoggedInMail);
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl(), user);
+        requestBuilder.httpPostRequest(params, this.getUrl(), user);
     }
 
     public void loginUser(UserWithPassword user) throws BackendError {
@@ -46,11 +48,12 @@ public class Userpersistence extends Persistence {
         requestBuilder.httpPostRequest(new HashMap<>(), this.getUrl() + "/login", user);
     }
 
-    public void deleteUserByMail(String mail) throws BackendError {
-        Map<String, String> params = new HashMap<>();
+    public void deleteUserByMail(String mail, String userLoggedInMail) throws BackendError {
+        Map<String, String> params = getParamsWithUserLoggedIn(userLoggedInMail);
         params.put("mail", mail);
         RequestBuilder requestBuilder = new RequestBuilder();
         requestBuilder.httpDeleteRequest(params, this.getUrl());
     }
+
 
 }
