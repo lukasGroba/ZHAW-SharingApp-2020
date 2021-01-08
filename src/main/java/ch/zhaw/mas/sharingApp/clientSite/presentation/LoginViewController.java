@@ -128,14 +128,16 @@ public class LoginViewController {
 
                 loginValid = true;
                 dialogStage.close();
-            }catch(BackendError | JsonProcessingException exp){
-                System.out.println(exp.getMessage());
+            }catch(BackendError exp){
                 exp.printStackTrace();
                 errorAlertMessage(exp.getMessage()+ "\n\"Login was not successful! Try another 'User Mail' or other 'Password'!\"");
 
                 /*Empty the textFields*/
                 userMail.clear();
                 userPassword.clear();
+            }
+            catch(JsonProcessingException exp){
+                exp.printStackTrace();
             }
         }
     }
