@@ -54,26 +54,6 @@ public class RootLayoutController {
         this.userService = userService;
     }
 
-
-    /************************************************************************************************************
-     * void handleSave() Method
-     *
-     * This method will be called when the user clicks the save button in GUI. This method will open a save dialog
-     * to choose the path and save the data list to this defined path
-     *
-     * author  Lukas Grossenbacher
-     * @since   2020.12.02
-     * version 0.1
-     * param
-     * return
-     *
-     ************************************************************************************************************/
-    @FXML
-    private void handleSave(){
-        System.out.println("handleSave button clicked");
-        //todo GRL: add the save method
-    }
-
     /************************************************************************************************************
      * void handleAbout() Method
      *
@@ -99,9 +79,10 @@ public class RootLayoutController {
                 "Noemi Kaelin,\n" +
                 "Lukas Grossenbacher\n\n" +
 
-                "SharingApp Version:\nv0.1\n\n" +
+                "SharingApp Version:\nv1.0\n\n" +
 
-                "GitRepository:\nhttps://github.com/lukasGroba/ZHAW-SharingApp-2020\n\n" +
+                "GitRepository:\nhttps://github.com/lukasGroba/ZHAW-SharingApp-2020\n" +
+                "https://github.com/lukasGroba/ZHAW_SharingAppServer-2020\n\n" +
 
                 "Copyright:\n(C) 2020 SharingAppTeam / This program may be used freely. " +
                         "No liability is assumed by the developers.\n\n");
