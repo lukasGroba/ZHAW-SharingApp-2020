@@ -4,6 +4,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 /**
+ * Model of the items that can be shared.
  *
  * @author Noemi Kälin
  */

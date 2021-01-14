@@ -7,7 +7,8 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Class used to build a rest template.
+ * Class used to build a rest template for a rest request.
+ *
  * @author Noemi Kälin
  */
 public class RestTemplateOwn extends RestTemplate{

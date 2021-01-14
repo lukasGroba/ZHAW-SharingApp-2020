@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * Model of the User for Persistence.
  *
  * @author Noemi Kälin
  */

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * Service for connecting the presentation and the persistence layer of the User and the UserWithPassword.
  *
  * @author Noemi Kälin
  */

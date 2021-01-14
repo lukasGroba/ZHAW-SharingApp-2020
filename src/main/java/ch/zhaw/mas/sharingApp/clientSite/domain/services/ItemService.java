@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * Service for connecting the presentation and the persistence layer of the ItemsToShare.
  *
  * @author Noemi Kälin
  */
