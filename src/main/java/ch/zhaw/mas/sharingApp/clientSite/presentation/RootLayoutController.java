@@ -79,7 +79,7 @@ public class RootLayoutController {
                 "Noemi Kaelin,\n" +
                 "Lukas Grossenbacher\n\n" +
 
-                "SharingApp Version:\nv1.0\n\n" +
+                "SharingApp Version:\nv2.0\n\n" +
 
                 "GitRepository:\nhttps://github.com/lukasGroba/ZHAW-SharingApp-2020\n" +
                 "https://github.com/lukasGroba/ZHAW_SharingAppServer-2020\n\n" +
